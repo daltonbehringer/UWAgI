@@ -14,7 +14,6 @@ class _reader(object):
 
         os.chdir('/Users/jbehrin1/Desktop/snowie_data/flight_info')
 
-        # data = pd.read_csv('20170119.csv')
         data = pd.read_csv(filename)
         
         self.sa_time = data.Time
