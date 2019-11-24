@@ -3,16 +3,16 @@ from netCDF4 import Dataset
 
 def KAReader(filename):
 
-	ka = _reader(filename)
-	return ka
+    ka = _reader(filename)
+    return ka
 
 class _reader(object):
 
-	def __init__(self, filename):
+    def __init__(self, filename):
 
-		self.filename = filename
+        self.filename = filename
 
-		# os.chdir('/Users/jbehrin1/Desktop/snowie_data/MP_files')
+        # os.chdir('/Users/jbehrin1/Desktop/snowie_data/MP_files')
 
         nc = Dataset(filename)
 
@@ -40,7 +40,7 @@ def ncvar_to_dict(ncvar):
 
 def _prep_data(self):
 
-	self.fields["u_wind"] = ncvar_to_dict(self.u)
+    self.fields["u_wind"] = ncvar_to_dict(self.u)
     self.fields["v_wind"] = ncvar_to_dict(self.v)
     self.fields["ka_lat"] = ncvar_to_dict(self.ka_lat)
     self.fields["ka_lon"] = ncvar_to_dict(self.ka_lon)
