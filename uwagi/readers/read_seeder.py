@@ -48,7 +48,7 @@ class _reader(object):
             "Ejectable", np.ma.array(self.EJ), " ", "Ejectable Flares (Active if n=[n-1]+1)",
         )
         self.fields["alt"] = var_to_dict(
-            "alt", np.ma.array(self.sa_alt), "m", "Seeding Aircraft Altitude",
+            "alt", np.ma.array(self.alt), "m", "Seeding Aircraft Altitude",
         )
 
 def var_to_dict(standard_name, data, units, long_name):
