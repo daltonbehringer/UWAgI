@@ -25,6 +25,8 @@ class _reader(object):
         self.EJ = data.EJcount
         self.sa_alt = data.Altitude_m
 
+        self._prep_data()
+
     def _prep_data(self):
         
         self.fields = {}
