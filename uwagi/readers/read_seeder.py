@@ -18,7 +18,7 @@ class _reader(object):
 
         data = pd.read_csv(filename)
         
-        self.sa_time = pd.Series([val.time() for val in pd.to_datetime(data.Time)])
+        self.sa_time = pd.to_datetime(data.Time)
         self.sa_date = pd.to_datetime(data.Date)
         self.sa_lat = data.Latitude
         self.sa_lon = data.Longitude
