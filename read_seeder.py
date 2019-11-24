@@ -24,15 +24,6 @@ class _reader(object):
         self.EJ = data.EJcount
         self.sa_alt = data.Altitude_m
 
-    def var_to_dict(standard_name, data, units, long_name):
- 
-        d = {}
-        d["data"] = data[:]
-        d["units"] = units
-        d["long_name"] = long_name
-        d["standard_name"] = standard_name
-        return d
-
     def _prep_data(self):
         
         self.fields = {}
@@ -59,5 +50,14 @@ class _reader(object):
         self.fields["sa_alt"] = var_to_dict(
             "alt", np.ma.array(self.sa_alt), "m", "Seeding Aircraft Altitude",
         )
+
+    def var_to_dict(standard_name, data, units, long_name):
+ 
+        d = {}
+        d["data"] = data[:]
+        d["units"] = units
+        d["long_name"] = long_name
+        d["standard_name"] = standard_name
+        return d
 
 

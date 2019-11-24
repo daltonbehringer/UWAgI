@@ -29,6 +29,18 @@ class _reader(object):
         # self._read_file()
         self._prep_data()
 
+    def _prep_data(self):
+
+        self.fields["u_wind"] = ncvar_to_dict(self.u)
+        self.fields["v_wind"] = ncvar_to_dict(self.v)
+        self.fields["ka_lat"] = ncvar_to_dict(self.ka_lat)
+        self.fields["ka_lon"] = ncvar_to_dict(self.ka_lon)
+        self.fields["ka_time"] = ncvar_to_dict(self.ka_time)
+        self.fields["ka_alt"] = ncvar_to_dict(self.ka_alt)
+        self.fields["wind_mag"] = ncvar_to_dict(self.wind_mag)
+        self.fields["wind_dir"] = ncvar_to_dict(self.wind_dir)
+        self.fields["roll"] = ncvar_to_dict(self.roll)
+
 def ncvar_to_dict(ncvar):
     
     d = dict((k, getattr(ncvar, k)) for k in ncvar.ncattrs())
@@ -37,15 +49,3 @@ def ncvar_to_dict(ncvar):
         d["data"] = np.array(d["data"][:])
         d["data"].shape = (1,)
     return d
-
-def _prep_data(self):
-
-    self.fields["u_wind"] = ncvar_to_dict(self.u)
-    self.fields["v_wind"] = ncvar_to_dict(self.v)
-    self.fields["ka_lat"] = ncvar_to_dict(self.ka_lat)
-    self.fields["ka_lon"] = ncvar_to_dict(self.ka_lon)
-    self.fields["ka_time"] = ncvar_to_dict(self.ka_time)
-    self.fields["ka_alt"] = ncvar_to_dict(self.ka_alt)
-    self.fields["wind_mag"] = ncvar_to_dict(self.wind_mag)
-    self.fields["wind_dir"] = ncvar_to_dict(self.wind_dir)
-    self.fields["roll"] = ncvar_to_dict(self.roll)
