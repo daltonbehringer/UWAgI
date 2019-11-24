@@ -1,6 +1,7 @@
 # import os
 import numpy as np
 import pandas as pd
+from datetime import datetime
 
 def SeederReader(filename):
     
@@ -17,8 +18,8 @@ class _reader(object):
 
         data = pd.read_csv(filename)
         
-        self.sa_time = data.Time
-        self.sa_date = data.Date
+        self.sa_time = pd.to_datetime(data.Time)
+        self.sa_date = pd.to_datetime(data.Date)
         self.sa_lat = data.Latitude
         self.sa_lon = data.Longitude
         self.BIP = data.BIPcount
