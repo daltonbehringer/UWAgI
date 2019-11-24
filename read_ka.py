@@ -1,4 +1,4 @@
-import os
+# import os
 from netCDF4 import Dataset
 
 def KAReader(filename):
@@ -12,7 +12,7 @@ class _reader(object):
 
 		self.filename = filename
 
-		os.chdir('/Users/jbehrin1/Desktop/snowie_data/MP_files')
+		# os.chdir('/Users/jbehrin1/Desktop/snowie_data/MP_files')
 
         nc = Dataset(filename)
 

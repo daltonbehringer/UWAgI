@@ -1,4 +1,4 @@
-import os
+# import os
 import pandas as pd
 
 def SeederReader(filename):
@@ -12,7 +12,7 @@ class _reader(object):
 
         self.filename = filename
 
-        os.chdir('/Users/jbehrin1/Desktop/snowie_data/flight_info')
+        # os.chdir('/Users/jbehrin1/Desktop/snowie_data/flight_info')
 
         data = pd.read_csv(filename)
         
