@@ -14,7 +14,6 @@ class _reader(object):
 
 		os.chdir('/Users/jbehrin1/Desktop/snowie_data/MP_files')
 
-        # nc = Dataset('20170119a.c1.nc')
         nc = Dataset(filename)
 
         self.u = nc.variables['avux'][:]
