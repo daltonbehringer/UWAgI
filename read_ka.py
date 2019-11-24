@@ -1,4 +1,5 @@
 # import os
+import numpy as np
 from netCDF4 import Dataset
 
 def KAReader(filename):
