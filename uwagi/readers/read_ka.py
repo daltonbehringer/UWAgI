@@ -2,7 +2,7 @@ import numpy as np
 from netCDF4 import Dataset
 from datetime import datetime
 
-def KAReader(filename):
+def read_ka(filename):
 
     ka = _reader(filename)
     return ka

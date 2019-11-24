@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-def SeederReader(filename):
+def read_seeder(filename):
     
     seeder = _reader(filename)
     return seeder
