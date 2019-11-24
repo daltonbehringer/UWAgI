@@ -1,7 +1,5 @@
-# import os
 import numpy as np
 import pandas as pd
-from datetime import datetime
 
 def SeederReader(filename):
     
@@ -14,17 +12,15 @@ class _reader(object):
 
         self.filename = filename
 
-        # os.chdir('/Users/jbehrin1/Desktop/snowie_data/flight_info')
-
         data = pd.read_csv(filename)
         
-        self.sa_time = data.Time
-        self.sa_date = pd.to_datetime(data.Date)
-        self.sa_lat = data.Latitude
-        self.sa_lon = data.Longitude
+        self.time = pd.Series([val.time() for val in data.time])
+        self.date = pd.to_datetime(data.Date)
+        self.lat = data.Latitude
+        self.lon = data.Longitude
         self.BIP = data.BIPcount
         self.EJ = data.EJcount
-        self.sa_alt = data.Altitude_m
+        self.alt = data.Altitude_m
 
         self._prep_data()
 
@@ -32,17 +28,17 @@ class _reader(object):
         
         self.fields = {}
 
-        self.fields["sa_time"] = var_to_dict(
-            "Time", np.ma.array(self.sa_time), "HHMMSS", "Seeding Aircraft Time"
+        self.fields["time"] = var_to_dict(
+            "Time", np.ma.array(self.time), "HHMMSS", "Seeding Aircraft Time"
         )
-        self.fields["sa_date"] = var_to_dict(
-            "date", np.ma.array(self.sa_date), "M/D/Y", "Seeding Aircraft Date",
+        self.fields["date"] = var_to_dict(
+            "date", np.ma.array(self.date), "M/D/Y", "Seeding Aircraft Date",
         )
-        self.fields["sa_lat"] = var_to_dict(
-            "lat", np.ma.array(self.sa_lat), " ", "Seeding Aircraft Latitude",
+        self.fields["lat"] = var_to_dict(
+            "lat", np.ma.array(self.lat), " ", "Seeding Aircraft Latitude",
         )
-        self.fields["sa_lon"] = var_to_dict(
-            "lon", np.ma.array(self.sa_lon), " ", "Seeding Aircraft Longitude",
+        self.fields["lon"] = var_to_dict(
+            "lon", np.ma.array(self.lon), " ", "Seeding Aircraft Longitude",
         )
         self.fields["BIP"] = var_to_dict(
             "Burn In Place", np.ma.array(self.BIP), " ", 
@@ -51,7 +47,7 @@ class _reader(object):
         self.fields["EJ"] = var_to_dict(
             "Ejectable", np.ma.array(self.EJ), " ", "Ejectable Flares (Active if n=[n-1]+1)",
         )
-        self.fields["sa_alt"] = var_to_dict(
+        self.fields["alt"] = var_to_dict(
             "alt", np.ma.array(self.sa_alt), "m", "Seeding Aircraft Altitude",
         )
 

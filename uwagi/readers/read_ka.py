@@ -1,4 +1,3 @@
-# import os
 import numpy as np
 from netCDF4 import Dataset
 from datetime import datetime
@@ -14,16 +13,14 @@ class _reader(object):
 
         self.filename = filename
 
-        # os.chdir('/Users/jbehrin1/Desktop/snowie_data/MP_files')
-
         nc = Dataset(filename)
 
         self.u = nc.variables['avux']
         self.v = nc.variables['avvy']
-        self.ka_lat = nc.variables['GLAT']
-        self.ka_lon = nc.variables['GLON']
-        self.ka_time = nc.variables['TIME']
-        self.ka_alt = nc.variables['avalt']
+        self.lat = nc.variables['GLAT']
+        self.lon = nc.variables['GLON']
+        self.time = nc.variables['TIME']
+        self.alt = nc.variables['avalt']
         self.wind_mag = nc.variables['avwmag']
         self.wind_dir = nc.variables['avwdir']
         self.roll = nc.variables['avroll']
@@ -37,10 +34,10 @@ class _reader(object):
 
         self.fields["u_wind"] = ncvar_to_dict(self.u)
         self.fields["v_wind"] = ncvar_to_dict(self.v)
-        self.fields["ka_lat"] = ncvar_to_dict(self.ka_lat)
-        self.fields["ka_lon"] = ncvar_to_dict(self.ka_lon)
-        self.fields["ka_time"] = ncvar_to_dict(self.ka_time)
-        self.fields["ka_alt"] = ncvar_to_dict(self.ka_alt)
+        self.fields["lat"] = ncvar_to_dict(self.lat)
+        self.fields["lon"] = ncvar_to_dict(self.lon)
+        self.fields["time"] = ncvar_to_dict(self.time)
+        self.fields["alt"] = ncvar_to_dict(self.alt)
         self.fields["wind_mag"] = ncvar_to_dict(self.wind_mag)
         self.fields["wind_dir"] = ncvar_to_dict(self.wind_dir)
         self.fields["roll"] = ncvar_to_dict(self.roll)
