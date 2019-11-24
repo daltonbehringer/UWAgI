@@ -32,6 +32,8 @@ class _reader(object):
 
     def _prep_data(self):
 
+        self.fields = {}
+
         self.fields["u_wind"] = ncvar_to_dict(self.u)
         self.fields["v_wind"] = ncvar_to_dict(self.v)
         self.fields["ka_lat"] = ncvar_to_dict(self.ka_lat)
