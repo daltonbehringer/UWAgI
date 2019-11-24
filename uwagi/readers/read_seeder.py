@@ -54,13 +54,13 @@ class _reader(object):
             "alt", np.ma.array(self.sa_alt), "m", "Seeding Aircraft Altitude",
         )
 
-    def var_to_dict(standard_name, data, units, long_name):
- 
-        d = {}
-        d["data"] = data[:]
-        d["units"] = units
-        d["long_name"] = long_name
-        d["standard_name"] = standard_name
-        return d
+def var_to_dict(standard_name, data, units, long_name):
+
+    d = {}
+    d["data"] = data[:]
+    d["units"] = units
+    d["long_name"] = long_name
+    d["standard_name"] = standard_name
+    return d
 
 
