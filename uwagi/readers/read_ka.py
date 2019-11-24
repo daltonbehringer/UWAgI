@@ -2,6 +2,17 @@ import numpy as np
 from netCDF4 import Dataset
 from datetime import datetime
 
+'''
+Reads NetCDF files from the University of Wyoming King Air
+and returns an object containing the data.
+
+Usage:
+ka = uwagi.read_ka('filename')
+
+Returns:
+Object containing King Air Data
+'''
+
 def read_ka(filename):
 
     ka = _reader(filename)
@@ -25,7 +36,6 @@ class _reader(object):
         self.wind_dir = nc.variables['avwdir']
         self.roll = nc.variables['avroll']
 
-        # self._read_file()
         self._prep_data()
 
     def _prep_data(self):

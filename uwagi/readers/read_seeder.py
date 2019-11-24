@@ -1,6 +1,17 @@
 import numpy as np
 import pandas as pd
 
+'''
+Reads CSV files from the seeding aircraft 
+during the SNOWIE campaign in 2017.
+
+Usage:
+seeder = uwagi.read_seeder('filename')
+
+Returns:
+Object containing seeding aircraft data
+'''
+
 def read_seeder(filename):
     
     seeder = _reader(filename)
