@@ -66,9 +66,9 @@ class _reader(object):
         self.fields["cdp_lwc"] = ncvar_to_dict(self.cdplwc)
         self.fields["cdp_conc"] = ncvar_to_dict(self.cdpconc)
         self.fields["lwc_pvm"] = ncvar_to_dict(self.pvmlwc)
-        self.fields["temperature"] = ncvar_to_dict(self.trf)
-        self.fields["dewpoint"] = ncvar_to_dict(self.tdp70)
-        self.fields["airspeed"] = ncvar_to_dict(self.tas)
+        self.fields["temperature"] = ncvar_to_dict(self.temp)
+        self.fields["dewpoint"] = ncvar_to_dict(self.dwpt)
+        self.fields["airspeed"] = ncvar_to_dict(self.airspeed)
 
 def ncvar_to_dict(ncvar):
     
