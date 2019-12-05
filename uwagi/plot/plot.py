@@ -33,9 +33,9 @@ def plot(
         vmax = np.nanmax(ka.fields[str(var)]["data"])
 
     ### MAYBE MOVE THIS TO SEPARATE FUNC ###
-    kdist = np.zeros((len(ka.time[:])))
-    for i in range(len(kdist)-1):
-        kdist[i] = 
+    # kdist = np.zeros((len(ka.time[:])))
+    # for i in range(len(kdist)-1):
+    #     kdist[i] = 
 
     plt.plot(
         ka.time[:].filled(),
