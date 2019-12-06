@@ -28,8 +28,8 @@ class _reader(object):
 
         self.u = nc.variables['avux']
         self.v = nc.variables['avvy']
-        self.lat = nc.variables['GLAT']
-        self.lon = nc.variables['GLON']
+        self.lat = nc.variables['avlat']
+        self.lon = nc.variables['avlon']
         self.time = nc.variables['TIME']
         self.alt = nc.variables['avalt']
         self.wind_mag = nc.variables['avwmag']
