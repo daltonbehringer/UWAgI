@@ -63,6 +63,8 @@ class _reader(object):
 
         self.fields = {}
 
+        self.fields["time"] = nc.variables['time']
+
         # 2DS
         self.fields["bin_min_2DS"] = ncvar_to_dict(self.min_2DS)
         self.fields["bin_max_2DS"] = ncvar_to_dict(self.max_2DS)
