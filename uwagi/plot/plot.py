@@ -46,7 +46,7 @@ clon = -116.0693
 '''Plot time-series'''
 
 def plot(
-    ka,
+    _ka,
     var,
     time_format = "%S",
     tz = None,
@@ -62,7 +62,7 @@ def plot(
     
     x_fmt = DateFormatter(time_format, tz=tz)
 
-    ax.plot_time(ka.time['data'], ka.fields[var]['data'], **kwargs)
+    ax.plot_time(_ka.time['data'], _ka.fields[var]['data'], **kwargs)
 
     ax.xaxis.set_major_formatter(x_fmt)
     if x_min_tick_format == 'second':
@@ -75,7 +75,7 @@ def plot(
         ax.xaxis.set_minor_locator(DayLocator())
 
     if title is not None:
-        ax.set_title(tite)
+        ax.set_title(title)
     
     return fig, ax
 
