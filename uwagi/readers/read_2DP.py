@@ -15,8 +15,8 @@ Object containing King Air 2DP data
 
 def read_2DP(filename):
 
-    2DP = _reader(filename)
-    return 2DP
+    data = _reader(filename)
+    return data
 
 class _reader(object):
 

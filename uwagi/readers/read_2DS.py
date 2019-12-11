@@ -15,8 +15,8 @@ Object containing King Air 2DS data
 
 def read_2DS(filename):
 
-    2DS = _reader(filename)
-    return 2DS
+    data = _reader(filename)
+    return data
 
 class _reader(object):
 
