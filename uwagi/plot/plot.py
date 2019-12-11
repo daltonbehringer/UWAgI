@@ -6,8 +6,8 @@ from matplotlib.dates import DateFormatter
 from matplotlib.dates import SecondLocator, MinuteLocator, HourLocator, DayLocator
 
 '''Lat/Lon for Packer John radar (SNOWIE 2017). Update as needed.'''
-clat = 44.207692
-clon = -116.0693
+# clat = 44.207692
+# clon = -116.0693
 
 '''Plot size distribution'''
 
@@ -59,7 +59,7 @@ def plot(
 
     ax = parse_ax(ax)
     fig = parse_fig(fig)
-    
+
     x_fmt = DateFormatter(time_format, tz=tz)
 
     ax.plot_time(_ka.time['data'], _ka.fields[var]['data'], **kwargs)
@@ -76,7 +76,7 @@ def plot(
 
     if title is not None:
         ax.set_title(title)
-    
+
     return fig, ax
 
 
