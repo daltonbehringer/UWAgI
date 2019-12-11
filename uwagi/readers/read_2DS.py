@@ -9,7 +9,6 @@ and returns an object containing the data.
 Usage:
 ka = uwagi.read_2DS('filename')
 
-
 Returns:
 Object containing King Air 2DS data
 '''

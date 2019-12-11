@@ -9,7 +9,6 @@ and returns an object containing the data.
 Usage:
 ka = uwagi.read_2DP('filename')
 
-
 Returns:
 Object containing King Air 2DP data
 '''
