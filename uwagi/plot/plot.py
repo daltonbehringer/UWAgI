@@ -62,7 +62,7 @@ def plot_ts(
 
     x_fmt = DateFormatter(time_format, tz=tz)
 
-    ax.plot_time(_ka.time['data'], _ka.fields[var]['data'], **kwargs)
+    ax.plot_date(_ka.time['data'], _ka.fields[var]['data'], **kwargs)
 
     ax.xaxis.set_major_formatter(x_fmt)
     if x_min_tick_format == 'second':
