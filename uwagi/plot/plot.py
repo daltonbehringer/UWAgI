@@ -46,7 +46,7 @@ from matplotlib.dates import SecondLocator, MinuteLocator, HourLocator, DayLocat
 '''Plot time-series'''
 
 def plot_ts(
-    _ka,
+    ka,
     var,
     time_format = "%S",
     tz = None,
@@ -62,7 +62,7 @@ def plot_ts(
 
     x_fmt = DateFormatter(time_format, tz=tz)
 
-    ax.plot_date(_ka.time['data'], _ka.fields[var]['data'], **kwargs)
+    ax.plot_date(ka.time[:], ka.fields[var]['data'][:], **kwargs)
 
     ax.xaxis.set_major_formatter(x_fmt)
     if x_min_tick_format == 'second':
