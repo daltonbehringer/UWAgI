@@ -24,7 +24,7 @@ class _reader(object):
 
         self.filename = filename
 
-        nc = Dataset(filename, 'r+')
+        nc = Dataset(filename)
 
         self.u = nc.variables['avux']
         self.v = nc.variables['avvy']
@@ -50,7 +50,7 @@ class _reader(object):
         self.airspeed = nc.variables['tas']
 
         self._prep_data()
-        self._time_to_int()
+        # self._time_to_int()
 
     def _prep_data(self):
 
@@ -79,11 +79,11 @@ class _reader(object):
         self.fields["dewpoint"] = ncvar_to_dict(self.dwpt)
         self.fields["airspeed"] = ncvar_to_dict(self.airspeed)
 
-    def _time_to_int(self):
+    # def _time_to_int(self):
 
-        self.hour[:] = self.hour[:].astype(int)
-        self.min[:] = self.min[:].astype(int)
-        self.sec[:] = self.sec[:].astype(int)
+    #     self.hour[:] = self.hour[:].astype(int)
+    #     self.min[:] = self.min[:].astype(int)
+    #     self.sec[:] = self.sec[:].astype(int)
 
 def ncvar_to_dict(ncvar):
     
