@@ -86,3 +86,10 @@ def ncvar_to_dict(ncvar):
         d["data"] = np.array(d["data"])
         d["data"].shape = (1,)
     return d
+
+def time_to_int(var):
+
+    ka.hour[:] = ka.hour[:].astype(int)
+    ka.min[:] = ka.min[:].astype(int)
+    ka.sec[:] = ka.sec[:].astype(int)
+    
