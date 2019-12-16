@@ -31,6 +31,10 @@ class _reader(object):
         self.lat = nc.variables['avlat']
         self.lon = nc.variables['avlon']
         self.time = nc.variables['TIME']
+        self.date = nc.variables['DATE']
+        self.hour = nc.variables['HOUR']
+        self.min = nc.variables['MINUTE']
+        self.sec = nc.variables['SECOND']
         self.alt = nc.variables['avalt']
         self.wind_mag = nc.variables['avwmag']
         self.wind_dir = nc.variables['avwdir']
@@ -56,6 +60,10 @@ class _reader(object):
         self.fields["lat"] = ncvar_to_dict(self.lat)
         self.fields["lon"] = ncvar_to_dict(self.lon)
         self.fields["time"] = ncvar_to_dict(self.time)
+        self.fields["date"] = ncvar_to_dict(self.date)
+        self.fields["hour"] = ncvar_to_dict(self.hour)
+        self.fields["minute"] = ncvar_to_dict(self.min)
+        self.fields["second"] = ncvar_to_dict(self.sec)
         self.fields["alt"] = ncvar_to_dict(self.alt)
         self.fields["wind_mag"] = ncvar_to_dict(self.wind_mag)
         self.fields["wind_dir"] = ncvar_to_dict(self.wind_dir)
