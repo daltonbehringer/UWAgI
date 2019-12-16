@@ -24,7 +24,7 @@ class _reader(object):
 
         self.filename = filename
 
-        nc = Dataset(filename)
+        nc = Dataset(filename, 'r+')
 
         self.u = nc.variables['avux']
         self.v = nc.variables['avvy']
@@ -50,7 +50,7 @@ class _reader(object):
         self.airspeed = nc.variables['tas']
 
         self._prep_data()
-        # self._time_to_int()
+        self._time_to_int()
 
     def _prep_data(self):
 
