@@ -79,6 +79,12 @@ class _reader(object):
         self.fields["dewpoint"] = ncvar_to_dict(self.dwpt)
         self.fields["airspeed"] = ncvar_to_dict(self.airspeed)
 
+    def _time_to_int(self):
+
+        self.hour[:] = self.hour[:].astype(int)
+        self.min[:] = self.min[:].astype(int)
+        self.sec[:] = self.sec[:].astype(int)
+
 def ncvar_to_dict(ncvar):
     
     d = dict((k, getattr(ncvar, k)) for k in ncvar.ncattrs())
@@ -87,10 +93,4 @@ def ncvar_to_dict(ncvar):
         d["data"] = np.array(d["data"])
         d["data"].shape = (1,)
     return d
-
-def _time_to_int(self):
-
-    self.hour[:] = self.hour[:].astype(int)
-    self.min[:] = self.min[:].astype(int)
-    self.sec[:] = self.sec[:].astype(int)
 
