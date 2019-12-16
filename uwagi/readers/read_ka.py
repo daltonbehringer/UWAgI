@@ -88,7 +88,7 @@ def ncvar_to_dict(ncvar):
         d["data"].shape = (1,)
     return d
 
-def time_to_int(self):
+def _time_to_int(self):
 
     self.hour[:] = self.hour[:].astype(int)
     self.min[:] = self.min[:].astype(int)
