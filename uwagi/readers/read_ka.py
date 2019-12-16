@@ -50,6 +50,7 @@ class _reader(object):
         self.airspeed = nc.variables['tas']
 
         self._prep_data()
+        self._time_to_int()
 
     def _prep_data(self):
 
@@ -87,9 +88,9 @@ def ncvar_to_dict(ncvar):
         d["data"].shape = (1,)
     return d
 
-def time_to_int(var):
+def time_to_int(self):
 
-    ka.hour[:] = ka.hour[:].astype(int)
-    ka.min[:] = ka.min[:].astype(int)
-    ka.sec[:] = ka.sec[:].astype(int)
-    
+    self.hour[:] = self.hour[:].astype(int)
+    self.min[:] = self.min[:].astype(int)
+    self.sec[:] = self.sec[:].astype(int)
+
