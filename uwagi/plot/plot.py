@@ -45,7 +45,7 @@ from matplotlib.dates import SecondLocator, MinuteLocator, HourLocator, DayLocat
 
 '''Plot time-series'''
 
-def plot(
+def plot_ts(
     _ka,
     var,
     time_format = "%S",
