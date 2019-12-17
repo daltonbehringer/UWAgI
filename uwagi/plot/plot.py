@@ -8,7 +8,7 @@ import matplotlib.ticker as ticker
 from ..utility.iop import which_data
 from ..utility.var_labels import get_label
 
-font = {'family': 'serif',
+font = {'family': 'sans serif',
         'color':  'black',
         'weight': 'normal',
         'size': 12,
@@ -100,8 +100,8 @@ def plot_ts(
     if c is None:
         c = 'k'
 
-    ax.plot_date(ka.fields['time'][start:end], ka.fields[var]['data'][start:end], ls=ls, c=c, **kwargs)
-    # ax.grid(linestyle='--', alpha=0.5)
+    ax.plot_date(ka.fields['time'][start:end], ka.fields[var]['data'][start:end], ls=ls, c=c, marker=marker, **kwargs)
+    ax.grid(True)
     ax.tick_params(axis='both', direction='in', grid_linestyle='--', grid_alpha=0.5)
     ax.set_xlabel('Time, UTC', fontdict=font)
     ax.set_ylabel(get_label(var), fontdict=font)
