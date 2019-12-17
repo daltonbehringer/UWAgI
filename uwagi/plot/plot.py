@@ -4,6 +4,7 @@ import matplotlib as mpl
 
 from matplotlib.dates import DateFormatter
 from matplotlib.dates import SecondLocator, MinuteLocator, HourLocator, DayLocator
+import matplotlib.ticker as ticker
 
 '''Lat/Lon for Packer John radar (SNOWIE 2017). Update as needed.'''
 # clat = 44.207692
@@ -48,7 +49,7 @@ from matplotlib.dates import SecondLocator, MinuteLocator, HourLocator, DayLocat
 def plot_ts(
     ka,
     var,
-    time_format = "%S",
+    time_format = "%H%M",
     tz = None,
     x_min_tick_format = 'second',
     title = None,
@@ -62,9 +63,16 @@ def plot_ts(
 
     x_fmt = DateFormatter(time_format, tz=tz)
 
-    ax.plot_date(ka.time[:], ka.fields[var]['data'][:], **kwargs)
+    start = np.where(ka.fields['time'] == np.datetime64(start_time))[0][0]
+    end = np.where(ka.fields['time'] == np.datetime64(end_time))[0][0]
+
+    ax.plot_date(ka.fields['time'][start:end], ka.fields[var]['data'][start:end], **kwargs)
+
+    # ax.xaxis.set_major_formatter(dates.DateFormatter('%H%M'))
 
     ax.xaxis.set_major_formatter(x_fmt)
+    # ax.xaxis.set_minor_locator(MultipleLocator(5))
+    
     if x_min_tick_format == 'second':
         ax.xaxis.set_minor_locator(SecondLocator())
     elif x_min_tick_format == 'minute':
