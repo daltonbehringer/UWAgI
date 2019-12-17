@@ -1,6 +1,6 @@
 import numpy as np
 from netCDF4 import Dataset
-from datetime import datetime
+import datetime
 
 '''
 Reads NetCDF files from the University of Wyoming King Air
