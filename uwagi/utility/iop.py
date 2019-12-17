@@ -11,7 +11,7 @@ def which_data(
 	# FINISH LATER (need to adjust plot function to accept IOP arg to select file.
 	# IOP arg usage currently does not select file, only leg times)
 	
-	if iop is None or if leg is None:
+	if iop is None or leg is None:
 		raise ValueError('Plotting function requires IOP and leg arguments.')
 	
 	elif iop is 1:
