@@ -87,7 +87,7 @@ def plot_ts(
     '''
 
     ax = parse_ax(ax)
-    fig = parse_fig(fig)
+    fig = parse_fig(fig,10,5)
 
     start_time, end_time = which_data(iop, leg)[0], which_data(iop, leg)[1]
 
@@ -133,9 +133,9 @@ def parse_ax(ax):
         ax = plt.gca()
     return ax
 
-def parse_fig(fig):
+def parse_fig(fig,x,y):
     """ Parse and return fig instance. """
     if fig is None:
-        fig = plt.gcf()
+        fig = plt.figure(figsize=(x,y))
     return fig
 
