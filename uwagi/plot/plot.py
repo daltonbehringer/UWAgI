@@ -115,8 +115,10 @@ def plot_ts(
     elif x_min_tick_format == 'day':
         ax.xaxis.set_minor_locator(DayLocator())
 
+    ax.yaxis.set_minor_locator(AutoMinorLocator())
+
     ax.grid(True)
-    ax.tick_params(axis='both', direction='in', grid_linestyle='--', grid_alpha=0.5)
+    ax.tick_params(axis='both', which='both', direction='in', grid_linestyle='--', grid_alpha=0.5)
     ax.set_xlabel('Time, UTC', fontdict=font)
     ax.set_ylabel(get_label(var), fontdict=font)
 
