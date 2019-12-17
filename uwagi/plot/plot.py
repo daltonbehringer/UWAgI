@@ -5,6 +5,7 @@ import matplotlib as mpl
 from matplotlib.dates import DateFormatter
 from matplotlib.dates import SecondLocator, MinuteLocator, HourLocator, DayLocator
 import matplotlib.ticker as ticker
+from .utility import iop
 
 '''Lat/Lon for Packer John radar (SNOWIE 2017). Update as needed.'''
 # clat = 44.207692
@@ -49,8 +50,8 @@ import matplotlib.ticker as ticker
 def plot_ts(
     ka,
     var,
-    start_time,
-    end_time,
+    iop,
+    leg,
     time_format = "%H%M",
     tz = None,
     x_min_tick_format = 'second',
@@ -60,8 +61,24 @@ def plot_ts(
     **kwargs
     ):
 
+    '''
+    Plots a time-series of a variable
+
+    Usage: uwagi.plot.plot_ts(args)
+
+    Arguments:
+        ka = data object
+        var = variable from data object
+        iop = iop number
+        leg = leg of the iop to plot
+
+    Returns: matplotlib plot object
+    '''
+
     ax = parse_ax(ax)
     fig = parse_fig(fig)
+
+    start_time, end_time = iop.which_data(iop, leg)[0], iop.which_data(iop, leg)[1]
 
     x_fmt = DateFormatter(time_format, tz=tz)
 
