@@ -82,14 +82,14 @@ class _reader(object):
 
     def _fix_time(self):
 
-        year = int(ka.time.units[14:18])
-        month = int(ka.time.units[19:21])
-        day = int(ka.time.units[22:24])
-        hour = int(ka.time.units[25:27])
-        minute = int(ka.time.units[28:30])
-        second = int(ka.time.units[31:33])
+        year = int(self.time.units[14:18])
+        month = int(self.time.units[19:21])
+        day = int(self.time.units[22:24])
+        hour = int(self.time.units[25:27])
+        minute = int(self.time.units[28:30])
+        second = int(self.time.units[31:33])
         start_time = datetime.datetime(year,month,day,hour,minute,second).timestamp()
-        time_sec = ka.time[:] + start_time
+        time_sec = self.time[:] + start_time
         self.fields['time'] = time_sec.astype('datetime64[s]')
 
 def ncvar_to_dict(ncvar):
