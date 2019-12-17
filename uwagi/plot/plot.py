@@ -115,7 +115,7 @@ def plot_ts(
     elif x_min_tick_format == 'day':
         ax.xaxis.set_minor_locator(DayLocator())
 
-    ax.yaxis.set_minor_locator(AutoMinorLocator())
+    ax.yaxis.set_minor_locator(ticker.AutoMinorLocator())
 
     ax.grid(True)
     ax.tick_params(axis='both', which='both', direction='in', grid_linestyle='--', grid_alpha=0.5)
