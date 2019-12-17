@@ -92,14 +92,14 @@ def plot_ts(
     ax.xaxis.set_major_formatter(x_fmt)
     ax.xaxis.set_major_locator(MinuteLocator(interval=2))
     
-    if x_min_tick_format == 'second':
-        ax.xaxis.set_minor_locator(SecondLocator())
-    elif x_min_tick_format == 'minute':
-        ax.xaxis.set_minor_locator(MinuteLocator())
-    elif x_min_tick_format == 'hour':
-        ax.xaxis.set_minor_locator(HourLocator())
-    elif x_min_tick_format == 'day':
-        ax.xaxis.set_minor_locator(DayLocator())
+    # if x_min_tick_format == 'second':
+    #     ax.xaxis.set_minor_locator(SecondLocator())
+    # elif x_min_tick_format == 'minute':
+    #     ax.xaxis.set_minor_locator(MinuteLocator())
+    # elif x_min_tick_format == 'hour':
+    #     ax.xaxis.set_minor_locator(HourLocator())
+    # elif x_min_tick_format == 'day':
+    #     ax.xaxis.set_minor_locator(DayLocator())
 
     if title is not None:
         ax.set_title(title)
