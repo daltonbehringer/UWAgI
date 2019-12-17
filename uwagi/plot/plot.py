@@ -86,8 +86,8 @@ def plot_ts(
     Returns: matplotlib plot object
     '''
 
-    ax = parse_ax(ax)
     fig = parse_fig(fig,10,5)
+    ax = parse_ax(ax)
 
     start_time, end_time = which_data(iop, leg)[0], which_data(iop, leg)[1]
 
@@ -127,15 +127,15 @@ def plot_ts(
 
     return fig, ax
 
-def parse_ax(ax):
-    """ Parse and return ax instance. """
-    if ax is None:
-        ax = plt.gca()
-    return ax
-
 def parse_fig(fig,x,y):
     """ Parse and return fig instance. """
     if fig is None:
         fig = plt.figure(figsize=(x,y))
     return fig
+
+def parse_ax(ax):
+    """ Parse and return ax instance. """
+    if ax is None:
+        ax = plt.gca()
+    return ax
 
