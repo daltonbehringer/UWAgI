@@ -6,6 +6,7 @@ from matplotlib.dates import DateFormatter
 from matplotlib.dates import SecondLocator, MinuteLocator, HourLocator, DayLocator
 import matplotlib.ticker as ticker
 from ..utility.iop import which_data
+from ..utility.var_labels import get_label
 
 font = {'family': 'serif',
         'color':  'black',
@@ -102,8 +103,8 @@ def plot_ts(
     ax.plot_date(ka.fields['time'][start:end], ka.fields[var]['data'][start:end], ls=ls, c=c, **kwargs)
     # ax.grid(linestyle='--', alpha=0.5)
     ax.tick_params(axis='both', direction='in', grid_linestyle='--', grid_alpha=0.5)
-    ax.set_xticklabels(fontdict=font)
-    ax.set_yticklabels(fontdict=font)
+    ax.set_xlabel('Time, UTC', fontdict=font)
+    ax.set_ylabel(get_label(var), fontdict=font)
 
     ax.xaxis.set_major_formatter(x_fmt)
     ax.xaxis.set_major_locator(MinuteLocator(interval=2))
