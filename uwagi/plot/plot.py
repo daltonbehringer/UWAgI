@@ -65,6 +65,7 @@ def plot_ts(
     title = None,
     ax = None,
     fig = None,
+    tighten = True,
     ls = None,
     c = None,
     marker = None,
@@ -101,10 +102,6 @@ def plot_ts(
         c = 'k'
 
     ax.plot_date(ka.fields['time'][start:end], ka.fields[var]['data'][start:end], ls=ls, c=c, marker=marker, **kwargs)
-    ax.grid(True)
-    ax.tick_params(axis='both', direction='in', grid_linestyle='--', grid_alpha=0.5)
-    ax.set_xlabel('Time, UTC', fontdict=font)
-    ax.set_ylabel(get_label(var), fontdict=font)
 
     ax.xaxis.set_major_formatter(x_fmt)
     ax.xaxis.set_major_locator(MinuteLocator(interval=2))
@@ -117,6 +114,11 @@ def plot_ts(
         ax.xaxis.set_minor_locator(HourLocator())
     elif x_min_tick_format == 'day':
         ax.xaxis.set_minor_locator(DayLocator())
+
+    ax.grid(True)
+    ax.tick_params(axis='both', direction='in', grid_linestyle='--', grid_alpha=0.5)
+    ax.set_xlabel('Time, UTC', fontdict=font)
+    ax.set_ylabel(get_label(var), fontdict=font)
 
     if title is None:
         ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | Leg '+str(leg), fontdict=font)
