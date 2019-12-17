@@ -4,8 +4,8 @@ Start/end database for plotting function
 
 
 def which_data(
-	iop = None,
-	leg = None
+	iop,
+	leg
 	):
 
 	# FINISH LATER (need to adjust plot function to accept IOP arg to select file.

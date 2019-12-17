@@ -50,8 +50,8 @@ from ..utility.iop import which_data
 def plot_ts(
     ka,
     var,
-    iop,
-    leg,
+    iop = None,
+    leg = None,
     time_format = "%H%M",
     tz = None,
     x_min_tick_format = 'second',
