@@ -49,6 +49,8 @@ import matplotlib.ticker as ticker
 def plot_ts(
     ka,
     var,
+    start_time,
+    end_time,
     time_format = "%H%M",
     tz = None,
     x_min_tick_format = 'second',
@@ -71,7 +73,7 @@ def plot_ts(
     # ax.xaxis.set_major_formatter(dates.DateFormatter('%H%M'))
 
     ax.xaxis.set_major_formatter(x_fmt)
-    # ax.xaxis.set_minor_locator(MultipleLocator(5))
+    ax.xaxis.set_major_locator(MinuteLocator(interval=2))
     
     if x_min_tick_format == 'second':
         ax.xaxis.set_minor_locator(SecondLocator())
