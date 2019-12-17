@@ -5,7 +5,7 @@ import matplotlib as mpl
 from matplotlib.dates import DateFormatter
 from matplotlib.dates import SecondLocator, MinuteLocator, HourLocator, DayLocator
 import matplotlib.ticker as ticker
-from .utility import iop
+from .utility.iop import which_data
 
 '''Lat/Lon for Packer John radar (SNOWIE 2017). Update as needed.'''
 # clat = 44.207692
@@ -78,7 +78,7 @@ def plot_ts(
     ax = parse_ax(ax)
     fig = parse_fig(fig)
 
-    start_time, end_time = iop.which_data(iop, leg)[0], iop.which_data(iop, leg)[1]
+    start_time, end_time = which_data(iop, leg)[0], which_data(iop, leg)[1]
 
     x_fmt = DateFormatter(time_format, tz=tz)
 
