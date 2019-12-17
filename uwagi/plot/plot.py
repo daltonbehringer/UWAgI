@@ -7,6 +7,12 @@ from matplotlib.dates import SecondLocator, MinuteLocator, HourLocator, DayLocat
 import matplotlib.ticker as ticker
 from ..utility.iop import which_data
 
+font = {'family': 'serif',
+        'color':  'black',
+        'weight': 'normal',
+        'size': 12,
+        }
+
 '''Lat/Lon for Packer John radar (SNOWIE 2017). Update as needed.'''
 # clat = 44.207692
 # clon = -116.0693
@@ -54,10 +60,13 @@ def plot_ts(
     leg = None,
     time_format = "%H%M",
     tz = None,
-    x_min_tick_format = 'second',
+    x_min_tick_format = 'minute',
     title = None,
     ax = None,
     fig = None,
+    ls = None,
+    c = None,
+    marker = None,
     **kwargs
     ):
 
@@ -85,28 +94,35 @@ def plot_ts(
     start = np.where(ka.fields['time'] == np.datetime64(start_time))[0][0]
     end = np.where(ka.fields['time'] == np.datetime64(end_time))[0][0]
 
-    ax.plot_date(ka.fields['time'][start:end], ka.fields[var]['data'][start:end], **kwargs)
+    if ls is None:
+        ls = '-'
+    if c is None:
+        c = 'k'
 
-    # ax.xaxis.set_major_formatter(dates.DateFormatter('%H%M'))
+    ax.plot_date(ka.fields['time'][start:end], ka.fields[var]['data'][start:end], ls=ls, c=c, **kwargs)
+    # ax.grid(linestyle='--', alpha=0.5)
+    ax.tick_params(axis='both', direction='in', grid_linestyle='--', grid_alpha=0.5)
+    ax.set_xticklabels(fontdict=font)
+    ax.set_yticklabels(fontdict=font)
 
     ax.xaxis.set_major_formatter(x_fmt)
     ax.xaxis.set_major_locator(MinuteLocator(interval=2))
     
-    # if x_min_tick_format == 'second':
-    #     ax.xaxis.set_minor_locator(SecondLocator())
-    # elif x_min_tick_format == 'minute':
-    #     ax.xaxis.set_minor_locator(MinuteLocator())
-    # elif x_min_tick_format == 'hour':
-    #     ax.xaxis.set_minor_locator(HourLocator())
-    # elif x_min_tick_format == 'day':
-    #     ax.xaxis.set_minor_locator(DayLocator())
+    if x_min_tick_format == 'second':
+        ax.xaxis.set_minor_locator(SecondLocator())
+    elif x_min_tick_format == 'minute':
+        ax.xaxis.set_minor_locator(MinuteLocator())
+    elif x_min_tick_format == 'hour':
+        ax.xaxis.set_minor_locator(HourLocator())
+    elif x_min_tick_format == 'day':
+        ax.xaxis.set_minor_locator(DayLocator())
 
-    if title is not None:
-        ax.set_title(title)
+    if title is None:
+        ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | Leg '+str(leg), fontdict=font)
+    elif title is not None:
+        ax.set_title(title, fontdict=font)
 
     return fig, ax
-
-
 
 def parse_ax(ax):
     """ Parse and return ax instance. """
@@ -114,12 +130,9 @@ def parse_ax(ax):
         ax = plt.gca()
     return ax
 
-
 def parse_fig(fig):
     """ Parse and return fig instance. """
     if fig is None:
         fig = plt.gcf()
     return fig
-
-
 
