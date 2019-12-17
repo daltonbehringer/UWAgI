@@ -5,7 +5,7 @@ import matplotlib as mpl
 from matplotlib.dates import DateFormatter
 from matplotlib.dates import SecondLocator, MinuteLocator, HourLocator, DayLocator
 import matplotlib.ticker as ticker
-from .utility.iop import which_data
+from ..utility.iop import which_data
 
 '''Lat/Lon for Packer John radar (SNOWIE 2017). Update as needed.'''
 # clat = 44.207692
