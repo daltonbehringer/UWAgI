@@ -122,6 +122,8 @@ def plot_ts(
     ax.set_xlabel('Time, UTC', fontdict=font)
     ax.set_ylabel(get_label(var), fontdict=font)
 
+    ax.set_xlim([ka.fields['time'][start],ka.fields['time'][end]])
+
     if title is None:
         ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | Leg '+str(leg), fontdict=font)
     elif title is not None:
