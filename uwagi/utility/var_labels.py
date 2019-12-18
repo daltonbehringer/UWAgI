@@ -4,6 +4,10 @@ Labels function for variables
 
 def get_label(var):
 
+	if var is 'lat':
+		label = 'Latitude'
+	if var is 'lon':
+		label = 'Longitude'
 	if var is 'temperature':
 		label = 'Temperature, $^\circ$C'
 	if var is 'dewpoint':
@@ -24,5 +28,6 @@ def get_label(var):
 		label = 'CDP Total Concentraion, cm$^{-3}$'
 	if var is 'lwc_pvm':
 		label = 'PVM Liquid Water Content, g m$^{-3}$'
+
 
 	return label

@@ -30,8 +30,8 @@ class _reader(object):
         self.v = nc.variables['avvy']
         self.lat = nc.variables['avlat']
         self.lon = nc.variables['avlon']
-        self.time = nc.variables['time']
-        # self.time = nc.variables['TIME']
+        self.time = nc.variables['time'] # seconds since 2017-01-01 00:00:00 UTC
+        # self.time = nc.variables['TIME'] 
         self.date = nc.variables['DATE']
         self.hour = nc.variables['HOUR']
         self.min = nc.variables['MINUTE']
@@ -81,6 +81,12 @@ class _reader(object):
         self.fields["airspeed"] = ncvar_to_dict(self.airspeed)
 
     def _fix_time(self):
+
+        '''
+        Time for SNOWIE '17 is in 'seconds since 2017-01-01 000000UTC'
+        This function adjust start time to this from 'since start of epoch'
+        and augments the time field to represent YYYY-MM-DD HH:MM:SS UTC.
+        '''
 
         year = int(self.time.units[14:18])
         month = int(self.time.units[19:21])

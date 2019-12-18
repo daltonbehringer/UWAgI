@@ -63,6 +63,7 @@ def plot_ts(
     tz = None,
     x_min_tick_format = 'minute',
     title = None,
+    y_label = None,
     ax = None,
     fig = None,
     tighten = True,
@@ -86,12 +87,12 @@ def plot_ts(
     Returns: matplotlib plot object
     '''
 
-    fig = parse_fig(fig,10,5)
+    fig = parse_fig(fig,10,4)
     ax = parse_ax(ax)
 
     start_time, end_time = which_data(iop, leg)[0], which_data(iop, leg)[1]
 
-    x_fmt = DateFormatter(time_format, tz=tz)
+    x_fmt = DateFormatter(time_format)
 
     start = np.where(ka.fields['time'] == np.datetime64(start_time))[0][0]
     end = np.where(ka.fields['time'] == np.datetime64(end_time))[0][0]
@@ -117,12 +118,14 @@ def plot_ts(
 
     ax.yaxis.set_minor_locator(ticker.AutoMinorLocator())
 
+    ax.set_xlim([ka.fields['time'][start],ka.fields['time'][end]])
+
     ax.grid(True)
     ax.tick_params(axis='both', which='both', direction='in', grid_linestyle='--', grid_alpha=0.5)
     ax.set_xlabel('Time, UTC', fontdict=font)
-    ax.set_ylabel(get_label(var), fontdict=font)
 
-    ax.set_xlim([ka.fields['time'][start],ka.fields['time'][end]])
+    if y_label is None:
+        ax.set_ylabel(get_label(var), fontdict=font)
 
     if title is None:
         ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | Leg '+str(leg), fontdict=font)
