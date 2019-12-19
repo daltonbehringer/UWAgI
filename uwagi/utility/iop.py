@@ -354,6 +354,454 @@ def which_data(
 			start_time = date + '21:16:35'
 			end_time = date + '21:24:50'
 
+	elif iop is 11:
+		date1 = '2017-02-04 '
+		date2 = '2017-02-05 '
+		if leg is 1:
+			start_time = date1 + '22:08:40'
+			end_time = date1 + '22:18:00'
+		elif leg is 2:
+			start_time = date1 + '22:20:50'
+			end_time = date1 + '22:38:50'
+		elif leg is 3:
+			start_time = date1 + '22:42:00'
+			end_time = date1 + '22:52:30'
+		elif leg is 4:
+			start_time = date1 + '22:55:30'
+			end_time = date1 + '23:11:30'
+		elif leg is 5:
+			start_time = date1 + '23:14:55'
+			end_time = date1 + '23:27:00'
+		elif leg is 6:
+			start_time = date1 + '23:29:25'
+			end_time = date1 + '23:43:05'
+		elif leg is 7:
+			start_time = date1+ '23:46:00'
+			end_time = date1 + '23:56:35'
+		elif leg is 8:
+			start_time = date1 + '23:59:00'
+			end_time = date2 + '00:12:20'
+		elif leg is 9:
+			start_time = date2 + '00:14:50'
+			end_time = date2 + '00:25:40'
+		elif leg is 10:
+			start_time = date2 + '00:28:00'
+			end_time = date2 + '00:42:30'
+		elif leg is 11:
+			start_time = date2 + '00:45:20'
+			end_time = date2 + '00:56:05'
+		elif leg is 12:
+			start_time = date2 + '00:58:30'
+			end_time = date2 + '01:07:10'
+
+	elif iop is 12:
+		date = '2017-02-07 '
+		if leg is 1:
+			start_time = date + '20:13:30'
+			end_time = date + '20:23:40'
+		elif leg is 2:
+			start_time = date + '20:26:15'
+			end_time = date + '20:46:10'
+		elif leg is 3:
+			start_time = date + '20:49:35'
+			end_time = date + '20:59:25'
+		elif leg is 4:
+			start_time = date + '21:02:30'
+			end_time = date + '21:22:30'
+		elif leg is 5:
+			start_time = date + '21:25:10'
+			end_time = date + '21:35:00'
+		elif leg is 6:
+			start_time = date + '21:37:00'
+			end_time = date + '21:56:00'
+		elif leg is 7:
+			start_time = date + '21:59:30'
+			end_time = date + '22:09:35'
+		elif leg is 8:
+			start_time = date + '22:12:34'
+			end_time = date + '22:33:30'
+		elif leg is 9:
+			start_time = date + '22:36:30'
+			end_time = date + '22:46:10'
+		elif leg is 10:
+			start_time = date + '22:49:00'
+			end_time = date + '23:03:20'
+
+	elif iop is 13:
+		date1 = '2017-02-16 '
+		date2 = '2017-02-17 '
+		if leg is 1:
+			start_time = date1 + '23:42:54'
+			end_time = date1 + '23:53:15'
+		elif leg is 2:
+			start_time = date1 + '23:58:00'
+			end_time = date2 + '00:13:00'
+		elif leg is 3:
+			start_time = date2 + '00:15:50'
+			end_time = date2 + '00:25:45'
+		elif leg is 4:
+			start_time = date2 + '00:29:00'
+			end_time = date2 + '00:39:00'
+
+	elif iop is 14:
+		date1 = '2017-02-18 '
+		date2 = '2017-02-19 '
+		if leg is 1:
+			start_time = date1 + '21:45:00'
+			end_time = date1 + '21:58:00'
+		elif leg is 2:
+			start_time = date1 + '22:01:00'
+			end_time = date1 + '22:21:50'
+		elif leg is 3:
+			start_time = date1 + '22:23:40'
+			end_time = date1 + '22:37:30'
+		elif leg is 4:
+			start_time = date1 + '22:39:20'
+			end_time = date1 + '22:58:00'
+		elif leg is 5:
+			start_time = date1 + '23:00:40'
+			end_time = date1 + '23:14:25'
+		elif leg is 6:
+			start_time = date1 + '23:16:20'
+			end_time = date1 + '23:34:50'
+		elif leg is 7:
+			start_time = date1+ '23:36:25'
+			end_time = date1 + '23:50:40'
+		elif leg is 8:
+			start_time = date1 + '23:52:00'
+			end_time = date2 + '00:07:00'
+		elif leg is 9:
+			start_time = date2 + '00:10:30'
+			end_time = date2 + '00:19:55'
+		elif leg is 10:
+			start_time = date2 + '00:21:50'
+			end_time = date2 + '00:41:20'
+
+	elif iop is 15:
+		date = '2017-02-19 '
+		if leg is 1:
+			start_time = date + '17:45:00'
+			end_time = date + '17:55:09'
+		elif leg is 2:
+			start_time = date + '17:58:00'
+			end_time = date + '18:15:00'
+		elif leg is 3:
+			start_time = date + '18:18:00'
+			end_time = date + '18:30:45'
+		elif leg is 4:
+			start_time = date + '18:34:30'
+			end_time = date + '18:46:20'
+		elif leg is 5:
+			start_time = date + '18:49:30'
+			end_time = date + '18:58:35'
+		elif leg is 6:
+			start_time = date + '19:01:00'
+			end_time = date + '19:10:00'
+		elif leg is 7:
+			start_time = date + '19:13:40'
+			end_time = date + '19:19:00'
+		elif leg is 8:
+			start_time = date + '19:22:00'
+			end_time = date + '19:39:00'
+		elif leg is 9:
+			start_time = date + '19:42:00'
+			end_time = date + '19:57:30'
+		elif leg is 10:
+			start_time = date + '20:01:00'
+			end_time = date + '20:14:30'
+		elif leg is 11:
+			start_time = date + '20:17:40'
+			end_time = date + '20:27:00'
+		elif leg is 12:
+			start_time = date + '20:30:15'
+			end_time = date + '20:45:30'
+
+	elif iop is 16:
+		date = '2017-02-20 '
+		if leg is 1:
+			start_time = date + '14:47:15'
+			end_time = date + '14:57:30'
+		elif leg is 2:
+			start_time = date + '15:01:00'
+			end_time = date + '15:19:55'
+		elif leg is 3:
+			start_time = date + '15:24:35'
+			end_time = date + '15:35:40'
+		elif leg is 4:
+			start_time = date + '15:38:45'
+			end_time = date + '15:58:45'
+		elif leg is 5:
+			start_time = date + '16:01:45'
+			end_time = date + '16:12:40'
+		elif leg is 6:
+			start_time = date + '16:15:15'
+			end_time = date + '16:37:47'
+		elif leg is 7:
+			start_time = date + '16:40:40'
+			end_time = date + '16:48:50'
+		elif leg is 8:
+			start_time = date + '17:03:02'
+			end_time = date + '17:25:00'
+
+	elif iop is 17:
+		date = '2017-02-21 '
+		if leg is 1:
+			start_time = date + '14:41:40'
+			end_time = date + '14:52:40'
+		elif leg is 2:
+			start_time = date + '14:56:05'
+			end_time = date + '15:15:50'
+		elif leg is 3:
+			start_time = date + '15:19:00'
+			end_time = date + '15:30:54'
+		elif leg is 4:
+			start_time = date + '15:35:20'
+			end_time = date + '15:53:40'
+		elif leg is 5:
+			start_time = date + '16:18:45'
+			end_time = date + '16:31:15'
+		elif leg is 6:
+			start_time = date + '16:35:05'
+			end_time = date + '16:52:30'
+		elif leg is 7:
+			start_time = date + '16:55:50'
+			end_time = date + '17:06:20'
+		elif leg is 8:
+			start_time = date + '17:11:10'
+			end_time = date + '17:25:30'
+		elif leg is 9:
+			start_time = date + '17:34:00'
+			end_time = date + '17:44:15'
+		elif leg is 10:
+			start_time = date + '17:48:00'
+			end_time = date + '18:06:40'
+
+	'''
+	NO FLIGHTS FOR IOP 18
+	'''
+
+	elif iop is 19:
+		date = '2017-03-04 '
+		if leg is 1:
+			start_time = date + '13:30:00'
+			end_time = date + '13:39:45'
+		elif leg is 2:
+			start_time = date + '13:43:30'
+			end_time = date + '14:00:10'
+		elif leg is 3:
+			start_time = date + '14:03:40'
+			end_time = date + '14:15:00'
+		elif leg is 4:
+			start_time = date + '14:18:45'
+			end_time = date + '14:33:45'
+		elif leg is 5:
+			start_time = date + '14:36:30'
+			end_time = date + '14:48:45'
+		elif leg is 6:
+			start_time = date + '14:51:20'
+			end_time = date + '15:01:45'
+		elif leg is 7:
+			start_time = date + '15:04:25'
+			end_time = date + '15:12:45'
+		elif leg is 8:
+			start_time = date + '15:14:15'
+			end_time = date + '15:24:25'
+		elif leg is 9:
+			start_time = date + '15:27:30'
+			end_time = date + '15:34:50'
+		elif leg is 10:
+			start_time = date + '15:37:50'
+			end_time = date + '15:47:10'
+		elif leg is 11:
+			start_time = date + '15:50:20'
+			end_time = date + '15:58:05'
+		elif leg is 12:
+			start_time = date + '16:00:05'
+			end_time = date + '16:07:15'
+		elif leg is 13:
+			start_time = date + '16:10:05'
+			end_time = date + '16:18:50'
+		elif leg is 14:
+			start_time = date + '16:25:40'
+			end_time = date + '16:41:10'
+
+	elif iop is 20:
+		date = '2017-03-05 '
+		if leg is 1:
+			start_time = date + '12:12:00'
+			end_time = date + '12:22:30'
+		elif leg is 2:
+			start_time = date + '12:27:30'
+			end_time = date + '12:44:20'
+		elif leg is 3:
+			start_time = date + '12:48:15'
+			end_time = date + '12:59:35'
+		elif leg is 4:
+			start_time = date + '13:02:12'
+			end_time = date + '13:17:00'
+		elif leg is 5:
+			start_time = date + '13:20:40'
+			end_time = date + '13:29:30'
+		elif leg is 6:
+			start_time = date + '13:32:35'
+			end_time = date + '13:47:00'
+		elif leg is 7:
+			start_time = date + '13:50:15'
+			end_time = date + '13:59:00'
+		elif leg is 8:
+			start_time = date + '14:02:45'
+			end_time = date + '14:17:05'
+		elif leg is 9:
+			start_time = date + '14:21:00'
+			end_time = date + '14:30:15'
+		elif leg is 10:
+			start_time = date + '14:33:40'
+			end_time = date + '14:52:00'
+
+	elif iop is 21:
+		date = '2017-03-07 '
+		if leg is 1:
+			start_time = date + '14:23:40'
+			end_time = date + '14:33:16'
+		elif leg is 2:
+			start_time = date + '14:36:20'
+			end_time = date + '14:51:50'
+		elif leg is 3:
+			start_time = date + '14:55:20'
+			end_time = date + '15:07:35'
+		elif leg is 4:
+			start_time = date + '15:09:18'
+			end_time = date + '15:24:00'
+		elif leg is 5:
+			start_time = date + '15:26:50'
+			end_time = date + '15:38:25'
+		elif leg is 6:
+			start_time = date + '15:40:30'
+			end_time = date + '15:55:35'
+		elif leg is 7:
+			start_time = date + '15:58:20'
+			end_time = date + '16:10:45'
+		elif leg is 8:
+			start_time = date + '16:13:05'
+			end_time = date + '16:28:00'
+		elif leg is 9:
+			start_time = date + '16:31:00'
+			end_time = date + '16:42:55'
+		elif leg is 10:
+			start_time = date + '16:45:09'
+			end_time = date + '16:59:00'
+		elif leg is 11:
+			start_time = date + '17:01:40'
+			end_time = date + '17:11:20'
+		elif leg is 12:
+			start_time = date + '17:12:55'
+			end_time = date + '17:16:30'
+		elif leg is 13:
+			start_time = date + '17:18:25'
+			end_time = date + '17:23:00'
+		elif leg is 14:
+			start_time = date + '17:25:23'
+			end_time = date + '17:35:55'
+
+	elif iop is 22:
+		date = '2017-03-09 '
+		if leg is 1:
+			start_time = date + '14:22:15'
+			end_time = date + '14:32:10'
+		elif leg is 2:
+			start_time = date + '14:35:05'
+			end_time = date + '14:54:50'
+		elif leg is 3:
+			start_time = date + '14:58:22'
+			end_time = date + '15:09:30'
+		elif leg is 4:
+			start_time = date + '15:13:00'
+			end_time = date + '15:32:10'
+		elif leg is 5:
+			start_time = date + '15:36:00'
+			end_time = date + '15:46:30'
+		elif leg is 6:
+			start_time = date + '15:50:40'
+			end_time = date + '16:08:10'
+		elif leg is 7:
+			start_time = date + '16:11:40'
+			end_time = date + '16:23:00'
+		elif leg is 8:
+			start_time = date + '16:26:30'
+			end_time = date + '16:46:00'
+
+	elif iop is 23:
+		date = '2017-03-09 '
+		if leg is 1:
+			start_time = date + '20:19:45'
+			end_time = date + '20:30:05'
+		elif leg is 2:
+			start_time = date + '20:34:00'
+			end_time = date + '21:09:00'
+		elif leg is 3:
+			start_time = date + '21:13:00'
+			end_time = date + '21:23:05'
+		elif leg is 4:
+			start_time = date + '21:27:30'
+			end_time = date + '21:44:30'
+		elif leg is 5:
+			start_time = date + '21:48:00'
+			end_time = date + '21:58:50'
+		elif leg is 6:
+			start_time = date + '22:02:40'
+			end_time = date + '22:21:05'
+		elif leg is 7:
+			start_time = date + '22:24:30'
+			end_time = date + '22:35:35'
+		elif leg is 8:
+			start_time = date + '22:40:00'
+			end_time = date + '22:57:05'
+		elif leg is 9:
+			start_time = date + '23:00:10'
+			end_time = date + '23:11:30'
+		elif leg is 10:
+			start_time = date + '23:15:35'
+			end_time = date + '23:32:30'
+
+	elif iop is 24:
+		date = '2017-03-16 '
+		if leg is 1:
+			start_time = date + '01:08:10'
+			end_time = date + '01:18:20'
+		elif leg is 2:
+			start_time = date + '01:22:00'
+			end_time = date + '01:40:40'
+		elif leg is 3:
+			start_time = date + '01:44:25'
+			end_time = date + '01:54:30'
+		elif leg is 4:
+			start_time = date + '01:58:40'
+			end_time = date + '02:15:25'
+		elif leg is 5:
+			start_time = date + '02:18:40'
+			end_time = date + '02:30:20'
+		elif leg is 6:
+			start_time = date + '02:33:40'
+			end_time = date + '02:51:20'
+		elif leg is 7:
+			start_time = date + '02:54:30'
+			end_time = date + '03:06:15'
+		elif leg is 8:
+			start_time = date + '03:09:00'
+			end_time = date + '03:27:00'
+		elif leg is 9:
+			start_time = date + '03:30:20'
+			end_time = date + '03:41:40'
+		elif leg is 10:
+			start_time = date + '03:45:20'
+			end_time = date + '04:02:25'
+		elif leg is 11:
+			start_time = date + '04:05:25'
+			end_time = date + '04:09:30'
+		elif leg is 12:
+			start_time = date + '04:12:00'
+			end_time = date + '04:20:30'
+
 
 	return start_time, end_time
 
