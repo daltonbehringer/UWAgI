@@ -5,7 +5,7 @@ import matplotlib as mpl
 from matplotlib.dates import DateFormatter
 from matplotlib.dates import SecondLocator, MinuteLocator, HourLocator, DayLocator
 import matplotlib.ticker as ticker
-from ..utility.iop import which_data
+from ..utility.iop import get_times
 from ..utility.var_labels import get_label
 
 font = {'family': 'sans serif',
@@ -90,7 +90,7 @@ def plot_ts(
     fig = parse_fig(fig,10,4)
     ax = parse_ax(ax)
 
-    start_time, end_time = which_data(iop, leg)[0], which_data(iop, leg)[1]
+    start_time, end_time = get_times(iop, leg)[0], which_data(iop, leg)[1]
 
     x_fmt = DateFormatter(time_format)
 

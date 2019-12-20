@@ -2,8 +2,7 @@
 Function to define start/end time to flight legs
 '''
 
-
-def which_data(
+def get_times(
 	iop,
 	leg
 	):
