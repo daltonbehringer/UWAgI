@@ -81,7 +81,7 @@ class _reader(object):
         self.fields["temperature"] = ncvar_to_dict(self.temp)
         self.fields["dewpoint"] = ncvar_to_dict(self.dwpt)
         self.fields["airspeed"] = ncvar_to_dict(self.airspeed)
-        self.fields["nev_iwc"] = ncvar_to_dict(self.neviwc)
+        self.fields["nev_iwc"] = self.neviwc
 
     def _fix_time(self):
 
