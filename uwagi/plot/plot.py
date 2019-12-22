@@ -90,7 +90,7 @@ def plot_ts(
     fig = parse_fig(fig,10,4)
     ax = parse_ax(ax)
 
-    start_time, end_time = get_times(iop, leg)[0], which_data(iop, leg)[1]
+    start_time, end_time = get_times(iop, leg)[0], get_times(iop, leg)[1]
 
     x_fmt = DateFormatter(time_format)
 
