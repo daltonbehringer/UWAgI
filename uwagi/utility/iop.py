@@ -575,10 +575,6 @@ def get_times(
 			start_time = date + '17:48:00'
 			end_time = date + '18:06:40'
 
-	'''
-	NO FLIGHTS FOR IOP 18
-	'''
-
 	elif iop is 19:
 		date = '2017-03-04 '
 		if leg is 1:
