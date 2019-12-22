@@ -22,10 +22,14 @@ def get_label(var):
 		label = 'Nevzorov Liquid Water Content, g m$^{-3}$'
 	if var is 'nev_twc':
 		label = 'Nevzorov Total Water Content, g m$^{-3}$'
+	if var is 'nev_iwc':
+		label = 'Nevzorov Ice Water Content, g m$^{-3}$'
 	if var is 'cdp_lwc':
 		label = 'CDP Liquid Water Content, g m$^{-3}$'
+	# if var is 'cdp_conc':
+	# 	label = 'CDP Total Concentraion, cm$^{-3}$'
 	if var is 'cdp_conc':
-		label = 'CDP Total Concentraion, cm$^{-3}$'
+		label = 'CDP Total Concentraion, L$^{-1}$'
 	if var is 'lwc_pvm':
 		label = 'PVM Liquid Water Content, g m$^{-3}$'
 

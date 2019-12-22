@@ -31,7 +31,7 @@ class _reader(object):
         self.lat = nc.variables['avlat']
         self.lon = nc.variables['avlon']
         self.time = nc.variables['time'] # seconds since 2017-01-01 00:00:00 UTC
-        # self.time = nc.variables['TIME'] 
+        #self.time = nc.variables['TIME'] 
         self.date = nc.variables['DATE']
         self.hour = nc.variables['HOUR']
         self.min = nc.variables['MINUTE']
@@ -43,8 +43,10 @@ class _reader(object):
         self.lwc100 = nc.variables['lwc100']
         self.nevlwc = nc.variables['nevlwc']
         self.nevtwc = nc.variables['nevtwc']
+        self.neviwc = self.nevtwc[:] - self.nevlwc[:]
         self.cdplwc = nc.variables['cdplwc_NRB']
-        self.cdpconc = nc.variables['cdpconc_NRB']
+        #self.cdpconc = nc.variables['cdpconc_NRB'] # Rebinned total CDP conc (#/cm3)
+        self.cdpconc = nc.variables['C2DP0_IBL'] # CDP concentration (#/L)
         self.pvmlwc = nc.variables['pvmlwc']
         self.temp = nc.variables['trf']
         self.dwpt = nc.variables['tdp70']
@@ -79,6 +81,7 @@ class _reader(object):
         self.fields["temperature"] = ncvar_to_dict(self.temp)
         self.fields["dewpoint"] = ncvar_to_dict(self.dwpt)
         self.fields["airspeed"] = ncvar_to_dict(self.airspeed)
+        self.fields["nev_iwc"] = ncvar_to_dict(self.neviwc)
 
     def _fix_time(self):
 
