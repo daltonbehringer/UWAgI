@@ -102,7 +102,7 @@ def plot_ts(
     if c is None:
         c = 'k'
 
-    ax.plot_date(ka.fields['time'][start:end], ka.fields[var]['data'][start:end], ls=ls, c=c, marker=marker, **kwargs)
+    ax.plot_date(ka.fields['time'][start:end], ka.fields[var][start:end], ls=ls, c=c, marker=marker, **kwargs)
 
     ax.xaxis.set_major_formatter(x_fmt)
     ax.xaxis.set_major_locator(MinuteLocator(interval=2))

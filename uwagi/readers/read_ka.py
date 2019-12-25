@@ -59,29 +59,54 @@ class _reader(object):
 
         self.fields = {}
 
-        self.fields["u_wind"] = ncvar_to_dict(self.u)
-        self.fields["v_wind"] = ncvar_to_dict(self.v)
-        self.fields["lat"] = ncvar_to_dict(self.lat)
-        self.fields["lon"] = ncvar_to_dict(self.lon)
-        self.fields["time"] = ncvar_to_dict(self.time)
-        self.fields["date"] = ncvar_to_dict(self.date)
-        self.fields["hour"] = ncvar_to_dict(self.hour)
-        self.fields["minute"] = ncvar_to_dict(self.min)
-        self.fields["second"] = ncvar_to_dict(self.sec)
-        self.fields["alt"] = ncvar_to_dict(self.alt)
-        self.fields["wind_mag"] = ncvar_to_dict(self.wind_mag)
-        self.fields["wind_dir"] = ncvar_to_dict(self.wind_dir)
-        self.fields["roll"] = ncvar_to_dict(self.roll)
-        self.fields["lwc100"] = ncvar_to_dict(self.lwc100)
-        self.fields["nev_lwc"] = ncvar_to_dict(self.nevlwc)
-        self.fields["nev_twc"] = ncvar_to_dict(self.nevtwc)
-        self.fields["cdp_lwc"] = ncvar_to_dict(self.cdplwc)
-        self.fields["cdp_conc"] = ncvar_to_dict(self.cdpconc)
-        self.fields["lwc_pvm"] = ncvar_to_dict(self.pvmlwc)
-        self.fields["temperature"] = ncvar_to_dict(self.temp)
-        self.fields["dewpoint"] = ncvar_to_dict(self.dwpt)
-        self.fields["airspeed"] = ncvar_to_dict(self.airspeed)
+        self.fields["u_wind"] = self.u[:]
+        self.fields["v_wind"] = self.v[:]
+        self.fields["lat"] = self.lat[:]
+        self.fields["lon"] = self.lon[:]
+        self.fields["time"] = self.time[:]
+        self.fields["date"] = self.date[:]
+        self.fields["hour"] = self.hour[:]
+        self.fields["minute"] = self.min[:]
+        self.fields["second"] = self.sec[:]
+        self.fields["alt"] = self.alt[:]
+        self.fields["wind_mag"] = self.wind_mag[:]
+        self.fields["wind_dir"] = self.wind_dir[:]
+        self.fields["roll"] = self.roll[:]
+        self.fields["lwc100"] = self.lwc100[:]
+        self.fields["nev_lwc"] = self.nevlwc[:]
+        self.fields["nev_twc"] = self.nevtwc[:]
+        self.fields["cdp_lwc"] = self.cdplwc[:]
+        self.fields["cdp_conc"] = self.cdpconc[:]
+        self.fields["lwc_pvm"] = self.pvmlwc[:]
+        self.fields["temperature"] = self.temp[:]
+        self.fields["dewpoint"] = self.dwpt[:]
+        self.fields["airspeed"] = self.airspeed[:]
         self.fields["nev_iwc"] = self.neviwc
+
+
+        # self.fields["u_wind"] = ncvar_to_dict(self.u)
+        # self.fields["v_wind"] = ncvar_to_dict(self.v)
+        # self.fields["lat"] = ncvar_to_dict(self.lat)
+        # self.fields["lon"] = ncvar_to_dict(self.lon)
+        # self.fields["time"] = ncvar_to_dict(self.time)
+        # self.fields["date"] = ncvar_to_dict(self.date)
+        # self.fields["hour"] = ncvar_to_dict(self.hour)
+        # self.fields["minute"] = ncvar_to_dict(self.min)
+        # self.fields["second"] = ncvar_to_dict(self.sec)
+        # self.fields["alt"] = ncvar_to_dict(self.alt)
+        # self.fields["wind_mag"] = ncvar_to_dict(self.wind_mag)
+        # self.fields["wind_dir"] = ncvar_to_dict(self.wind_dir)
+        # self.fields["roll"] = ncvar_to_dict(self.roll)
+        # self.fields["lwc100"] = ncvar_to_dict(self.lwc100)
+        # self.fields["nev_lwc"] = ncvar_to_dict(self.nevlwc)
+        # self.fields["nev_twc"] = ncvar_to_dict(self.nevtwc)
+        # self.fields["cdp_lwc"] = ncvar_to_dict(self.cdplwc)
+        # self.fields["cdp_conc"] = ncvar_to_dict(self.cdpconc)
+        # self.fields["lwc_pvm"] = ncvar_to_dict(self.pvmlwc)
+        # self.fields["temperature"] = ncvar_to_dict(self.temp)
+        # self.fields["dewpoint"] = ncvar_to_dict(self.dwpt)
+        # self.fields["airspeed"] = ncvar_to_dict(self.airspeed)
+        # # self.fields["nev_iwc"] = self.neviwc
 
     def _fix_time(self):
 
@@ -101,12 +126,12 @@ class _reader(object):
         time_sec = self.time[:] + start_time
         self.fields['time'] = time_sec.astype('datetime64[s]')
 
-def ncvar_to_dict(ncvar):
+# def ncvar_to_dict(ncvar):
     
-    d = dict((k, getattr(ncvar, k)) for k in ncvar.ncattrs())
-    d["data"] = ncvar
-    if np.isscalar(d["data"]):
-        d["data"] = np.array(d["data"])
-        d["data"].shape = (1,)
-    return d
+#     d = dict((k, getattr(ncvar, k)) for k in ncvar.ncattrs())
+#     d["data"] = ncvar
+#     if np.isscalar(d["data"]):
+#         d["data"] = np.array(d["data"])
+#         d["data"].shape = (1,)
+#     return d
 
