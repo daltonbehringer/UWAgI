@@ -97,7 +97,7 @@ class _reader(object):
 
     def _fix_time(self):
 
-        start_time = datetime.datetime(2017,01,01,00,00,tzinfo=datetime.timezone.utc).timestamp()
+        start_time = datetime.datetime(2017,1,1,0,0,tzinfo=datetime.timezone.utc).timestamp()
         time_sec = self.time[:] + start_time
         self.fields['time'] = time_sec.astype('datetime64[s]')
 
