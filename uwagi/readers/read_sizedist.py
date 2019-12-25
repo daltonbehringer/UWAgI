@@ -1,6 +1,6 @@
 import numpy as np
 from netCDF4 import Dataset
-# from datetime import datetime
+from datetime import datetime
 
 '''
 Reads NetCDF files from the University of Wyoming King Air Optical Array Probe
@@ -58,6 +58,7 @@ class _reader(object):
         self.dist_CDP = nc.variables['size_dist_CDP']
 
         self._prep_data()
+        self._fix_time()
 
     def _prep_data(self):
 
@@ -93,6 +94,13 @@ class _reader(object):
         self.fields["bin_mid_CDP"] = self.min_CDP[:]
         self.fields["bin_dD_CDP"] = self.dD_CDP[:]
         self.fields["size_dist_CDP_H"] = self.dist_CDP[:]
+
+    def _fix_time(self):
+
+        start_time = datetime.datetime(2017,01,01,00,00,tzinfo=datetime.timezone.utc).timestamp()
+        time_sec = self.time[:] + start_time
+        self.fields['time'] = time_sec.astype('datetime64[s]')
+
 
 
 # def ncvar_to_dict(ncvar):
