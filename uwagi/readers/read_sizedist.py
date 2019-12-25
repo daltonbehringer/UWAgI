@@ -63,43 +63,44 @@ class _reader(object):
 
         self.fields = {}
 
-        self.fields["time"] = nc.variables['time']
+        self.fields["time"] = nc.variables['time'][:]
 
         # 2DS
-        self.fields["bin_min_2DS"] = ncvar_to_dict(self.min_2DS)
-        self.fields["bin_max_2DS"] = ncvar_to_dict(self.max_2DS)
-        self.fields["bin_mid_2DS"] = ncvar_to_dict(self.min_2DS)
-        self.fields["bin_dD_2DS"] = ncvar_to_dict(self.dD_2DS)
-        self.fields["size_dist_2DS_H"] = ncvar_to_dict(self.dist_2DS_H)
-        self.fields["size_dist_2DS_V"] = ncvar_to_dict(self.dist_2DS_V)
+        self.fields["bin_min_2DS"] = self.min_2DS[:]
+        self.fields["bin_max_2DS"] = self.max_2DS[:]
+        self.fields["bin_mid_2DS"] = self.min_2DS[:]
+        self.fields["bin_dD_2DS"] = self.dD_2DS[:]
+        self.fields["size_dist_2DS_H"] = self.dist_2DS_H[:]
+        self.fields["size_dist_2DS_V"] = self.dist_2DS_V[:]
 
         # 2DP
-        self.fields["bin_min_2DP"] = ncvar_to_dict(self.min_2DP)
-        self.fields["bin_max_2DP"] = ncvar_to_dict(self.max_2DP)
-        self.fields["bin_mid_2DP"] = ncvar_to_dict(self.min_2DP)
-        self.fields["bin_dD_2DP"] = ncvar_to_dict(self.dD_2DP)
-        self.fields["size_dist_2DP_H"] = ncvar_to_dict(self.dist_2DP)
+        self.fields["bin_min_2DP"] = self.min_2DP[:]
+        self.fields["bin_max_2DP"] = self.max_2DP[:]
+        self.fields["bin_mid_2DP"] = self.min_2DP[:]
+        self.fields["bin_dD_2DP"] = self.dD_2DP[:]
+        self.fields["size_dist_2DP_H"] = self.dist_2DP[:]
 
         # CIP
-        self.fields["bin_min_CIP"] = ncvar_to_dict(self.min_CIP)
-        self.fields["bin_max_CIP"] = ncvar_to_dict(self.max_CIP)
-        self.fields["bin_mid_CIP"] = ncvar_to_dict(self.min_CIP)
-        self.fields["bin_dD_CIP"] = ncvar_to_dict(self.dD_CIP)
-        self.fields["size_dist_CIP_H"] = ncvar_to_dict(self.dist_CIP)
+        self.fields["bin_min_CIP"] = self.min_CIP[:]
+        self.fields["bin_max_CIP"] = self.max_CIP[:]
+        self.fields["bin_mid_CIP"] = self.min_CIP[:]
+        self.fields["bin_dD_CIP"] = self.dD_CIP[:]
+        self.fields["size_dist_CIP_H"] = self.dist_CIP[:]
 
         # CDP
-        self.fields["bin_min_CDP"] = ncvar_to_dict(self.min_CDP)
-        self.fields["bin_max_CDP"] = ncvar_to_dict(self.max_CDP)
-        self.fields["bin_mid_CDP"] = ncvar_to_dict(self.min_CDP)
-        self.fields["bin_dD_CDP"] = ncvar_to_dict(self.dD_CDP)
-        self.fields["size_dist_CDP_H"] = ncvar_to_dict(self.dist_CDP)
+        self.fields["bin_min_CDP"] = self.min_CDP[:]
+        self.fields["bin_max_CDP"] = self.max_CDP[:]
+        self.fields["bin_mid_CDP"] = self.min_CDP[:]
+        self.fields["bin_dD_CDP"] = self.dD_CDP[:]
+        self.fields["size_dist_CDP_H"] = self.dist_CDP[:]
 
 
-def ncvar_to_dict(ncvar):
+# def ncvar_to_dict(ncvar):
     
-    d = dict((k, getattr(ncvar, k)) for k in ncvar.ncattrs())
-    d["data"] = ncvar
-    if np.isscalar(d["data"]):
-        d["data"] = np.array(d["data"])
-        d["data"].shape = (1,)
-    return d
+#     d = dict((k, getattr(ncvar, k)) for k in ncvar.ncattrs())
+#     d["data"] = ncvar
+#     if np.isscalar(d["data"]):
+#         d["data"] = np.array(d["data"])
+#         d["data"].shape = (1,)
+#     return d
+
