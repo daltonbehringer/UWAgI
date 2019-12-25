@@ -63,7 +63,7 @@ class _reader(object):
 
         self.fields = {}
 
-        self.fields["time"] = nc.variables['time'][:]
+        self.fields["time"] = self.time[:]
 
         # 2DS
         self.fields["bin_min_2DS"] = self.min_2DS[:]
