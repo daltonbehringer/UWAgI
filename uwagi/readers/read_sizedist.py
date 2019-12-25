@@ -99,7 +99,6 @@ class _reader(object):
 need different fix time function. time is in HHMMSS format without date or leading zeros.
 '''
 
-
     def _fix_time(self):
 
         start_time = datetime.datetime(2017,1,1,0,0,tzinfo=datetime.timezone.utc).timestamp()
