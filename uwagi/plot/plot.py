@@ -140,15 +140,34 @@ def plot_sd(
     # start = np.where(ka.fields['time'] == np.datetime64(start_time))[0][0]
     # end = np.where(ka.fields['time'] == np.datetime64(end_time))[0][0]
 
-    # if var is '2ds' or '2DS':
-    #     sd = ka.
+    if var is '2ds' or '2DS':
+        sd = (ka.fields['size_dist_2DS_H'] * ka.fields['size_dist_2DS_V']) / 2
+        bins = ka.fields['bin_mid_2DS']
+        sd[sd == 0.] = np.nan
+        sd = np.nanmean(sd, axis=0)
+    elif var is '2dp' or '2DP':
+        sd = ka.fields['size_dist_2DP']
+        bins = ka.fields['bin_mid_2DP']
+        sd[sd == 0.] = np.nan
+        sd = np.nanmean(sd, axis=0)
+    elif var is 'cdp' or 'CDP':
+        sd = ka.fields['size_dist_CDP']
+        bins = ka.fields['bin_mid_CDP']
+        sd[sd == 0.] = np.nan
+        sd = np.nanmean(sd, axis=0)
+    elif var is 'cip' or 'CIP':
+        sd = ka.fields['size_dist_CIP']
+        bins = ka.fields['bin_mid_CIP']
+        sd[sd == 0.] = np.nan
+        sd = np.nanmean(sd, axis=0)
+
 
     if ls is None:
         ls = '-'
     if c is None:
         c = 'k'
 
-    ax.plot(bin_mid_2DS, mean_2DS, ls=ls, c=c, marker=marker, **kwargs)
+    ax.plot(bins, sd, ls=ls, c=c, marker=marker, **kwargs)
 
     # ax.yaxis.set_minor_locator(ticker.AutoMinorLocator())
 
