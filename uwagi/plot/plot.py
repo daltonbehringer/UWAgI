@@ -233,9 +233,9 @@ def plot_sd_hov(
     time = ka.time
 
     if var is '2ds' or '2DS':
-        dist = (ka.dist_2DS_H * ka.dist_2DS_V) / 2
+        sd = (ka.dist_2DS_H * ka.dist_2DS_V) / 2
         bins = ka.mid_2DS
-        dist[dist == 0.] = np.nan
+        sd[sd == 0.] = np.nan
     # if var is '2dp' or '2DP':
     #     dist = ka.dist_2DP
     #     bins = ka.mid_2DP
