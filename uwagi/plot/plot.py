@@ -145,6 +145,7 @@ def plot_sd(
         bins = ka.mid_2DS
         dist[dist == 0.] = np.nan
         sd = np.nanmean(dist, axis=0)
+        print('2DS')
     else:
         raise Exception('Not 2DS')
     
