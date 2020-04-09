@@ -145,21 +145,24 @@ def plot_sd(
         bins = ka.mid_2DS
         dist[dist == 0.] = np.nan
         sd = np.nanmean(dist, axis=0)
-    elif var is '2dp' or '2DP':
-        dist = ka.dist_2DP
-        bins = ka.mid_2DP
-        dist[dist == 0.] = np.nan
-        sd = np.nanmean(dist, axis=0)
-    elif var is 'cdp' or 'CDP':
-        dist = ka.dist_CDP
-        bins = ka.mid_CDP
-        dist[dist == 0.] = np.nan
-        sd = np.nanmean(dist, axis=0)
-    elif var is 'cip' or 'CIP':
-        dist = ka.dist_CIP
-        bins = ka.mid_CIP
-        dist[dist == 0.] = np.nan
-        sd = np.nanmean(dist, axis=0)
+    else:
+        raise Exception('Not 2DS')
+    
+    # elif var is '2dp' or '2DP':
+    #     dist = ka.dist_2DP
+    #     bins = ka.mid_2DP
+    #     dist[dist == 0.] = np.nan
+    #     sd = np.nanmean(dist, axis=0)
+    # elif var is 'cdp' or 'CDP':
+    #     dist = ka.dist_CDP
+    #     bins = ka.mid_CDP
+    #     dist[dist == 0.] = np.nan
+    #     sd = np.nanmean(dist, axis=0)
+    # elif var is 'cip' or 'CIP':
+    #     dist = ka.dist_CIP
+    #     bins = ka.mid_CIP
+    #     dist[dist == 0.] = np.nan
+    #     sd = np.nanmean(dist, axis=0)
 
     if ls is None:
         ls = '-'
