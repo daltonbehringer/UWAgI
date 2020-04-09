@@ -99,13 +99,13 @@ class _reader(object):
 need different fix time function. time is in HHMMSS format without date or leading zeros.
 '''
 
-    def _fix_time(self):
+    # def _fix_time(self):
 
-        date = self.filename[self.filename.find(2017),self.filename.find(2017)+8]
+    #     date = self.filename[self.filename.find(2017),self.filename.find(2017)+8]
 
-        start_time = datetime.datetime(2017,1,1,0,0,tzinfo=datetime.timezone.utc).timestamp()
-        time_sec = self.time[:] + start_time
-        self.fields['time'] = time_sec.astype('datetime64[s]')
+    #     start_time = datetime.datetime(2017,1,1,0,0,tzinfo=datetime.timezone.utc).timestamp()
+    #     time_sec = self.time[:] + start_time
+    #     self.fields['time'] = time_sec.astype('datetime64[s]')
 
 
 # def ncvar_to_dict(ncvar):

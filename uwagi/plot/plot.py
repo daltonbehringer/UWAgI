@@ -18,40 +18,6 @@ font = {'family': 'sans serif',
 # clat = 44.207692
 # clon = -116.0693
 
-'''Plot size distribution'''
-
-# def plot_dist(
-#     # placeholder
-#     bin_min = None,
-#     bin_max = None,
-#     bin_mid = None,
-#     bin_dd = None,
-#     tighten = True,
-#     ax = None,
-#     fig = None
-#     ):
-    
-#     ax = parse_ax(ax)
-#     fig = parse_fig(fig)
-
-#     if bin_min is None:
-#         bin_min = [10,20,30,40,50,60,70,80,90,100,\
-#         150,200,250,300,400,480,600,800,1000,1200,\
-#         1400,1600,1800,2000,2200,2600,3000,3400,3800,\
-#         4400,5000,6000,8000]
-#     if bin_max is None:
-#         bin_max = [20,30,40,50,60,70,80,90,100,150,200\
-#         250,300,400,480,600,800,1000,1200,1400,1600,1800,\
-#         2000,2200,2600,3000,3400,3800,4400,5000,6000,8000,10000]
-#     if bin_mid is None:
-#         bin_mid = [15,25,35,45,55,65,75,85,95,125,175,225,\
-#         275,350,440,540,700,900,1100,1300,1500,1700,1900,\
-#         2100,2400,2800,3200,3600,4100,4700,5500,7000,9000]
-#     if bin_dd = None:
-#         bin_dd = [10,10,10,10,10,10,10,10,10,50,50,50,50,\
-#         100,80,120,200,200,200,200,200,200,200,200,400,400,\
-#         400,400,600,600,1000,2000,2000]
-
 '''Plot time-series'''
 
 def plot_ts(
@@ -131,6 +97,73 @@ def plot_ts(
         ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | Leg '+str(leg), fontdict=font)
     elif title is not None:
         ax.set_title(title, fontdict=font)
+
+    return fig, ax
+
+'''Plot size distribution'''
+
+def plot_sd(
+    ka,
+    var,
+    iop = None,
+    leg = None,
+    title = None,
+    y_label = None,
+    ax = None,
+    fig = None,
+    tighten = True,
+    ls = None,
+    c = None,
+    marker = None,
+    **kwargs
+    ):
+
+    '''
+    Plots a size distribution
+
+    Usage: uwagi.plot.plot_sd(args)
+
+    Arguments:
+        ka = data object
+        var = which probe to get size dist from, or average ('mean')
+        iop = iop number
+        leg = leg of the iop to plot
+
+    Returns: matplotlib plot object
+    '''
+
+    fig = parse_fig(fig,6,6)
+    ax = parse_ax(ax)
+
+    # start_time, end_time = get_times(iop, leg)[0], get_times(iop, leg)[1]
+
+    # start = np.where(ka.fields['time'] == np.datetime64(start_time))[0][0]
+    # end = np.where(ka.fields['time'] == np.datetime64(end_time))[0][0]
+
+    if var == '2ds' || '2DS':
+        sd = ka.
+
+    if ls is None:
+        ls = '-'
+    if c is None:
+        c = 'k'
+
+    ax.plot(bin_mid_2DS, mean_2DS, ls=ls, c=c, marker=marker, **kwargs)
+
+    # ax.yaxis.set_minor_locator(ticker.AutoMinorLocator())
+
+    ax.set_xlim([1E1, 1E4])
+    ax.set_ylim([1E-10, 1E2])
+
+    ax.tick_params(axis='both', which='both', direction='in', length = 7)
+    
+    ax.set_xlabel(r'Particle Diameter, $\mu m$')
+    ax.set_ylabel(r'# $cm^{-3}\/\mu m^{-1}$')
+
+    # if title is None:
+    #     ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | Leg '+str(leg), fontdict=font)
+    # elif title is not None:
+    #     ax.set_title(title, fontdict=font)
 
     return fig, ax
 
