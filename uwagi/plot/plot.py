@@ -140,8 +140,8 @@ def plot_sd(
     # start = np.where(ka.fields['time'] == np.datetime64(start_time))[0][0]
     # end = np.where(ka.fields['time'] == np.datetime64(end_time))[0][0]
 
-    if var is '2ds' or '2DS':
-        sd = ka.
+    # if var is '2ds' or '2DS':
+    #     sd = ka.
 
     if ls is None:
         ls = '-'
