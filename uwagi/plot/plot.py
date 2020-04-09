@@ -233,16 +233,15 @@ def plot_sd_hov(
 
     time = ka.time
 
-    if var is '2ds' or '2DS':
-        sd = (ka.dist_2DS_H * ka.dist_2DS_V) / 2
-        bins = ka.mid_2DS
-        sd[sd == 0.] = np.nan
+    # if var is '2ds' or '2DS':
+    sd1 = (ka.dist_2DS_H * ka.dist_2DS_V) / 2
+    bins1 = ka.mid_2DS
+    sd1[sd1 == 0.] = np.nan
     # if var is '2dp' or '2DP':
-    #     dist = ka.dist_2DP
-    #     bins = ka.mid_2DP
-    #     dist[dist == 0.] = np.nan
+    dist2 = ka.dist_2DP
+    bins2 = ka.mid_2DP
+    dist2[dist2 == 0.] = np.nan
     #     sd = np.nanmean(dist, axis=0)
-    #     print('2DP')
     # if var is 'cdp' or 'CDP':
     #     dist = ka.dist_CDP
     #     bins = ka.mid_CDP
@@ -254,8 +253,9 @@ def plot_sd_hov(
     #     dist[dist == 0.] = np.nan
     #     sd = np.nanmean(dist, axis=0)
 
-    y, x = np.meshgrid(bins, time)
-
+    y1, x1 = np.meshgrid(bins1, time)
+    y2, x2 = np.meshgrid(bins2, time)
+    
     cmap = plt.get_cmap('plasma')
 
     if ls is None:
@@ -274,7 +274,9 @@ def plot_sd_hov(
 
     vmin, vmax = 1E-8, 1E0
 
-    sd_plot = plt.pcolormesh(x, y, sd, 
+    sd_plot = plt.pcolormesh(x1, y1, sd1, 
+        norm=colors.LogNorm(vmin=vmin,vmax=vmax), cmap=cmap)
+    sd_plot2 = plt.pcolormesh(x2, y2, sd2, 
         norm=colors.LogNorm(vmin=vmin,vmax=vmax), cmap=cmap)
 
     fig.colorbar(sd_plot, ax=ax, label=r'# $cm^{-3}\/\mu m^{-1}$')
