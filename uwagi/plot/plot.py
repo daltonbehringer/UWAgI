@@ -161,7 +161,6 @@ def plot_sd(
         sd[sd == 0.] = np.nan
         sd = np.nanmean(sd, axis=0)
 
-
     if ls is None:
         ls = '-'
     if c is None:
@@ -171,7 +170,9 @@ def plot_sd(
 
     # ax.yaxis.set_minor_locator(ticker.AutoMinorLocator())
 
+    ax.set_xscale('log')
     ax.set_xlim([1E1, 1E4])
+    ax.set_yscale('log')
     ax.set_ylim([1E-10, 1E2])
 
     ax.tick_params(axis='both', which='both', direction='in', length = 7)
