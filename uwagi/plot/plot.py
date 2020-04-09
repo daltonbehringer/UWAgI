@@ -277,7 +277,7 @@ def plot_sd_hov(
     sd_plot = plt.pcolormesh(x, y, sd, 
         norm=colors.LogNorm(vmin=vmin,vmax=vmax), cmap=cmap)
 
-    fig.colorbar(sd_plot, ax=ax)
+    fig.colorbar(sd_plot, ax=ax, label=r'# $cm^{-3}\/\mu m^{-1}$')
 
     # if title is None:
     #     ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | Leg '+str(leg), fontdict=font)
