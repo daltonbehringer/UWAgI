@@ -266,7 +266,8 @@ def plot_sd_hov(
     ax.set_yscale('log')
     ax.set_ylim([1E1, 1E4])
 
-    ax.tick_params(axis='both', which='both', direction='in', length = 7)
+    ax.grid(True)
+    ax.tick_params(axis='both', which='both', direction='in', length = 7, grid_linestyle='--', grid_alpha=0.5)
     
     ax.set_xlabel(r'Time, UTC')
     ax.set_ylabel(r'Particle Diameter, $\mu m$')
