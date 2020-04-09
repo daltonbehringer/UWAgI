@@ -58,7 +58,7 @@ class _reader(object):
         self.dist_CDP = nc.variables['size_dist_CDP']
 
         self._prep_data()
-        self._fix_time()
+        # self._fix_time()
 
     def _prep_data(self):
 
