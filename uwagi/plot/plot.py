@@ -232,13 +232,14 @@ def plot_sd_hov(
     # end = np.where(ka.fields['time'] == np.datetime64(end_time))[0][0]
 
     time = ka.time
+    ind = np.array(((np.where(time == 165551)[0][0]),(np.where(time == 170749)[0][0])))
 
     # if var is '2ds' or '2DS':
-    sd1 = ka.dist_2DS_H# * ka.dist_2DS_V) / 2
+    sd1 = ka.dist_2DS_H[ind[0]:ind[1],:]# * ka.dist_2DS_V) / 2
     bins1 = ka.mid_2DS
     # sd1[sd1 == 0.] = np.nan
     # if var is '2dp' or '2DP':
-    dist2 = ka.dist_2DP
+    dist2 = ka.dist_2DP[ind[0]:ind[1],:]
     bins2 = ka.mid_2DP
     # dist2[dist2 == 0.] = np.nan
     #     sd = np.nanmean(dist, axis=0)
@@ -253,8 +254,8 @@ def plot_sd_hov(
     #     dist[dist == 0.] = np.nan
     #     sd = np.nanmean(dist, axis=0)
 
-    y1, x1 = np.meshgrid(bins1, time)
-    y2, x2 = np.meshgrid(bins2, time)
+    y1, x1 = np.meshgrid(bins1, time[ind[0]:ind[1]])
+    y2, x2 = np.meshgrid(bins2, time[ind[0]:ind[1]])
     
     cmap = plt.get_cmap('plasma')
 
