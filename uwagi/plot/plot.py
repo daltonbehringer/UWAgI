@@ -151,6 +151,7 @@ def plot_sd(
         bins = ka.mid_2DP
         dist[dist == 0.] = np.nan
         sd = np.nanmean(dist, axis=0)
+        print('2DP')
     if var is 'cdp' or 'CDP':
         dist = ka.dist_CDP
         bins = ka.mid_CDP
