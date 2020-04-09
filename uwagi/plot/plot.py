@@ -147,7 +147,7 @@ def plot_sd(
         sd = np.nanmean(dist, axis=0)
         print('2DS')
     else:
-        raise Exception('Not 2DS')
+        print('Not 2DS')
     
     # elif var is '2dp' or '2DP':
     #     dist = ka.dist_2DP
