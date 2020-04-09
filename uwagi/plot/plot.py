@@ -134,6 +134,8 @@ def plot_ts(
 
     return fig, ax
 
+
+
 def parse_fig(fig,x,y):
     """ Parse and return fig instance. """
     if fig is None:
