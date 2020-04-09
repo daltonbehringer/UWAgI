@@ -195,6 +195,7 @@ def plot_sd(
 
 def plot_sd_hov(
     ka,
+    var,
     iop = None,
     leg = None,
     title = None,
@@ -275,7 +276,7 @@ def plot_sd_hov(
 
     sd_plot = plt.pcolormesh(x1, y1, sd1, 
         norm=colors.LogNorm(vmin=vmin,vmax=vmax), cmap=cmap)
-    sd_plot2 = plt.pcolormesh(x2, y2, sd2, 
+    sd_plot2 = plt.pcolormesh(x2, y2, dist2, 
         norm=colors.LogNorm(vmin=vmin,vmax=vmax), cmap=cmap)
 
     fig.colorbar(sd_plot, ax=ax, label=r'# $cm^{-3}\/\mu m^{-1}$')
