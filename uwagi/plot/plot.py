@@ -195,7 +195,6 @@ def plot_sd(
 
 def plot_sd_hov(
     ka,
-    var,
     iop = None,
     leg = None,
     title = None,
