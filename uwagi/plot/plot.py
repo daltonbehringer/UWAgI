@@ -236,11 +236,11 @@ def plot_sd_hov(
     # if var is '2ds' or '2DS':
     sd1 = (ka.dist_2DS_H * ka.dist_2DS_V) / 2
     bins1 = ka.mid_2DS
-    sd1[sd1 == 0.] = np.nan
+    # sd1[sd1 == 0.] = np.nan
     # if var is '2dp' or '2DP':
     dist2 = ka.dist_2DP
     bins2 = ka.mid_2DP
-    dist2[dist2 == 0.] = np.nan
+    # dist2[dist2 == 0.] = np.nan
     #     sd = np.nanmean(dist, axis=0)
     # if var is 'cdp' or 'CDP':
     #     dist = ka.dist_CDP
