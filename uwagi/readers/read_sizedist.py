@@ -26,7 +26,7 @@ class _reader(object):
 
         nc = Dataset(filename)
 
-        self.time = nc.variables['time']
+        self.time = nc.variables['time'][:]
 
         # 2DS
         self.min_2DS = nc.variables['bin_min_2DS'][:]
