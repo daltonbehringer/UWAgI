@@ -141,25 +141,25 @@ def plot_sd(
     # end = np.where(ka.fields['time'] == np.datetime64(end_time))[0][0]
 
     if var is '2ds' or '2DS':
-        sd = (ka.fields['size_dist_2DS_H'] * ka.fields['size_dist_2DS_V']) / 2
-        bins = ka.fields['bin_mid_2DS']
-        sd[sd == 0.] = np.nan
-        sd = np.nanmean(sd, axis=0)
+        dist = (ka.dist_2DS_H * ka.dist_2DS_V) / 2
+        bins = ka.mid_2DS
+        dist[dist == 0.] = np.nan
+        sd = np.nanmean(dist, axis=0)
     elif var is '2dp' or '2DP':
-        sd = ka.fields['size_dist_2DP']
-        bins = ka.fields['bin_mid_2DP']
-        sd[sd == 0.] = np.nan
-        sd = np.nanmean(sd, axis=0)
+        dist = ka.dist_2DP
+        bins = ka.mid_2DP
+        dist[dist == 0.] = np.nan
+        sd = np.nanmean(dist, axis=0)
     elif var is 'cdp' or 'CDP':
-        sd = ka.fields['size_dist_CDP']
-        bins = ka.fields['bin_mid_CDP']
-        sd[sd == 0.] = np.nan
-        sd = np.nanmean(sd, axis=0)
+        dist = ka.dist_CDP
+        bins = ka.mid_CDP
+        dist[dist == 0.] = np.nan
+        sd = np.nanmean(dist, axis=0)
     elif var is 'cip' or 'CIP':
-        sd = ka.fields['size_dist_CIP']
-        bins = ka.fields['bin_mid_CIP']
-        sd[sd == 0.] = np.nan
-        sd = np.nanmean(sd, axis=0)
+        dist = ka.dist_CIP
+        bins = ka.mid_CIP
+        dist[dist == 0.] = np.nan
+        sd = np.nanmean(dist, axis=0)
 
     if ls is None:
         ls = '-'
