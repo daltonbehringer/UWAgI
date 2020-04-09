@@ -264,7 +264,7 @@ def plot_sd_hov(
         c = 'k'
 
     ax.set_yscale('log')
-    ax.set_ylim([1E-10, 1E2])
+    ax.set_ylim([1E1, 1E4])
 
     ax.tick_params(axis='both', which='both', direction='in', length = 7)
     
