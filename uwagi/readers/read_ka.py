@@ -26,31 +26,31 @@ class _reader(object):
 
         nc = Dataset(filename)
 
-        self.u = nc.variables['avux']
-        self.v = nc.variables['avvy']
-        self.lat = nc.variables['avlat']
-        self.lon = nc.variables['avlon']
-        self.time = nc.variables['time'] # seconds since 2017-01-01 00:00:00 UTC
-        #self.time = nc.variables['TIME'] 
-        self.date = nc.variables['DATE']
-        self.hour = nc.variables['HOUR']
-        self.min = nc.variables['MINUTE']
-        self.sec = nc.variables['SECOND']
-        self.alt = nc.variables['avalt']
-        self.wind_mag = nc.variables['avwmag']
-        self.wind_dir = nc.variables['avwdir']
-        self.roll = nc.variables['avroll']
-        self.lwc100 = nc.variables['lwc100']
-        self.nevlwc = nc.variables['nevlwc']
-        self.nevtwc = nc.variables['nevtwc']
-        self.neviwc = self.nevtwc[:] - self.nevlwc[:]
-        self.cdplwc = nc.variables['cdplwc_NRB']
-        #self.cdpconc = nc.variables['cdpconc_NRB'] # Rebinned total CDP conc (#/cm3)
-        self.cdpconc = nc.variables['C2DP0_IBL'] # CDP concentration (#/L)
-        self.pvmlwc = nc.variables['pvmlwc']
-        self.temp = nc.variables['trf']
-        self.dwpt = nc.variables['tdp70']
-        self.airspeed = nc.variables['tas']
+        self.u = nc.variables['avux'][:]
+        self.v = nc.variables['avvy'][:]
+        self.lat = nc.variables['avlat'][:]
+        self.lon = nc.variables['avlon'][:]
+        self.time = nc.variables['time'][:] # seconds since 2017-01-01 00:00:00 UTC
+        #self.time = nc.variables['TIME'][:] 
+        self.date = nc.variables['DATE'][:]
+        self.hour = nc.variables['HOUR'][:]
+        self.min = nc.variables['MINUTE'][:]
+        self.sec = nc.variables['SECOND'][:]
+        self.alt = nc.variables['avalt'][:]
+        self.wind_mag = nc.variables['avwmag'][:]
+        self.wind_dir = nc.variables['avwdir'][:]
+        self.roll = nc.variables['avroll'][:]
+        self.lwc100 = nc.variables['lwc100'][:]
+        self.nevlwc = nc.variables['nevlwc'][:]
+        self.nevtwc = nc.variables['nevtwc'][:]
+        # self.neviwc = self.nevtwc[:] - self.nevlwc[:]
+        self.cdplwc = nc.variables['cdplwc_NRB'][:]
+        #self.cdpconc = nc.variables['cdpconc_NRB'][:] # Rebinned total CDP conc (#/cm3)
+        self.cdpconc = nc.variables['C2DP0_IBL'][:] # CDP concentration (#/L)
+        self.pvmlwc = nc.variables['pvmlwc'][:]
+        self.temp = nc.variables['trf'][:]
+        self.dwpt = nc.variables['tdp70'][:]
+        self.airspeed = nc.variables['tas'][:]
 
         self._prep_data()
         self._fix_time()
@@ -59,29 +59,29 @@ class _reader(object):
 
         self.fields = {}
 
-        self.fields["u_wind"] = self.u[:]
-        self.fields["v_wind"] = self.v[:]
-        self.fields["lat"] = self.lat[:]
-        self.fields["lon"] = self.lon[:]
-        self.fields["time"] = self.time[:]
-        self.fields["date"] = self.date[:]
-        self.fields["hour"] = self.hour[:]
-        self.fields["minute"] = self.min[:]
-        self.fields["second"] = self.sec[:]
-        self.fields["alt"] = self.alt[:]
-        self.fields["wind_mag"] = self.wind_mag[:]
-        self.fields["wind_dir"] = self.wind_dir[:]
-        self.fields["roll"] = self.roll[:]
-        self.fields["lwc100"] = self.lwc100[:]
-        self.fields["nev_lwc"] = self.nevlwc[:]
-        self.fields["nev_twc"] = self.nevtwc[:]
-        self.fields["cdp_lwc"] = self.cdplwc[:]
-        self.fields["cdp_conc"] = self.cdpconc[:]
-        self.fields["lwc_pvm"] = self.pvmlwc[:]
-        self.fields["temperature"] = self.temp[:]
-        self.fields["dewpoint"] = self.dwpt[:]
-        self.fields["airspeed"] = self.airspeed[:]
-        self.fields["nev_iwc"] = self.neviwc
+        self.fields["u_wind"] = self.u
+        self.fields["v_wind"] = self.v
+        self.fields["lat"] = self.lat
+        self.fields["lon"] = self.lon
+        self.fields["time"] = self.time
+        self.fields["date"] = self.date
+        self.fields["hour"] = self.hour
+        self.fields["minute"] = self.min
+        self.fields["second"] = self.sec
+        self.fields["alt"] = self.alt
+        self.fields["wind_mag"] = self.wind_mag
+        self.fields["wind_dir"] = self.wind_dir
+        self.fields["roll"] = self.roll
+        self.fields["lwc100"] = self.lwc100
+        self.fields["nev_lwc"] = self.nevlwc
+        self.fields["nev_twc"] = self.nevtwc
+        self.fields["cdp_lwc"] = self.cdplwc
+        self.fields["cdp_conc"] = self.cdpconc
+        self.fields["lwc_pvm"] = self.pvmlwc
+        self.fields["temperature"] = self.temp
+        self.fields["dewpoint"] = self.dwpt
+        self.fields["airspeed"] = self.airspeed
+        # self.fields["nev_iwc"] = self.neviwc
 
 
         # self.fields["u_wind"] = ncvar_to_dict(self.u)
@@ -123,7 +123,7 @@ class _reader(object):
         minute = int(self.time.units[28:30])
         second = int(self.time.units[31:33])
         start_time = datetime.datetime(year,month,day,hour,minute,tzinfo=datetime.timezone.utc).timestamp()
-        time_sec = self.time[:] + start_time
+        time_sec = self.time + start_time
         self.fields['time'] = time_sec.astype('datetime64[s]')
 
 # def ncvar_to_dict(ncvar):
