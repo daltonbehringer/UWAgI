@@ -72,30 +72,30 @@ class _reader(object):
         self.fields["time"] = self.time[:]
 
         # 2DS
-        if np.nansum(self.conc_2DS_H) is 0:
+        if np.nansum(self.dist_2DS_H) is 0:
             h_2DS = 0
         else:
             h_2DS = 1
-        if np.nansum(self.conc_2DS_V) is 0:
+        if np.nansum(self.dist_2DS_V) is 0:
             v_2DS = 0
         else:
             v_2DS = 1
 
         channels = h_2DS + v_2DS
 
-        self.conc_2DS_H[np.where(np.isfinite(self.conc_2DS_H) != 1)] = 0
-        self.conc_2DS_V[np.where(np.isfinite(self.conc_2DS_V) != 1)] = 0
+        self.dist_2DS_H[np.where(np.isfinite(self.dist_2DS_H) != 1)] = 0
+        self.dist_2DS_V[np.where(np.isfinite(self.dist_2DS_V) != 1)] = 0
 
-        # self.ntot_2DS_H = np.nanmean(self.conc_2DS_H, axis=1)
-        # self.ntot_2DS_V = np.nanmean(self.conc_2DS_V, axis=1)
+        self.ntot_2DS_H = np.nanmean(self.dist_2DS_H, axis=1)
+        self.ntot_2DS_V = np.nanmean(self.dist_2DS_V, axis=1)
 
         if channels is 1:
             print('One 2DS channel missing, using good channel only')
         if channels < 1:
             print('!!!Both 2DS channels missing!!!')
 
-        self.conc_2DS = (self.conc_2DS_H + self.conc_2DS_V) / channels
-        # self.ntot_2DS = np.nanmean(self.conc_2DS, axis=1)
+        self.dist_2DS = (self.dist_2DS_H + self.dist_2DS_V) / channels
+        self.ntot_2DS = np.nanmean(self.dist_2DS, axis=1)
 
         self.fields["bin_min_2DS"] = self.bin_min_2DS
         self.fields["bin_max_2DS"] = self.bin_max_2DS
@@ -103,7 +103,8 @@ class _reader(object):
         self.fields["bin_dD_2DS"] = self.bin_dD_2DS
         self.fields["size_dist_2DS_H"] = self.dist_2DS_H
         self.fields["size_dist_2DS_V"] = self.dist_2DS_V
-        self.fields["conc_2DS"] = self.conc_2DS
+        self.fields["size_dist_2DS"] = self.dist_2DS
+        # self.fields["conc_2DS"] = self.conc_2DS
         # self.fields["ntot_2DS"] = self.ntot_2DS
 
         # 2DP
