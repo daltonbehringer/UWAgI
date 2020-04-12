@@ -26,12 +26,12 @@ def sd_corr(sd):
     # times_info = sd_times.shape
     # n_times = len(sd_times) / 2
 
-    ;CDP
+    #CDP
     bin_mid_CDP = 0
     bin_dD_CDP = 0
     conc_CDP = 0
 
-    ;2DS
+    #2DS
     bin_mid_2DS = 0
     bin_dD_2DS = 0
     conc_2DS_both = 0
@@ -73,6 +73,8 @@ def sd_corr(sd):
         sd_2DP = np.mean(conc_2DP[:,ind], axis=2)
 
 
+
+    # return sd_2DS
 
 
 
