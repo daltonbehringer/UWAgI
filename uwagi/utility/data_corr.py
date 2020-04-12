@@ -64,9 +64,9 @@ def sd_corr(sd):
     sd_2DS_re = np.zeros_like(bin_mid_2DS_re)
     ind_re = np.where(bin_mid_2DS_re > 40)
     ind_driz_re = np.where(np.logical_and(bin_min_2DS_re >= 95, bin_max_2DS_re <= 295))
-    ind_driz = np.where(np.logical_and(bin_mid_2DS >= 95, bin_mid_2DS <= 295)
+    ind_driz = np.where(np.logical_and(bin_mid_2DS >= 95, bin_mid_2DS <= 295))
 
-    for i in (n_times-1):
+    for i in range(0,n_times-1):
         ind = np.where(np.logical_and(sd_hhmmss >= sd_times[0,i], sd_hhmmss < sd_times[1,i]))
         sd_2DS = np.mean(conc_2DS[:,ind], axis=2)
         sd_CDP = np.mean(conc_CDP[:,ind], axis=2)
@@ -74,7 +74,7 @@ def sd_corr(sd):
 
 
 
-    # return sd_2DS
+    return sd_2DS
 
 
 
