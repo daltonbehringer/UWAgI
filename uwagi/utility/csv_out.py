@@ -24,10 +24,10 @@ def sd_to_csv(
 
     bin_min = np.append(bins_CDP[0], bins_2DS[0])
     bin_min = np.append(bin_min, bins_2DP[0])
-    
+
     bin_mid = np.append(bins_CDP[1], bins_2DS[1])
     bin_mid = np.append(bin_mid, bins_2DP[1])
-    
+
     bin_max = np.append(bins_CDP[2], bins_2DS[2])
     bin_max = np.append(bin_max, bins_2DP[2])
 
@@ -37,11 +37,11 @@ def sd_to_csv(
     # df = pd.DataFrame(data = sd.time.astype(int), index = None, columns = ['HHMMSS'])
     df = pd.DataFrame(data = None, index = None, columns = None)
 
-    df['bin_min'] = bin_min
-    df['bin_mid'] = bin_mid
-    df['bin_max'] = bin_max
-    
-    df['size_dist'] = sd
+    df['bin_min (microns)'] = bin_min
+    df['bin_mid (microns)'] = bin_mid
+    df['bin_max (microns)'] = bin_max
+
+    df['size_dist #/cm-3/micron'] = sd
 
     if outdir is None:
         filename = 'sizedist_'+str(start_time)+'_'+str(end_time)+'.csv'
