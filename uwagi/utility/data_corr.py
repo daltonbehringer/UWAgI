@@ -45,7 +45,7 @@ def sd_corr(sd, start_time, end_time):
     # ind_re = np.where(bin_mid_2DS_re > 40)
     # ind_driz_re = np.where(np.logical_and(bin_min_2DS_re >= 95, bin_max_2DS_re <= 295))
     # ind_driz = np.where(np.logical_and(bin_mid_2DS >= 95, bin_mid_2DS <= 295))
-       
+
     ind = np.where(np.logical_and(sd.time >= start_time, sd.time < end_time))[0]
     sd_CDP = np.nanmean(sd.dist_CDP[ind,:], axis=0).data
     sd_2DS = np.nanmean(sd.dist_2DS[ind,:], axis=0).data

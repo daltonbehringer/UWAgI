@@ -90,6 +90,7 @@ class _reader(object):
         self.ntot_2DS_V = np.nanmean(self.dist_2DS_V, axis=1)
 
         if channels is 1:
+            print(channels)
             print('One 2DS channel missing, using good channel only')
         if channels < 1:
             print('!!!Both 2DS channels missing!!!')
@@ -108,7 +109,7 @@ class _reader(object):
         # self.fields["ntot_2DS"] = self.ntot_2DS
 
         # 2DP
-        self.ntot_2DP = np.nanmean(self.dist_2DP, axis=1)
+        # self.ntot_2DP = np.nanmean(self.dist_2DP, axis=1)
         
         self.fields["bin_min_2DP"] = self.bin_min_2DP
         self.fields["bin_max_2DP"] = self.bin_max_2DP
@@ -127,7 +128,7 @@ class _reader(object):
         self.fields["conc_CIP"] = self.conc_CIP
 
         # CDP
-        self.ntot_CDP = np.nanmean(self.dist_CDP, axis=1)
+        # self.ntot_CDP = np.nanmean(self.dist_CDP, axis=1)
 
         self.fields["bin_min_CDP"] = self.bin_min_CDP
         self.fields["bin_max_CDP"] = self.bin_max_CDP
