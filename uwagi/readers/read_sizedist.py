@@ -95,8 +95,8 @@ class _reader(object):
             raise ValueError('!!!Both 2DS channels missing!!!')
 
         self.dist_2DS = (self.dist_2DS_H + self.dist_2DS_V) / channels
-        self.dist_2DS[self.dist_2DS == 0.] = np.nan
-        self.ntot_2DS = np.nanmean(self.dist_2DS, axis=1)
+        # self.dist_2DS[self.dist_2DS == 0.] = np.nan
+        # self.ntot_2DS = np.nanmean(self.dist_2DS, axis=1)
 
         self.fields["bin_min_2DS"] = self.bin_min_2DS
         self.fields["bin_max_2DS"] = self.bin_max_2DS
