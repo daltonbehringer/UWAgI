@@ -41,7 +41,7 @@ def sd_to_csv(
     df['bin_mid (microns)'] = bin_mid
     df['bin_max (microns)'] = bin_max
 
-    df['size_dist #/cm-3/micron'] = sd
+    df['size_dist (# cm-3 um-1)'] = sd
 
     if outdir is None:
         filename = 'sizedist_'+str(start_time)+'_'+str(end_time)+'.csv'
