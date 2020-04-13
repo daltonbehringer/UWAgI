@@ -59,10 +59,12 @@ def sd_corr(sd, start_time, end_time):
     #     ind_j = np.where(np.logical_and(sd.bin_mid_2DP >= bin_min_2DP_new[j], sd.bin_mid_2DP <= bin_max_2DP_new[j]))
     #     sd_2DP_new[j] = np.nansum(sd_2DP[ind_j] * sd.bin_dD_2DP.data[ind_j]) / np.nansum(sd.bin_dD_2DP.data[ind_j])
     sd_2DP_new = sd_2DP
-    bin_mid_2DP_new = sd.bin_mid_2DP[1:]
 
+    bins_CDP = np.array((bin_min_CDP, bin_mid_CDP, bin_max_CDP))
+    bins_2DS = np.array((bin_min_2DS_new, bin_mid_2DS_new, bin_max_2DS_new))
+    bins_2DP = np.array((sd.bin_min_2DP[1:], sd.bin_mid_2DP[1:], sd.bin_max_2DP[1:]))
 
-    return sd_CDP, sd_2DS_new, sd_2DP_new, bin_mid_CDP, bin_mid_2DS_new, bin_mid_2DP_new
+    return sd_CDP, sd_2DS_new, sd_2DP_new, bins_CDP, bins_2DS, bins_2DP
 
 
 

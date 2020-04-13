@@ -153,8 +153,8 @@ def plot_sd(
 
     sd_CDP, sd_2DS, sd_2DP, bins_CDP, bins_2DS, bins_2DP = sd_corr(ka, start_time, end_time)
 
-    bins = np.append(bins_CDP, bins_2DS)
-    bins = np.append(bins, bins_2DP)
+    bins = np.append(bins_CDP[1], bins_2DS[1])
+    bins = np.append(bins, bins_2DP[1])
 
     sd = np.append(sd_CDP, sd_2DS)
     sd = np.append(sd, sd_2DP)

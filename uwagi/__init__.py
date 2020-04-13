@@ -9,4 +9,5 @@ from .readers.read_2DS import read_2DS
 from .readers.read_2DP import read_2DP
 
 from .utility import data_corr
+from .utility import to_csv
 from .plot import plot
