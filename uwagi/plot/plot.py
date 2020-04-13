@@ -166,6 +166,8 @@ def plot_sd(
 
     ax.plot(bins, sd, ls=ls, c=c, marker=marker, **kwargs)
 
+    ax.yaxis.set_minor_locator(ticker.AutoMinorLocator())
+
     ax.set_xscale('log')
     ax.set_xlim([1E1, 1E4])
     ax.set_yscale('log')
