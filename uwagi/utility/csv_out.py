@@ -48,6 +48,6 @@ def sd_to_csv(
     if outdir is not None:
         filename = outdir+'sizedist_'+str(start_time)+'_'+str(end_time)+'.csv'
 
-    csv_out = df.to_csv(filename, sep = ',', index = False, enconding = 'utf-8')
+    csv_out = df.to_csv(filename, sep = ',', index = False, encoding = 'utf-8')
 
     return csv_out
