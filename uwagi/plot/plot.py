@@ -176,10 +176,10 @@ def plot_sd(
     ax.set_xlabel(r'Particle Diameter, $\mu m$')
     ax.set_ylabel(r'# $cm^{-3}\/\mu m^{-1}$')
 
-    # if title is None:
-    #     ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | Leg '+str(leg), fontdict=font)
-    # elif title is not None:
-    #     ax.set_title(title, fontdict=font)
+    if title is None:
+        ax.set_title(str(start_time) + ' - ' + str(end_time), fontdict=font)
+    elif title is not None:
+        ax.set_title(title, fontdict=font)
 
     return fig, ax
 

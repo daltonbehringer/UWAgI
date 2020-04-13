@@ -7,13 +7,13 @@ Reads NetCDF files from the University of Wyoming King Air Optical Array Probe
 and returns an object containing the data.
 
 Usage:
-ka = uwagi.read_sizedist('filename')
+ka = uwagi.read_sd('filename')
 
 Returns:
 Object containing King Air OAP size distribution data
 '''
 
-def read_sizedist(filename):
+def read_sd(filename):
 
     dist = _reader(filename)
     return dist
@@ -95,8 +95,6 @@ class _reader(object):
             raise ValueError('!!!Both 2DS channels missing!!!')
 
         self.dist_2DS = (self.dist_2DS_H + self.dist_2DS_V) / channels
-        # self.dist_2DS[self.dist_2DS == 0.] = np.nan
-        # self.ntot_2DS = np.nanmean(self.dist_2DS, axis=1)
 
         self.fields["bin_min_2DS"] = self.bin_min_2DS
         self.fields["bin_max_2DS"] = self.bin_max_2DS
@@ -105,18 +103,13 @@ class _reader(object):
         self.fields["size_dist_2DS_H"] = self.dist_2DS_H
         self.fields["size_dist_2DS_V"] = self.dist_2DS_V
         self.fields["size_dist_2DS"] = self.dist_2DS
-        # self.fields["conc_2DS"] = self.conc_2DS
-        # self.fields["ntot_2DS"] = self.ntot_2DS
 
         # 2DP
-        # self.ntot_2DP = np.nanmean(self.dist_2DP, axis=1)
-        
         self.fields["bin_min_2DP"] = self.bin_min_2DP
         self.fields["bin_max_2DP"] = self.bin_max_2DP
         self.fields["bin_mid_2DP"] = self.bin_min_2DP
         self.fields["bin_dD_2DP"] = self.bin_dD_2DP
         self.fields["size_dist_2DP"] = self.dist_2DP
-        # self.fields["ntot_2DP"] = self.ntot_2DP
         self.fields["conc_2DP"] = self.conc_2DP
 
         # CIP
@@ -128,10 +121,6 @@ class _reader(object):
         self.fields["conc_CIP"] = self.conc_CIP
 
         # CDP
-        # self.ntot_CDP = np.nanmean(self.dist_CDP, axis=1)
-
-        # self.dist_CDP[self.dist_CDP == 0.] = np.nan
-
         self.fields["bin_min_CDP"] = self.bin_min_CDP
         self.fields["bin_max_CDP"] = self.bin_max_CDP
         self.fields["bin_mid_CDP"] = self.bin_min_CDP
