@@ -90,10 +90,9 @@ class _reader(object):
         self.ntot_2DS_V = np.nanmean(self.dist_2DS_V, axis=1)
 
         if channels is 1:
-            print(channels)
-            print('One 2DS channel missing, using good channel only')
+            raise ValueError('One 2DS channel missing, using good channel only')
         if channels < 1:
-            print('!!!Both 2DS channels missing!!!')
+            raise ValueError('!!!Both 2DS channels missing!!!')
 
         self.dist_2DS = (self.dist_2DS_H + self.dist_2DS_V) / channels
         self.ntot_2DS = np.nanmean(self.dist_2DS, axis=1)
