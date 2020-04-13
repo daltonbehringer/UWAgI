@@ -6,75 +6,60 @@ import numpy as np
 Adjust size distribution to set new bins
 '''
 
-def sd_corr(sd):
+def sd_corr(sd, start_time, end_time):
 
     bins_2DP = np.arange(100,20300,200)
     bins1 = np.arange(500,2100,200)
     bins2 = np.arange(2100,21100,1000)
-    bins_2DP_re = np.append(bins1,bins2)
+    bins_2DP_new = np.append(bins1,bins2)
     bin_mid_2DP = (bins_2DP[1:] + bins_2DP[0:-1]) / 2
-    bin_min_2DP_re = bins_2DP_re[0:-1]
-    bin_max_2DP_re = bins_2DP_re[1:]
+    bin_min_2DP_new = bins_2DP_new[0:-1]
+    bin_max_2DP_new = bins_2DP_new[1:]
     bin_dD_2DP = bins_2DP[1:] - bins_2DP[0:-1]
-    conc_2DP = conc_2DP[1:,:,:] * 1E-3
-    conc_2DP = conc_2DP / bin_dD_2DP
 
-    bin_mid_2DP_re = (bins_2DP_re[1:] + bins_2DP_re[0:-1]) / 2
-    bin_dD_2DP_re = bins_2DP_re[1:] - bins_2DP_re[0:-1]
-    sd_2DP_re = np.zeros_like(bin_dD_2DP_re)
+    bin_mid_2DP_new = (bins_2DP_new[1:] + bins_2DP_new[0:-1]) / 2
+    bin_dD_2DP_new = bins_2DP_new[1:] - bins_2DP_new[0:-1]
+    sd_2DP_new = np.zeros_like(bin_dD_2DP_new)
 
-    # times_info = sd_times.shape
-    # n_times = len(sd_times) / 2
+    bin_mid_CDP = sd.bin_mid_CDP.data
+    bin_min_CDP = sd.bin_min_CDP.data
+    bin_max_CDP = sd.bin_max_CDP.data
 
-    #CDP
-    bin_mid_CDP = 0
-    bin_dD_CDP = 0
-    conc_CDP = 0
+    ind_min = np.arange(5,15)
+    ind_min = np.append(ind_min, np.arange(15,35,2))
+    ind_min = np.append(ind_min, np.arange(35,59,4))
+    ind_min = np.append(ind_min, np.arange(59,83,8))
+    ind_min = np.append(ind_min, 83)
 
-    #2DS
-    bin_mid_2DS = 0
-    bin_dD_2DS = 0
-    conc_2DS_both = 0
+    ind_max = np.arange(5,15)
+    ind_max = np.append(ind_max, np.arange(16,36,2))
+    ind_max = np.append(ind_max, np.arange(38,62,4))
+    ind_max = np.append(ind_max, np.arange(66,90,8))
+    ind_max = np.append(ind_max, 98)
 
-    i_both = np.where(sd.bin_mid_2DS > 40)
+    bin_min_2DS_new = np.round(sd.bin_min_2DS[ind_min])
+    bin_max_2DS_new = np.round(sd.bin_max_2DS[ind_max])
+    bin_dD_2DS_new = bin_max_2DS_new - bin_min_2DS_new
+    bin_mid_2DS_new = np.round((bin_max_2DS_new + bin_min_2DS_new) / 2).data
+    sd_2DS_new = np.zeros_like(bin_mid_2DS_new)
+    # ind_re = np.where(bin_mid_2DS_re > 40)
+    # ind_driz_re = np.where(np.logical_and(bin_min_2DS_re >= 95, bin_max_2DS_re <= 295))
+    # ind_driz = np.where(np.logical_and(bin_mid_2DS >= 95, bin_mid_2DS <= 295))
+       
+    ind = np.where(np.logical_and(sd.time >= start_time, sd.time < end_time))[0]
+    sd_CDP = np.nanmean(sd.dist_CDP[ind,:], axis=1).data
+    sd_2DS = np.nanmean(sd.dist_2DS[ind,:], axis=1).data
+    sd_2DP = np.nanmean(sd.dist_2DP[ind,:], axis=1).data
 
-    bin_min_2DS = sd.bin_mid_2DS - sd.bin_dD_2DS / 2
-    bin_max_2DS = sd.bin_mid_2DS + sd.bin_dD_2DS / 2
-    bin_min_CDP = sd.bin_mid_CDP - sd.bin_dD_CDP / 2
-    bin_max_CDP = sd.bin_mid_CDP + sd.bin_dD_CDP / 2
-    bin_min_2DP = sd.bin_mid_2DP - sd.bin_dD_2DP / 2
-    bin_max_2DP = sd.bin_mid_2DP + sd.bin_dD_2DP / 2 
+    for i in range(0, len(bin_dD_2DS_new)):
+        ind_i = np.where(np.logical_and(sd.bin_mid_2DS >= bin_min_2DS_new[i], sd.bin_mid_2DS <= bin_max_2DS_new[i]))
+        sd_2DS_new[i] = np.nansum(sd_2DS[:,ind_i] * sd.bin_dD_2DS.data[ind_i]) / np.nansum(sd.bin_dD_2DS.data[ind_i])
 
-    ind_min = np.arange(0,16)
-    ind_min = np.append(ind_min, np.arange(16,48,2))
-    ind_min = np.append(ind_min, np.arange(48,64,4))
-    ind_min = np.append(ind_min, np.arange(64,96,8))
-    ind_min = np.append(ind_min, np.arange(96,128,16))
+    for j in range(0, len(bin_dD_2DP_new)):
+        ind_j = np.where(np.logical_and(sd.bin_mid_2DP >= bin_min_2DP_new[j], sd.bin_mid_2DP <= bin_max_2DP_new[j]))
+        sd_2DP_new[j] = np.nansum(sd_2DP[:,ind_j] * sd.bin_dD_2DP.data[ind_j]) / np.nansum(sd.bin_dD_2DP.data[ind_j])
 
-    ind_max = np.arange(0,15)
-    ind_max = np.append(ind_max, np.arange(15,47,2))
-    ind_max = np.append(ind_max, np.arange(47,63,4))
-    ind_max = np.append(ind_max, np.arange(63,95,8))
-    ind_max = np.append(ind_max, np.arange(95,143,16))
-
-    bin_min_2DS_re = bin_min_2DS[ind_min]
-    bin_max_2DS_re = bin_max_2DS[ind_max]
-    bin_dD_2DS_re = bin_max_2DS_re - bin_min_2DS_re
-    bin_mid_2DS_re = np.round((bin_max_2DS_re + bin_min_2DS_re) / 2)
-    sd_2DS_re = np.zeros_like(bin_mid_2DS_re)
-    ind_re = np.where(bin_mid_2DS_re > 40)
-    ind_driz_re = np.where(np.logical_and(bin_min_2DS_re >= 95, bin_max_2DS_re <= 295))
-    ind_driz = np.where(np.logical_and(bin_mid_2DS >= 95, bin_mid_2DS <= 295))
-
-    for i in range(0,n_times-1):
-        ind = np.where(np.logical_and(sd_hhmmss >= sd_times[0,i], sd_hhmmss < sd_times[1,i]))
-        sd_2DS = np.mean(conc_2DS[:,ind], axis=2)
-        sd_CDP = np.mean(conc_CDP[:,ind], axis=2)
-        sd_2DP = np.mean(conc_2DP[:,ind], axis=2)
-
-
-
-    return sd_2DS
+    return sd_CDP, sd_2DS_new, sd_2DP_new, bin_mid_CDP, bin_mid_2DS_new, bin_mid_2DP_new
 
 
 
