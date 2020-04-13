@@ -47,17 +47,17 @@ def sd_corr(sd, start_time, end_time):
     # ind_driz = np.where(np.logical_and(bin_mid_2DS >= 95, bin_mid_2DS <= 295))
        
     ind = np.where(np.logical_and(sd.time >= start_time, sd.time < end_time))[0]
-    sd_CDP = np.nanmean(sd.dist_CDP[ind,:], axis=1).data
-    sd_2DS = np.nanmean(sd.dist_2DS[ind,:], axis=1).data
-    sd_2DP = np.nanmean(sd.dist_2DP[ind,:], axis=1).data
+    sd_CDP = np.nanmean(sd.dist_CDP[ind,:], axis=0).data
+    sd_2DS = np.nanmean(sd.dist_2DS[ind,:], axis=0).data
+    sd_2DP = np.nanmean(sd.dist_2DP[ind,:], axis=0).data
 
     for i in range(0, len(bin_dD_2DS_new)):
         ind_i = np.where(np.logical_and(sd.bin_mid_2DS >= bin_min_2DS_new[i], sd.bin_mid_2DS <= bin_max_2DS_new[i]))
-        sd_2DS_new[i] = np.nansum(sd_2DS[:,ind_i] * sd.bin_dD_2DS.data[ind_i]) / np.nansum(sd.bin_dD_2DS.data[ind_i])
+        sd_2DS_new[i] = np.nansum(sd_2DS[ind_i] * sd.bin_dD_2DS.data[ind_i]) / np.nansum(sd.bin_dD_2DS.data[ind_i])
 
     for j in range(0, len(bin_dD_2DP_new)):
         ind_j = np.where(np.logical_and(sd.bin_mid_2DP >= bin_min_2DP_new[j], sd.bin_mid_2DP <= bin_max_2DP_new[j]))
-        sd_2DP_new[j] = np.nansum(sd_2DP[:,ind_j] * sd.bin_dD_2DP.data[ind_j]) / np.nansum(sd.bin_dD_2DP.data[ind_j])
+        sd_2DP_new[j] = np.nansum(sd_2DP[ind_j] * sd.bin_dD_2DP.data[ind_j]) / np.nansum(sd.bin_dD_2DP.data[ind_j])
 
     return sd_CDP, sd_2DS_new, sd_2DP_new, bin_mid_CDP, bin_mid_2DS_new, bin_mid_2DP_new
 
