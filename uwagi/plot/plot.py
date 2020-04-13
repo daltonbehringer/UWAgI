@@ -171,9 +171,8 @@ def plot_sd(
     ax.set_yscale('log')
     ax.set_ylim([1E-10, 1E2])
 
-    ax.tick_params(axis='both', which='both', direction='in', length = 7)
+    ax.tick_params(axis='both', which='both', direction='in', length = 7, grid_linestyle='--', grid_alpha=0.5)
     ax.yaxis.set_major_locator(ticker.LogLocator(base=10, numticks=7))
-    # ax.tick_params(which='minor', length=4)
     
     ax.set_xlabel(r'Particle Diameter, $\mu m$')
     ax.set_ylabel(r'# $cm^{-3}\/\mu m^{-1}$')
