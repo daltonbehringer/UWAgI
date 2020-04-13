@@ -166,14 +166,14 @@ def plot_sd(
 
     ax.plot(bins, sd, ls=ls, c=c, marker=marker, **kwargs)
 
-    ax.yaxis.set_minor_locator(ticker.AutoMinorLocator())
-
     ax.set_xscale('log')
-    ax.set_xlim([1E1, 1E4])
+    ax.set_xlim([1E0, 1E4])
     ax.set_yscale('log')
     ax.set_ylim([1E-10, 1E2])
 
     ax.tick_params(axis='both', which='both', direction='in', length = 7)
+    ax.yaxis.set_minor_locator(ticker.AutoMinorLocator())
+    ax.tick_params(which='minor', length=4)
     
     ax.set_xlabel(r'Particle Diameter, $\mu m$')
     ax.set_ylabel(r'# $cm^{-3}\/\mu m^{-1}$')
