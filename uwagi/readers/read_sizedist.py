@@ -130,7 +130,7 @@ class _reader(object):
         # CDP
         # self.ntot_CDP = np.nanmean(self.dist_CDP, axis=1)
 
-        self.dist_CDP[self.dist_CDP == 0.] = np.nan
+        # self.dist_CDP[self.dist_CDP == 0.] = np.nan
 
         self.fields["bin_min_CDP"] = self.bin_min_CDP
         self.fields["bin_max_CDP"] = self.bin_max_CDP
