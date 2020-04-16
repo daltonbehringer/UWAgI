@@ -62,7 +62,7 @@ def plot_ts(
     # if start is not None and end is not None and leg is not None:
     #     raise ValueError('***Use either start/end or entire leg***')
     print(start)
-    
+
     if start is None and end is None and leg is None:
         raise ValueError('***Need either start/end or leg number***')
     
@@ -130,7 +130,7 @@ def plot_ts(
         ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | Leg '+str(leg)+'\n'
             +'Mean: '+str(mean)+' StDev: '+str(stdev)+' Var: '+str(variance), fontdict=font)
     elif title is None and leg is None:
-        ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | '+start+' - '+end+'\n'
+        ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | '+str(start)+' - '+str(end)+'\n'
             +'Mean: '+str(mean)+' StDev: '+str(stdev)+' Var: '+str(variance), fontdict=font)
     elif title is not None:
         ax.set_title(title, fontdict=font)
