@@ -65,12 +65,19 @@ def plot_ts(
     start = np.where(ka.fields['time'] == np.datetime64(start_time))[0][0]
     end = np.where(ka.fields['time'] == np.datetime64(end_time))[0][0]
 
+    t = ka.fields['time'][start:end]
+    y = ka.fields[var][start:end]
+
     if ls is None:
         ls = '-'
     if c is None:
         c = 'k'
 
-    ax.plot_date(ka.fields['time'][start:end], ka.fields[var][start:end], ls=ls, c=c, marker=marker, **kwargs)
+    ax.plot_date(t, y, ls=ls, c=c, marker=marker, **kwargs)
+
+    variance = np.round(np.nanvar(y), decimals=2)
+    stdev = np.round(np.nanstd(y), decimals=2)
+    mean = np.round(np.nanmean(y), decimals=2)
 
     ax.xaxis.set_major_formatter(x_fmt)
     ax.xaxis.set_major_locator(MinuteLocator(interval=2))
@@ -84,19 +91,21 @@ def plot_ts(
     elif x_min_tick_format == 'day':
         ax.xaxis.set_minor_locator(DayLocator())
 
-    ax.yaxis.set_minor_locator(ticker.AutoMinorLocator())
+    ax.yaxis.set_minor_locator(ticker.AutoMinorLocator(2))
 
     ax.set_xlim([ka.fields['time'][start],ka.fields['time'][end]])
 
     ax.grid(True)
     ax.tick_params(axis='both', which='both', direction='in', grid_linestyle='--', grid_alpha=0.5)
     ax.set_xlabel('Time, UTC', fontdict=font)
+    ax.set_ylim(xmin=0)
 
     if y_label is None:
         ax.set_ylabel(get_label(var), fontdict=font)
 
     if title is None:
-        ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | Leg '+str(leg), fontdict=font)
+        ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | Leg '+str(leg)+'\n'
+            +'Mean: '+str(mean)+' StDev: '+str(stdev)+' Var: '+str(variance), fontdict=font)
     elif title is not None:
         ax.set_title(title, fontdict=font)
 
