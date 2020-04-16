@@ -30,7 +30,7 @@ class _reader(object):
         self.v = nc.variables['avvy'][:]
         self.lat = nc.variables['avlat'][:]
         self.lon = nc.variables['avlon'][:]
-        self.time = nc.variables['time'][:] # seconds since 2017-01-01 00:00:00 UTC
+        self.time = nc.variables['time'] # seconds since 2017-01-01 00:00:00 UTC
         #self.time = nc.variables['TIME'][:] 
         self.date = nc.variables['DATE'][:]
         self.hour = nc.variables['HOUR'][:]
