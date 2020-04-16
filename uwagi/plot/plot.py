@@ -98,7 +98,7 @@ def plot_ts(
     ax.grid(True)
     ax.tick_params(axis='both', which='both', direction='in', grid_linestyle='--', grid_alpha=0.5)
     ax.set_xlabel('Time, UTC', fontdict=font)
-    ax.set_ylim(xmin=0)
+    ax.set_ylim(ymin=0)
 
     if y_label is None:
         ax.set_ylabel(get_label(var), fontdict=font)
