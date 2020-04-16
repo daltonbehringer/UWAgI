@@ -85,11 +85,11 @@ def plot_ts(
 
     x_fmt = DateFormatter(time_format)
 
-    start = np.where(ka.fields['time'] == np.datetime64(start_time))[0][0]
-    end = np.where(ka.fields['time'] == np.datetime64(end_time))[0][0]
+    p_start = np.where(ka.fields['time'] == np.datetime64(start_time))[0][0]
+    p_end = np.where(ka.fields['time'] == np.datetime64(end_time))[0][0]
 
-    t = ka.fields['time'][start:end]
-    y = ka.fields[var][start:end]
+    t = ka.fields['time'][p_start:p_end]
+    y = ka.fields[var][p_start:p_end]
 
     if ls is None:
         ls = '-'
@@ -116,7 +116,7 @@ def plot_ts(
 
     ax.yaxis.set_minor_locator(ticker.AutoMinorLocator(2))
 
-    ax.set_xlim([ka.fields['time'][start],ka.fields['time'][end]])
+    ax.set_xlim([ka.fields['time'][p_start],ka.fields['time'][p_end]])
 
     ax.grid(True)
     ax.tick_params(axis='both', which='both', direction='in', grid_linestyle='--', grid_alpha=0.5)
