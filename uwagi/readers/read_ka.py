@@ -123,7 +123,7 @@ class _reader(object):
         minute = int(self.time.units[28:30])
         second = int(self.time.units[31:33])
         start_time = datetime.datetime(year,month,day,hour,minute,tzinfo=datetime.timezone.utc).timestamp()
-        time_sec = self.time + start_time
+        time_sec = self.time[:] + start_time
         self.fields['time'] = time_sec.astype('datetime64[s]')
 
 # def ncvar_to_dict(ncvar):
