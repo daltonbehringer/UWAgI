@@ -7,6 +7,8 @@ from matplotlib.dates import DateFormatter
 from matplotlib.dates import SecondLocator, MinuteLocator, HourLocator, DayLocator
 import matplotlib.ticker as ticker
 from ..utility.iop import get_times
+from ..readers.read_ka import read_ka
+from ..readers.read_sizedist import read_sd
 from ..utility.data_corr import sd_corr
 from ..utility.var_labels import get_label
 
@@ -23,9 +25,10 @@ font = {'family': 'sans serif',
 '''Plot time-series'''
 
 def plot_ts(
-    ka,
     var,
-    iop = None,
+    iop,
+    start = None,
+    end = None,
     leg = None,
     time_format = "%H%M",
     tz = None,
@@ -44,7 +47,7 @@ def plot_ts(
     '''
     Plots a time-series of a variable
 
-    Usage: uwagi.plot.plot_ts(args)
+    Usage: uwagi.plot_ts(args)
 
     Arguments:
         ka = data object
@@ -55,10 +58,19 @@ def plot_ts(
     Returns: matplotlib plot object
     '''
 
+    if start is not None or end is not None and leg is not None:
+        raise ValueError('Use either start/end or entire leg.')
+    elif start is None and end is None and leg is not None:
+        print('Plotting data from entire leg '+str(leg)+' period.')
+        start_time, end_time = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
+    elif start_time is not None and end_time is not None and leg is None:
+        start_time, end_time = get_times(iop, start=start, end=end)[0], get_times(iop, start=start, end=end)[1]
+
+    filename = get_times(iop)[2]+'.c1.nc'
+    ka = read_ka(filename)
+
     fig = parse_fig(fig,10,4)
     ax = parse_ax(ax)
-
-    start_time, end_time = get_times(iop, leg)[0], get_times(iop, leg)[1]
 
     x_fmt = DateFormatter(time_format)
 
@@ -135,7 +147,7 @@ def plot_sd(
 
     If not start time, entire leg is averaged
 
-    Usage: uwagi.plot.plot_sd(args)
+    Usage: uwagi.plot_sd(args)
 
     Arguments:
         ka = data object

@@ -4,18 +4,24 @@ Function to define start/end time to flight legs
 
 def get_times(
 	iop,
-	leg
+	leg = None,
+	start = None,
+	end = None
 	):
 
 	# FINISH LATER (need to adjust plot function to accept IOP arg to select file.
 	# IOP arg usage currently does not select file, only leg times)
 	
-	if iop is None or leg is None:
-		raise ValueError('Plotting function requires IOP and leg arguments.')
+	if iop is None:
+		raise ValueError('Plotting function requires IOP argument.')
 	
 	elif iop is 1:
 		date = '2017-01-08 '
-		if leg is 1:
+		file = '20170108'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '02:45:11'
 			end_time = date + '02:56:09'
 		elif leg is 2:
@@ -48,7 +54,11 @@ def get_times(
 
 	elif iop is 2:
 		date = '2017-01-09 '
-		if leg is 1:
+		file = '20170109'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '04:35:40'
 			end_time = date + '04:46:00'
 		elif leg is 2:
@@ -81,7 +91,11 @@ def get_times(
 
 	elif iop is 3:
 		date = '2017-01-11 '
-		if leg is 1:
+		file = '20170111'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '02:47:21'
 			end_time = date + '03:03:35'
 		elif leg is 2:
@@ -114,7 +128,11 @@ def get_times(
 
 	elif iop is 4:
 		date = '2017-01-18 '
-		if leg is 1:
+		file = '20170118'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '20:15:40'
 			end_time = date + '20:31:18'
 		elif leg is 2:
@@ -147,7 +165,11 @@ def get_times(
 
 	elif iop is 5:
 		date = '2017-01-19 '
-		if leg is 1:
+		file = '20170119a'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '15:40:02'
 			end_time = date + '15:59:17'
 		elif leg is 2:
@@ -181,7 +203,18 @@ def get_times(
 	elif iop is 6:
 		date1 = '2017-01-19 '
 		date2 = '2017-01-20 '
-		if leg is 1:
+		file = '20170119b'
+		if leg is None:
+			if int(start[0:2]) > 20 and int(end[0:2]) > 20:
+				start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date1 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+			elif int(start[0:2]) > 20 and int(end[0:2]) < 10:
+				start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+			elif int(start[0:2]) <10 and int(end[0:2]) < 10:
+				start_time = date2 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date1 + '22:44:29'
 			end_time = date1 + '23:05:05'
 		elif leg is 2:
@@ -215,7 +248,18 @@ def get_times(
 	elif iop is 7:
 		date1 = '2017-01-21 '
 		date2 = '2017-01-22 '
-		if leg is 1:
+		file = '20170121'
+		if leg is None:
+			if int(start[0:2]) > 20 and int(end[0:2]) > 20:
+				start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date1 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+			elif int(start[0:2]) > 20 and int(end[0:2]) < 10:
+				start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+			elif int(start[0:2]) <10 and int(end[0:2]) < 10:
+				start_time = date2 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date1 + '22:49:40'
 			end_time = date1 + '22:57:35'
 		elif leg is 2:
@@ -262,7 +306,18 @@ def get_times(
 	elif iop is 8:
 		date1 = '2017-01-22 '
 		date2 = '2017-01-23 '
-		if leg is 1:
+		file = '20170122'
+		if leg is None:
+			if int(start[0:2]) > 20 and int(end[0:2]) > 20:
+				start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date1 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+			elif int(start[0:2]) > 20 and int(end[0:2]) < 10:
+				start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+			elif int(start[0:2]) <10 and int(end[0:2]) < 10:
+				start_time = date2 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date1 + '21:11:00'
 			end_time = date1 + '21:23:05'
 		elif leg is 2:
@@ -301,7 +356,11 @@ def get_times(
 
 	elif iop is 9:
 		date = '2017-01-31 '
-		if leg is 1:
+		file = '20170131'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '20:21:00'
 			end_time = date + '20:31:00'
 		elif leg is 2:
@@ -334,7 +393,11 @@ def get_times(
 
 	elif iop is 10:
 		date = '2017-02-03 '
-		if leg is 1:
+		file = '20170203'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '20:06:30'
 			end_time = date + '20:17:55'
 		elif leg is 2:
@@ -356,7 +419,18 @@ def get_times(
 	elif iop is 11:
 		date1 = '2017-02-04 '
 		date2 = '2017-02-05 '
-		if leg is 1:
+		file = '20170204'
+		if leg is None:
+			if int(start[0:2]) > 20 and int(end[0:2]) > 20:
+				start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date1 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+			elif int(start[0:2]) > 20 and int(end[0:2]) < 10:
+				start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+			elif int(start[0:2]) <10 and int(end[0:2]) < 10:
+				start_time = date2 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date1 + '22:08:40'
 			end_time = date1 + '22:18:00'
 		elif leg is 2:
@@ -395,7 +469,11 @@ def get_times(
 
 	elif iop is 12:
 		date = '2017-02-07 '
-		if leg is 1:
+		file = '20170207'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '20:13:30'
 			end_time = date + '20:23:40'
 		elif leg is 2:
@@ -429,7 +507,18 @@ def get_times(
 	elif iop is 13:
 		date1 = '2017-02-16 '
 		date2 = '2017-02-17 '
-		if leg is 1:
+		file = '20170216'
+		if leg is None:
+			if int(start[0:2]) > 20 and int(end[0:2]) > 20:
+				start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date1 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+			elif int(start[0:2]) > 20 and int(end[0:2]) < 10:
+				start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+			elif int(start[0:2]) <10 and int(end[0:2]) < 10:
+				start_time = date2 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date1 + '23:42:54'
 			end_time = date1 + '23:53:15'
 		elif leg is 2:
@@ -445,7 +534,18 @@ def get_times(
 	elif iop is 14:
 		date1 = '2017-02-18 '
 		date2 = '2017-02-19 '
-		if leg is 1:
+		file = '20170218'
+		if leg is None:
+			if int(start[0:2]) > 20 and int(end[0:2]) > 20:
+				start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date1 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+			elif int(start[0:2]) > 20 and int(end[0:2]) < 10:
+				start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+			elif int(start[0:2]) <10 and int(end[0:2]) < 10:
+				start_time = date2 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date1 + '21:45:00'
 			end_time = date1 + '21:58:00'
 		elif leg is 2:
@@ -478,7 +578,11 @@ def get_times(
 
 	elif iop is 15:
 		date = '2017-02-19 '
-		if leg is 1:
+		file = '20170219'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '17:45:00'
 			end_time = date + '17:55:09'
 		elif leg is 2:
@@ -517,7 +621,11 @@ def get_times(
 
 	elif iop is 16:
 		date = '2017-02-20 '
-		if leg is 1:
+		file = '20170220'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '14:47:15'
 			end_time = date + '14:57:30'
 		elif leg is 2:
@@ -544,7 +652,11 @@ def get_times(
 
 	elif iop is 17:
 		date = '2017-02-21 '
-		if leg is 1:
+		file = '20170221'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '14:41:40'
 			end_time = date + '14:52:40'
 		elif leg is 2:
@@ -577,7 +689,11 @@ def get_times(
 
 	elif iop is 19:
 		date = '2017-03-04 '
-		if leg is 1:
+		file = '20170304'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '13:30:00'
 			end_time = date + '13:39:45'
 		elif leg is 2:
@@ -622,7 +738,11 @@ def get_times(
 
 	elif iop is 20:
 		date = '2017-03-05 '
-		if leg is 1:
+		file = '20170305'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '12:12:00'
 			end_time = date + '12:22:30'
 		elif leg is 2:
@@ -655,7 +775,11 @@ def get_times(
 
 	elif iop is 21:
 		date = '2017-03-07 '
-		if leg is 1:
+		file = '20170307'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '14:23:40'
 			end_time = date + '14:33:16'
 		elif leg is 2:
@@ -700,7 +824,11 @@ def get_times(
 
 	elif iop is 22:
 		date = '2017-03-09 '
-		if leg is 1:
+		file = '20170309a'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '14:22:15'
 			end_time = date + '14:32:10'
 		elif leg is 2:
@@ -727,7 +855,11 @@ def get_times(
 
 	elif iop is 23:
 		date = '2017-03-09 '
-		if leg is 1:
+		file = '20170309b'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '20:19:45'
 			end_time = date + '20:30:05'
 		elif leg is 2:
@@ -760,7 +892,11 @@ def get_times(
 
 	elif iop is 24:
 		date = '2017-03-16 '
-		if leg is 1:
+		file = '20170316a'
+		if leg is None:
+			start_time = date + start[0:2]+':'+start[2:4]+':'+start[4:6]
+			end_time = date + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
 			start_time = date + '01:08:10'
 			end_time = date + '01:18:20'
 		elif leg is 2:
@@ -798,5 +934,5 @@ def get_times(
 			end_time = date + '04:20:30'
 
 
-	return start_time, end_time
+	return start_time, end_time, file
 
