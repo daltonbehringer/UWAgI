@@ -60,10 +60,10 @@ def plot_ts(
     '''
 
     if start is not None or end is not None and leg is not None:
-        raise ValueError('Use either start/end or entire leg.')
+        raise ValueError('***Use either start/end or entire leg***')
     
     if start is None and end is None and leg is None:
-        raise ValueError('Need either start/end or leg number.')
+        raise ValueError('***Need either start/end or leg number***')
     
     if start is None and end is None and leg is not None:
         print('Plotting data from entire leg '+str(leg)+' period.')
