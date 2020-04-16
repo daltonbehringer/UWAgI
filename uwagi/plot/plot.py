@@ -64,7 +64,7 @@ def plot_ts(
     elif start is None and end is None and leg is not None:
         print('Plotting data from entire leg '+str(leg)+' period.')
         start_time, end_time = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
-    elif start_time is not None and end_time is not None and leg is None:
+    elif start is not None and end is not None and leg is None:
         start_time, end_time = get_times(iop, start=start, end=end)[0], get_times(iop, start=start, end=end)[1]
 
     filename = get_times(iop)[2]+'.c1.nc'
