@@ -26,7 +26,7 @@ font = {'family': 'sans serif',
 
 def plot_ts(
     var,
-    iop,
+    iop = None,
     start = None,
     end = None,
     leg = None,
