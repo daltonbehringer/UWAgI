@@ -933,6 +933,8 @@ def get_times(
 			start_time = date + '04:12:00'
 			end_time = date + '04:20:30'
 
-
-	return start_time, end_time, file
+	if leg is None and start is None:
+		return file
+	else:
+		return start_time, end_time, file
 
