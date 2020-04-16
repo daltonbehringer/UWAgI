@@ -104,6 +104,8 @@ def plot_ts(
 
     ax.xaxis.set_major_formatter(x_fmt)
     ax.xaxis.set_major_locator(MinuteLocator(interval=2))
+    ax.xaxis.set_minor_locator(SecondLocator(interval=30))
+    ax.set_xlabel('Time, UTC', fontdict=font)
     
     if x_min_tick_format == 'second':
         ax.xaxis.set_minor_locator(SecondLocator())
@@ -114,15 +116,14 @@ def plot_ts(
     elif x_min_tick_format == 'day':
         ax.xaxis.set_minor_locator(DayLocator())
 
-    ax.yaxis.set_minor_locator(ticker.AutoMinorLocator(4))
-
     ax.set_xlim([ka.fields['time'][p_start],ka.fields['time'][p_end]])
 
-    ax.grid(True)
-    ax.tick_params(axis='both', which='both', direction='in', grid_linestyle='--', grid_alpha=0.5,
+    ax.tick_params(axis='both', which='major', direction='in', grid_linestyle='--', grid_alpha=0.5,
         length=7, labelsize=12)
-    ax.set_xlabel('Time, UTC', fontdict=font)
-    ax.set_ylim(ymin=0)
+    ax.tick_params(axis='both', which='minor', direction='in',length=4)
+
+    ax.yaxis.set_minor_locator(ticker.AutoMinorLocator(4))
+    ax.set_ylim(ymin = -0.01)
 
     if y_label is None:
         ax.set_ylabel(get_label(var), fontdict=font)
