@@ -25,12 +25,12 @@ font = {'family': 'sans serif',
 '''Plot time-series'''
 
 def plot_ts(
-    file_loc = None,
     var,
     iop,
     start = None,
     end = None,
     leg = None,
+    file_loc = None,
     time_format = "%H%M",
     tz = None,
     x_min_tick_format = 'minute',
