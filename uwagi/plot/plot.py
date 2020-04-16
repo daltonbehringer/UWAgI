@@ -61,7 +61,6 @@ def plot_ts(
 
     # if start is not None and end is not None and leg is not None:
     #     raise ValueError('***Use either start/end or entire leg***')
-    print(start)
 
     if start is None and end is None and leg is None:
         raise ValueError('***Need either start/end or leg number***')
@@ -98,9 +97,9 @@ def plot_ts(
 
     ax.plot_date(t, y, ls=ls, c=c, marker=marker, **kwargs)
 
-    variance = np.round(np.nanvar(y), decimals=2)
-    stdev = np.round(np.nanstd(y), decimals=2)
-    mean = np.round(np.nanmean(y), decimals=2)
+    variance = np.round(np.nanvar(y), decimals=3)
+    stdev = np.round(np.nanstd(y), decimals=3)
+    mean = np.round(np.nanmean(y), decimals=3)
 
     ax.xaxis.set_major_formatter(x_fmt)
     ax.xaxis.set_major_locator(MinuteLocator(interval=2))
@@ -124,7 +123,7 @@ def plot_ts(
     ax.tick_params(axis='both', which='minor', direction='in',length=4)
 
     ax.yaxis.set_minor_locator(ticker.AutoMinorLocator(4))
-    ax.set_ylim(ymin = -0.01)
+    ax.set_ylim(ymin = -0.005)
 
     if y_label is None:
         ax.set_ylabel(get_label(var), fontdict=font)
