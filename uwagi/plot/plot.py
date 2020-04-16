@@ -71,7 +71,7 @@ def plot_ts(
 
     if file_loc is not None:
         ka = read_ka(file_loc+filename)
-    else
+    else:
         ka = read_ka(filename)
 
     fig = parse_fig(fig,10,4)
