@@ -72,7 +72,7 @@ def plot_ts(
     if start is not None and end is not None and leg is None:
         start_time, end_time = get_times(iop, start=start, end=end)[0], get_times(iop, start=start, end=end)[1]
 
-    filename = get_times(iop)[2]+'.c1.nc'
+    filename = get_times(iop)+'.c1.nc'
 
     if file_loc is not None:
         ka = read_ka(file_loc+filename)
