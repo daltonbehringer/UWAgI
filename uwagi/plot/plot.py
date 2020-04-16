@@ -114,12 +114,13 @@ def plot_ts(
     elif x_min_tick_format == 'day':
         ax.xaxis.set_minor_locator(DayLocator())
 
-    ax.yaxis.set_minor_locator(ticker.AutoMinorLocator(2))
+    ax.yaxis.set_minor_locator(ticker.AutoMinorLocator(4))
 
     ax.set_xlim([ka.fields['time'][p_start],ka.fields['time'][p_end]])
 
     ax.grid(True)
-    ax.tick_params(axis='both', which='both', direction='in', grid_linestyle='--', grid_alpha=0.5)
+    ax.tick_params(axis='both', which='both', direction='in', grid_linestyle='--', grid_alpha=0.5,
+        length=7, labelsize=12)
     ax.set_xlabel('Time, UTC', fontdict=font)
     ax.set_ylim(ymin=0)
 
