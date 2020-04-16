@@ -104,7 +104,7 @@ def plot_ts(
 
     ax.xaxis.set_major_formatter(x_fmt)
     ax.xaxis.set_major_locator(MinuteLocator(interval=2))
-    ax.xaxis.set_minor_locator(SecondLocator(interval=30))
+    ax.xaxis.set_minor_locator(SecondLocator(interval=2))
     ax.set_xlabel('Time, UTC', fontdict=font)
     
     if x_min_tick_format == 'second':
@@ -118,6 +118,7 @@ def plot_ts(
 
     ax.set_xlim([ka.fields['time'][p_start],ka.fields['time'][p_end]])
 
+    ax.grid(True)
     ax.tick_params(axis='both', which='major', direction='in', grid_linestyle='--', grid_alpha=0.5,
         length=7, labelsize=12)
     ax.tick_params(axis='both', which='minor', direction='in',length=4)
