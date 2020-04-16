@@ -125,8 +125,11 @@ def plot_ts(
     if y_label is None:
         ax.set_ylabel(get_label(var), fontdict=font)
 
-    if title is None:
+    if title is None and leg is not None:
         ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | Leg '+str(leg)+'\n'
+            +'Mean: '+str(mean)+' StDev: '+str(stdev)+' Var: '+str(variance), fontdict=font)
+    elif title is None and leg is None:
+        ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | 'str(start_time)+' - '+str(end_time)+'\n'
             +'Mean: '+str(mean)+' StDev: '+str(stdev)+' Var: '+str(variance), fontdict=font)
     elif title is not None:
         ax.set_title(title, fontdict=font)
