@@ -104,7 +104,7 @@ def plot_ts(
 
     ax.xaxis.set_major_formatter(x_fmt)
     ax.xaxis.set_major_locator(MinuteLocator(interval=2))
-    ax.xaxis.set_minor_locator(SecondLocator(interval=2))
+    ax.xaxis.set_minor_locator(ticker.AutoMinorLocator())
     ax.set_xlabel('Time, UTC', fontdict=font)
     
     if x_min_tick_format == 'second':
