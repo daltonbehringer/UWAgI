@@ -123,7 +123,6 @@ def plot_ts(
     ax.tick_params(axis='both', which='minor', direction='in',length=4)
 
     ax.yaxis.set_minor_locator(ticker.AutoMinorLocator(4))
-    ax.set_ylim(ymin = -0.005)
 
     if y_label is None:
         ax.set_ylabel(get_label(var), fontdict=font)
