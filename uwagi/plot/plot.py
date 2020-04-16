@@ -25,7 +25,7 @@ font = {'family': 'sans serif',
 '''Plot time-series'''
 
 def plot_ts(
-    dir = None,
+    file_loc = None,
     var,
     iop,
     start = None,
@@ -69,8 +69,8 @@ def plot_ts(
 
     filename = get_times(iop)[2]+'.c1.nc'
 
-    if dir is not None:
-        ka = read_ka(dir+filename)
+    if file_loc is not None:
+        ka = read_ka(file_loc+filename)
     else
         ka = read_ka(filename)
 
