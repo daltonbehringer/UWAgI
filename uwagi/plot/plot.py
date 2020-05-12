@@ -30,8 +30,8 @@ def plot_ts(
     start = None,
     end = None,
     leg = None,
-    file_loc = None,
-    time_format = "%H%M",
+    indir = None,
+    time_format = "%H%M%S",
     tz = None,
     x_min_tick_format = 'minute',
     title = None,
@@ -51,41 +51,44 @@ def plot_ts(
     Usage: uwagi.plot_ts(args)
 
     Arguments:
-        ka = data object
-        var = variable from data object
+        var = variable to plot
         iop = iop number
         leg = leg of the iop to plot
+        start = start time of plot
+        end = end time of plot
 
     Returns: matplotlib plot object
     '''
-
-    # if start is not None and end is not None and leg is not None:
-    #     raise ValueError('***Use either start/end or entire leg***')
 
     if start is None and end is None and leg is None:
         raise ValueError('***Need either start/end or leg number***')
     
     if start is None and end is None and leg is not None:
         print('Plotting data from entire leg '+str(leg)+' period.')
-        start_time, end_time = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
+        start, end = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
     
-    if start is not None and end is not None and leg is None:
-        start_time, end_time = get_times(iop, start=start, end=end)[0], get_times(iop, start=start, end=end)[1]
-
     filename = get_times(iop)+'.c1.nc'
 
-    if file_loc is not None:
-        ka = read_ka(file_loc+filename)
+    if indir is not None:
+        if indir[-1] is '/':
+            ka = read_ka(indir+filename)
+        else:
+            ka = read_ka(indir+'/'+filename)
     else:
         ka = read_ka(filename)
+
+    if start is None:
+        start = ka.fields['HHMMSS'][0]
+    if end is None:
+        end = ka.fields['HHMMSS'][-1]
 
     fig = parse_fig(fig,10,4)
     ax = parse_ax(ax)
 
     x_fmt = DateFormatter(time_format)
 
-    p_start = np.where(ka.fields['time'] == np.datetime64(start_time))[0][0]
-    p_end = np.where(ka.fields['time'] == np.datetime64(end_time))[0][0]
+    p_start = np.where(np.array(ka.fields['HHMMSS']) == str(start))[0][0]
+    p_end = np.where(np.array(ka.fields['HHMMSS']) == str(end))[0][0]
 
     t = ka.fields['time'][p_start:p_end]
     y = ka.fields[var][p_start:p_end]
@@ -102,8 +105,8 @@ def plot_ts(
     mean = np.round(np.nanmean(y), decimals=3)
 
     ax.xaxis.set_major_formatter(x_fmt)
-    ax.xaxis.set_major_locator(MinuteLocator(interval=2))
-    ax.xaxis.set_minor_locator(ticker.AutoMinorLocator())
+    ax.xaxis.set_major_locator(MinuteLocator(interval=5))
+    # ax.xaxis.set_major_locator(SecondLocator(interval=20))
     ax.set_xlabel('Time, UTC', fontdict=font)
     
     if x_min_tick_format == 'second':
@@ -128,10 +131,10 @@ def plot_ts(
         ax.set_ylabel(get_label(var), fontdict=font)
 
     if title is None and leg is not None:
-        ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | Leg '+str(leg)+'\n'
+        ax.set_title('IOP '+str(iop)+' | Leg '+str(leg)+'\n'
             +'Mean: '+str(mean)+' StDev: '+str(stdev)+' Var: '+str(variance), fontdict=font)
     elif title is None and leg is None:
-        ax.set_title(start_time[0:10]+' | IOP '+str(iop)+' | '+str(start)+' - '+str(end)+'\n'
+        ax.set_title('IOP '+str(iop)+' | '+str(start)+' - '+str(end)+'\n'
             +'Mean: '+str(mean)+' StDev: '+str(stdev)+' Var: '+str(variance), fontdict=font)
     elif title is not None:
         ax.set_title(title, fontdict=font)
@@ -141,11 +144,11 @@ def plot_ts(
 '''Plot size distribution'''
 
 def plot_sd(
-    ka,
-    # iop = None,
-    # leg = None,
-    start_time = None,
-    end_time = None,
+    iop,
+    leg = None,
+    start = None,
+    end = None,
+    indir = None,
     title = None,
     y_label = None,
     ax = None,
@@ -171,6 +174,28 @@ def plot_sd(
     Returns: matplotlib plot object
     '''
 
+    if start is None and end is None and leg is None:
+        raise ValueError('***Need either start/end or leg number***')
+    
+    if start is None and end is None and leg is not None:
+        print('Gathering data from entire leg '+str(leg)+' period.')
+        start, end = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
+    
+    filename = get_times(iop)+'.SD.cdf'
+
+    if indir is not None:
+        if indir[-1] is '/':
+            sd = read_sd(indir+filename)
+        else:
+            sd = read_sd(indir+'/'+filename)
+    else:
+        sd = read_sd(filename)
+
+    if start is None:
+        start = int(sd.time[0])
+    if end is None:
+        end = int(sd.time[-1])
+
     fig = parse_fig(fig,6,6)
     ax = parse_ax(ax)
 
@@ -179,15 +204,10 @@ def plot_sd(
     # start = np.where(ka.fields['time'] == np.datetime64(start_time))[0][0]
     # end = np.where(ka.fields['time'] == np.datetime64(end_time))[0][0]
 
-    if start_time is None:
-        start_time = int(ka.time[0])
-    if end_time is None:
-        end_time = int(ka.time[-1])
-
     # start_time = 151458
     # end_time = 183702
 
-    sd_CDP, sd_2DS, sd_2DP, bins_CDP, bins_2DS, bins_2DP = sd_corr(ka, start_time, end_time)
+    sd_CDP, sd_2DS, sd_2DP, bins_CDP, bins_2DS, bins_2DP = sd_corr(sd, start, end, 0)
 
     bins = np.append(bins_CDP[1], bins_2DS[1])
     bins = np.append(bins, bins_2DP[1])
@@ -213,12 +233,144 @@ def plot_sd(
     ax.set_xlabel(r'Particle Diameter, $\mu m$')
     ax.set_ylabel(r'# $cm^{-3}\/\mu m^{-1}$')
 
-    if title is None:
-        ax.set_title(str(start_time) + ' - ' + str(end_time), fontdict=font)
+    if title is None and leg is not None:
+        ax.set_title('IOP '+str(iop)+' | Leg '+str(leg), fontdict=font)
+    elif title is None and leg is None:
+        ax.set_title('IOP '+str(iop)+' | '+str(start)+' - '+str(end), fontdict=font)
     elif title is not None:
         ax.set_title(title, fontdict=font)
 
     return fig, ax
+
+
+'''Plot size dist hovmoller'''
+def plot_sd_hov(
+    iop,
+    leg = None,
+    start = None,
+    end = None,
+    indir = None,
+    time_format = "%H%M%S",
+    x_axis = None,
+    cmap = None,
+    vmin = None,
+    vmax = None,
+    title = None,
+    y_label = None,
+    ax = None,
+    fig = None,
+    tighten = True,
+    **kwargs
+    ):
+
+    '''
+    Plots a size distribution Hovmoller over time or space.
+
+    If not start time, entire leg is averaged
+
+    Usage: uwagi.plot_sd_hov(args)
+
+    Arguments:
+        ka = data object
+        iop = iop number
+
+    Returns: matplotlib plot object
+    '''
+
+    if start is None and end is None and leg is None:
+        raise ValueError('***Need either start/end or leg number***')
+    
+    if start is None and end is None and leg is not None:
+        print('Gathering data from entire leg '+str(leg)+' period.')
+        start_time, end_time = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
+    
+    # if start is not None and end is not None and leg is None:
+    #     start_time, end_time = get_times(iop, start=start, end=end)[0], get_times(iop, start=start, end=end)[1
+
+    filename = get_times(iop)+'.SD.cdf'
+    filename_ka = get_times(iop)+'.c1.nc'
+
+    if indir is not None:
+        if indir[-1] is '/':
+            sd = read_sd(indir+filename)
+            ka = read_ka(indir+filename_ka)
+        else:
+            sd = read_sd(indir+'/'+filename)
+            ka = read_ka(indir+'/'+filename_ka)
+    else:
+        sd = read_sd(filename)
+        ka = read_ka(filename_ka)
+
+    if start is None:
+        start = int(sd.time[0])
+    if end is None:
+        end = int(sd.time[-1])
+
+    fig = parse_fig(fig,10,4)
+    ax = parse_ax(ax)
+
+    p_start = np.where(sd.time == start)[0][0]
+    p_end = np.where(sd.time == end)[0][0]
+
+    t = sd.time[p_start:p_end].astype(int)
+    t_sec = np.arange(0,len(t))
+
+    sd_CDP = np.zeros((27,len(t)))
+    sd_2DS = np.zeros((30,len(t)))
+    sd_2DP = np.zeros((18,len(t)))
+
+    for i in range(len(t)):
+        sd_CDP[:,i], sd_2DS[:,i], sd_2DP[:,i], bins_CDP, bins_2DS, bins_2DP = sd_corr(sd, t[i], t[i], 1)
+
+    sd = np.append(sd_CDP, sd_2DS, axis=0)
+    sd = np.append(sd, sd_2DP, axis=0)
+
+    bin_min = np.append(bins_CDP[0], bins_2DS[0])
+    bin_min = np.append(bin_min, bins_2DP[0])
+
+    bin_mid = np.append(bins_CDP[1], bins_2DS[1])
+    bin_mid = np.append(bin_mid, bins_2DP[1])
+
+    bin_max = np.append(bins_CDP[2], bins_2DS[2])
+    bin_max = np.append(bin_max, bins_2DP[2])
+
+    if cmap is None:
+        cmap = plt.get_cmap('plasma')
+
+    if vmin is None:
+        vmin = 1E-10
+    if vmax is None:
+        vmax = 1E2
+
+    if x_axis is None or x_axis is 'seconds':
+        p = ax.pcolormesh(t_sec, bin_mid, sd, norm=colors.LogNorm(), cmap=cmap, vmin=vmin, vmax=vmax)
+        ax.set_xlabel('Seconds from start')   
+    elif x_axis is 'time':
+        x_fmt = DateFormatter(time_format)
+        p = ax.pcolormesh(t, bin_mid, sd, norm=colors.LogNorm(), cmap=cmap, vmin=vmin, vmax=vmax)
+        ax.set_xlabel('Time, UTC')
+    # elif x_axis is 'space':
+        # p = ax.pcolormesh(dist, bin_mid, sd, norm=colors.LogNorm(), cmap=cmap, vmin=vmin, vmax=vmax)
+        # ax.set_xlabel('Distance from Packer John')
+
+    cbar = plt.colorbar(p, cmap=cmap)
+    cbar.set_label(r'# $cm^{-3}\/\mu m^{-1}$')
+        
+    ax.set_yscale('log')
+    ax.set_ylim([1E0,1E4])
+    ax.tick_params(axis='both', which='both', direction='in', length=7)
+
+    ax.set_ylabel(r'Particle Diameter, $\mu m$')
+
+    if title is None and leg is not None:
+        ax.set_title('IOP '+str(iop)+' | Leg '+str(leg), fontdict=font)
+    elif title is None and leg is None:
+        ax.set_title('IOP '+str(iop)+' | '+str(start)+' - '+str(end), fontdict=font)
+    elif title is not None:
+        ax.set_title(title, fontdict=font)
+
+    return fig, ax
+
 
 def parse_fig(fig,x,y):
     """ Parse and return fig instance. """
@@ -231,4 +383,16 @@ def parse_ax(ax):
     if ax is None:
         ax = plt.gca()
     return ax
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -6,7 +6,10 @@ import numpy as np
 Adjust size distribution to set new bins
 '''
 
-def sd_corr(sd, start_time, end_time):
+def sd_corr(sd,
+    start_time,
+    end_time,
+    t_flag):
 
     # bins_2DP = np.arange(100,20300,200)
     # bins1 = np.arange(500,2100,200)
@@ -46,7 +49,15 @@ def sd_corr(sd, start_time, end_time):
     # ind_driz_re = np.where(np.logical_and(bin_min_2DS_re >= 95, bin_max_2DS_re <= 295))
     # ind_driz = np.where(np.logical_and(bin_mid_2DS >= 95, bin_mid_2DS <= 295))
 
-    ind = np.where(np.logical_and(sd.time >= start_time, sd.time < end_time))[0]
+    if t_flag == 0:
+        ind = np.where(np.logical_and(sd.time >= start_time, sd.time < end_time))[0]
+    if t_flag == 1:
+        ind = np.where(sd.time == start_time)[0]
+
+    sd.dist_CDP[ind,:][sd.dist_CDP[ind,:] == 0.] = np.nan
+    sd.dist_2DS[ind,:][sd.dist_2DS[ind,:] == 0.] = np.nan
+    sd.dist_2DP[ind,:][sd.dist_2DP[ind,:] == 0.] = np.nan
+
     sd_CDP = np.nanmean(sd.dist_CDP[ind,:], axis=0).data
     sd_2DS = np.nanmean(sd.dist_2DS[ind,:], axis=0).data
     sd_2DP = np.nanmean(sd.dist_2DP[ind,1:], axis=0).data
@@ -63,6 +74,10 @@ def sd_corr(sd, start_time, end_time):
     bins_CDP = np.array((bin_min_CDP, bin_mid_CDP, bin_max_CDP))
     bins_2DS = np.array((bin_min_2DS_new, bin_mid_2DS_new, bin_max_2DS_new))
     bins_2DP = np.array((sd.bin_min_2DP[1:], sd.bin_mid_2DP[1:], sd.bin_max_2DP[1:]))
+
+    sd_CDP[np.logical_or(np.isnan(sd_CDP), sd_CDP == 0.)] = -9999.
+    sd_2DS_new[np.logical_or(np.isnan(sd_2DS_new), sd_2DS_new == 0.)] = -9999.
+    sd_2DP_new[np.logical_or(np.isnan(sd_2DP_new), sd_2DP_new == 0.)] = -9999.
 
     return sd_CDP, sd_2DS_new, sd_2DP_new, bins_CDP, bins_2DS, bins_2DP
 

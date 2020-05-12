@@ -29,7 +29,7 @@ def get_label(var):
 	# if var is 'cdp_conc':
 	# 	label = 'CDP Total Concentraion, $cm^{-3}$'
 	if var is 'cdp_conc':
-		label = r'CDP Total Concentraion, $L^{-1}$'
+		label = r'CDP Total Concentraion, $cm^{-3}$'
 	if var is 'lwc_pvm':
 		label = r'PVM Liquid Water Content, $g\/m^{-3}$'
 

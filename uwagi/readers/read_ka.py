@@ -45,8 +45,7 @@ class _reader(object):
         self.nevtwc = nc.variables['nevtwc'][:]
         # self.neviwc = self.nevtwc[:] - self.nevlwc[:]
         self.cdplwc = nc.variables['cdplwc_NRB'][:]
-        #self.cdpconc = nc.variables['cdpconc_NRB'][:] # Rebinned total CDP conc (#/cm3)
-        self.cdpconc = nc.variables['C2DP0_IBL'][:] # CDP concentration (#/L)
+        self.cdpconc = nc.variables['cdpconc_NRB'][:] # CDP concentration (#/L)
         self.pvmlwc = nc.variables['pvmlwc'][:]
         self.temp = nc.variables['trf'][:]
         self.dwpt = nc.variables['tdp70'][:]
@@ -125,6 +124,8 @@ class _reader(object):
         start_time = datetime.datetime(year,month,day,hour,minute,tzinfo=datetime.timezone.utc).timestamp()
         time_sec = self.time[:] + start_time
         self.fields['time'] = time_sec.astype('datetime64[s]')
+
+        self.fields['HHMMSS'] = [datetime.datetime.fromtimestamp(t, tz=datetime.timezone.utc).strftime('%H%M%S') for t in time_sec]
 
 # def ncvar_to_dict(ncvar):
     

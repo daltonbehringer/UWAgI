@@ -8,7 +8,10 @@ from .readers.read_sizedist import read_sd
 from .readers.read_2DS import read_2DS
 from .readers.read_2DP import read_2DP
 from .utility.csv_out import sd_to_csv
+from .utility.csv_out import sd_time_csv
+from .utility.csv_out import ts_to_csv
 from .plot.plot import plot_sd
+from .plot.plot import plot_sd_hov
 from .plot.plot import plot_ts
 
 from .utility import data_corr

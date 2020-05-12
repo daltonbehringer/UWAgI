@@ -13,7 +13,7 @@ def get_times(
 	# IOP arg usage currently does not select file, only leg times)
 	
 	if iop is None:
-		raise ValueError('Plotting function requires IOP argument.')
+		raise ValueError('Function requires IOP argument.')
 	
 	elif iop is 1:
 		date = '2017-01-08 '
