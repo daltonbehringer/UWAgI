@@ -15,4 +15,5 @@ from .plot.plot import plot_sd_hov
 from .plot.plot import plot_ts
 
 from .utility import data_corr
+from .utility import distance
 from .plot import plot

@@ -11,6 +11,7 @@ from ..readers.read_ka import read_ka
 from ..readers.read_sizedist import read_sd
 from ..utility.data_corr import sd_corr
 from ..utility.var_labels import get_label
+from ..utility.distance import dist
 
 font = {'family': 'sans serif',
         'color':  'black',
@@ -349,9 +350,12 @@ def plot_sd_hov(
         x_fmt = DateFormatter(time_format)
         p = ax.pcolormesh(t, bin_mid, sd, norm=colors.LogNorm(), cmap=cmap, vmin=vmin, vmax=vmax)
         ax.set_xlabel('Time, UTC')
-    # elif x_axis is 'space':
-        # p = ax.pcolormesh(dist, bin_mid, sd, norm=colors.LogNorm(), cmap=cmap, vmin=vmin, vmax=vmax)
-        # ax.set_xlabel('Distance from Packer John')
+    elif x_axis is 'space':
+        lats = ka.fields['lat']
+        lons = ka.fields['lon']
+        dist = dist(lats, lons)
+        p = ax.pcolormesh(dist, bin_mid, sd, norm=colors.LogNorm(), cmap=cmap, vmin=vmin, vmax=vmax)
+        ax.set_xlabel('Distance from Packer John')
 
     cbar = plt.colorbar(p, cmap=cmap)
     cbar.set_label(r'# $cm^{-3}\/\mu m^{-1}$')
