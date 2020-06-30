@@ -5,6 +5,7 @@ from ..utility.data_corr import sd_corr
 from ..utility.iop import get_times
 from ..readers.read_ka import read_ka
 from ..readers.read_sizedist import read_sd
+from ..utility.distance import dist
 
 '''
 
@@ -102,7 +103,7 @@ def sd_time_csv(
     
     if start is None and end is None and leg is not None:
         print('Gathering data from entire leg '+str(leg)+' period.')
-        start_time, end_time = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
+        start, end = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
     
     # if start is not None and end is not None and leg is None:
     #     start_time, end_time = get_times(iop, start=start, end=end)[0], get_times(iop, start=start, end=end)[1
@@ -150,14 +151,20 @@ def sd_time_csv(
     bin_max = np.append(bins_CDP[2], bins_2DS[2])
     bin_max = np.append(bin_max, bins_2DP[2])
 
+    lats = ka.fields['lat'][p_start:p_end]
+    lons = ka.fields['lon'][p_start:p_end]
+    d = dist(lats, lons)
+
     df = pd.DataFrame(data = None, index = None, columns = None)
 
     df['Time (UTC)'] = t
     df['Seconds since start'] = np.arange(0,len(t))
-    df['Latitude'] = ka.fields['lat'][p_start:p_end]
-    df['Longitude'] = ka.fields['lon'][p_start:p_end]
+    df['Dist from PJ (km)'] = d
+    df['Latitude'] = lats
+    df['Longitude'] = lons
 
     for j in range(len(bin_mid)):
+        sd[j,:][np.isnan(sd[j,:])] = -9999.
         df[str(np.round(bin_mid[j], decimals=0))+' (um)'] = sd[j,:]
 
     if outdir is None:

@@ -9,8 +9,8 @@ def dist(lats, lons):
 	x_dist = (lons - rlon) * ref_dist
 	y_dist = (lats - rlat) * 111.321
 
-	dist = np.sqrt(x_dist**2 + y_dist**2)
-	ind = np.where(dist[lons < rlon])
-	dist[ind] = dist[ind] * -1
+	d = np.sqrt(x_dist**2 + y_dist**2)
+	ind = np.where(lons < rlon)
+	d[ind] = d[ind] * -1
 
-	return dist
+	return d

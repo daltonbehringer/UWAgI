@@ -19,19 +19,23 @@ def get_label(var):
 	if var is 'lwc100':
 		label = r'Liquid Water Content, $g\/m^{-3}$'
 	if var is 'nev_lwc':
-		label = r'Nevzorov Liquid Water Content, $g\/m^{-3}$'
+		label = r'Nevzorov LWC, $g\/m^{-3}$'
 	if var is 'nev_twc':
-		label = r'Nevzorov Total Water Content, $g\/m^{-3}$'
+		label = r'Nevzorov TWC, $g\/m^{-3}$'
 	if var is 'nev_iwc':
-		label = r'Nevzorov Ice Water Content, $g\/m^{-3}$'
+		label = r'Nevzorov IWC, $g\/m^{-3}$'
 	if var is 'cdp_lwc':
-		label = r'CDP Liquid Water Content, $g\/m^{-3}$'
+		label = r'CDP LWC, $g\/m^{-3}$'
 	# if var is 'cdp_conc':
 	# 	label = 'CDP Total Concentraion, $cm^{-3}$'
 	if var is 'cdp_conc':
 		label = r'CDP Total Concentraion, $cm^{-3}$'
 	if var is 'lwc_pvm':
 		label = r'PVM Liquid Water Content, $g\/m^{-3}$'
+	if var is 'mean_vol_diam':
+		label = r'Mean Volume Diameter, $\mu m$'
+	if var is 'water_content':
+		label = r'Water Content (g$\/$m$^{-3}$)'
 
 
 	return label

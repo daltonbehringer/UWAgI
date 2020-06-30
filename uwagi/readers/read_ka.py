@@ -45,7 +45,7 @@ class _reader(object):
         self.nevtwc = nc.variables['nevtwc'][:]
         # self.neviwc = self.nevtwc[:] - self.nevlwc[:]
         self.cdplwc = nc.variables['cdplwc_NRB'][:]
-        self.cdpconc = nc.variables['cdpconc_NRB'][:] # CDP concentration (#/L)
+        self.cdpconc = nc.variables['cdpconc_NRB'][:]
         self.pvmlwc = nc.variables['pvmlwc'][:]
         self.temp = nc.variables['trf'][:]
         self.dwpt = nc.variables['tdp70'][:]

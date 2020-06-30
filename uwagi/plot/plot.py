@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import matplotlib.colors as colors
 
+from matplotlib import rc
 from matplotlib.dates import DateFormatter
 from matplotlib.dates import SecondLocator, MinuteLocator, HourLocator, DayLocator
 import matplotlib.ticker as ticker
@@ -10,14 +11,20 @@ from ..utility.iop import get_times
 from ..readers.read_ka import read_ka
 from ..readers.read_sizedist import read_sd
 from ..utility.data_corr import sd_corr
+from ..utility.data_corr import nev_corr
 from ..utility.var_labels import get_label
 from ..utility.distance import dist
+
+import matplotlib
+matplotlib.rcParams['mathtext.fontset'] = 'dejavusans'
+matplotlib.rc('font', family='sans serif')
 
 font = {'family': 'sans serif',
         'color':  'black',
         'weight': 'normal',
-        'size': 12,
+        'size': 16,
         }
+labelsize = 16
 
 '''Lat/Lon for Packer John radar (SNOWIE 2017). Update as needed.'''
 # clat = 44.207692
@@ -123,7 +130,7 @@ def plot_ts(
 
     ax.grid(True)
     ax.tick_params(axis='both', which='major', direction='in', grid_linestyle='--', grid_alpha=0.5,
-        length=7, labelsize=12)
+        length=7, labelsize=labelsize)
     ax.tick_params(axis='both', which='minor', direction='in',length=4)
 
     ax.yaxis.set_minor_locator(ticker.AutoMinorLocator(4))
@@ -228,11 +235,11 @@ def plot_sd(
     ax.set_yscale('log')
     ax.set_ylim([1E-10, 1E2])
 
-    ax.tick_params(axis='both', which='both', direction='in', length = 7, grid_linestyle='--', grid_alpha=0.5)
+    ax.tick_params(axis='both', which='both', direction='in', length = 7, grid_linestyle='--', grid_alpha=0.5, labelsize=labelsize)
     ax.yaxis.set_major_locator(ticker.LogLocator(base=10, numticks=7))
     
-    ax.set_xlabel(r'Particle Diameter, $\mu m$')
-    ax.set_ylabel(r'# $cm^{-3}\/\mu m^{-1}$')
+    ax.set_xlabel(r'Particle Diameter, $\mu m$', fontdict=font)
+    ax.set_ylabel(r'# $cm^{-3}\/\mu m^{-1}$', fontdict=font)
 
     if title is None and leg is not None:
         ax.set_title('IOP '+str(iop)+' | Leg '+str(leg), fontdict=font)
@@ -253,6 +260,7 @@ def plot_sd_hov(
     indir = None,
     time_format = "%H%M%S",
     x_axis = None,
+    second_var = None,
     cmap = None,
     vmin = None,
     vmax = None,
@@ -283,7 +291,7 @@ def plot_sd_hov(
     
     if start is None and end is None and leg is not None:
         print('Gathering data from entire leg '+str(leg)+' period.')
-        start_time, end_time = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
+        start, end = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
     
     # if start is not None and end is not None and leg is None:
     #     start_time, end_time = get_times(iop, start=start, end=end)[0], get_times(iop, start=start, end=end)[1
@@ -313,7 +321,7 @@ def plot_sd_hov(
     p_start = np.where(sd.time == start)[0][0]
     p_end = np.where(sd.time == end)[0][0]
 
-    t = sd.time[p_start:p_end].astype(int)
+    t = sd.time[p_start:p_end]#.astype(int)
     t_sec = np.arange(0,len(t))
 
     sd_CDP = np.zeros((27,len(t)))
@@ -345,29 +353,60 @@ def plot_sd_hov(
 
     if x_axis is None or x_axis is 'seconds':
         p = ax.pcolormesh(t_sec, bin_mid, sd, norm=colors.LogNorm(), cmap=cmap, vmin=vmin, vmax=vmax)
-        ax.set_xlabel('Seconds from start')   
+        ax.set_xlabel('Seconds from start', fontdict=font)
+        ax.set_xlim([t_sec[0],t_sec[-1]])
     elif x_axis is 'time':
         x_fmt = DateFormatter(time_format)
         p = ax.pcolormesh(t, bin_mid, sd, norm=colors.LogNorm(), cmap=cmap, vmin=vmin, vmax=vmax)
-        ax.set_xlabel('Time, UTC')
+        ax.set_xlabel('Time, UTC', fontdict=font)
+        ax.set_xlim([t[0],t[-1]])
     elif x_axis is 'space':
         lats = ka.fields['lat']
         lons = ka.fields['lon']
-        dist = dist(lats, lons)
-        p = ax.pcolormesh(dist, bin_mid, sd, norm=colors.LogNorm(), cmap=cmap, vmin=vmin, vmax=vmax)
-        ax.set_xlabel('Distance from Packer John')
-
-    cbar = plt.colorbar(p, cmap=cmap)
-    cbar.set_label(r'# $cm^{-3}\/\mu m^{-1}$')
+        d = dist(lats, lons)[p_start:p_end]
+        p = ax.pcolormesh(d, bin_mid, sd, norm=colors.LogNorm(), cmap=cmap, vmin=vmin, vmax=vmax)
+        ax.set_xlabel('Distance from PJ (km)', fontdict=font)
+        ax.set_xlim([np.min(d),np.max(d)])
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(10))
+        ax.xaxis.set_minor_locator(ticker.MultipleLocator(2))
         
     ax.set_yscale('log')
-    ax.set_ylim([1E0,1E4])
-    ax.tick_params(axis='both', which='both', direction='in', length=7)
+    ax.set_ylim([2.5E0,1E4])
+    ax.grid(True)
+    ax.tick_params(axis='both', which='major', direction='in', length=7, grid_linestyle='--', grid_alpha=0.5, labelsize=labelsize)
+    ax.tick_params(axis='both', which='minor', direction='in', length=4)
 
-    ax.set_ylabel(r'Particle Diameter, $\mu m$')
+    ax.set_ylabel('Particle Diameter (\u03bcm)', fontdict=font)
+
+    if second_var is None:
+        cbar = plt.colorbar(p, cmap=cmap)
+        cbar.ax.tick_params(labelsize=12)
+        cbar.set_label('# cm$^{-3}\/$'+'\u03bc'+'m$^{-1}$', fontdict=font)
+    else:
+        cbar = plt.colorbar(p, cmap=cmap, pad=0.12)
+        cbar.ax.tick_params(labelsize=12)
+        cbar.set_label('# cm$^{-3}\/$'+'\u03bc'+'m$^{-1}$', fontdict=font)
+        ax2 = ax.twinx()
+        
+        # if second_var is 'nev_lwc':
+        #     y2 = nev_corr(ka, iop)[p_start:p_end]
+        # else:
+        #     y2 = ka.fields[second_var][p_start:p_end]
+        
+        y2 = nev_corr(ka, iop)[0][p_start:p_end]
+        y3 = nev_corr(ka, iop)[1][p_start:p_end]
+
+        ax2.plot(d, y2, ls='-', c='k', linewidth=0.6, label='Liquid', **kwargs)
+        ax2.plot(d, y3, ls='-', c='b', linewidth=0.6, label='Total', **kwargs)
+        ax2.set_ylim(ymin=0)
+        ax2.set_ylabel(get_label('water_content'), fontdict=font)
+        # ax2.legend(loc=2, fontsize=12)
+        ax2.yaxis.set_minor_locator(ticker.MultipleLocator(0.025))
+        ax2.tick_params(axis='y', which='major', direction='in', length=7, grid_linestyle='--', grid_alpha=0.5, labelsize=labelsize)
+        ax2.tick_params(axis='y', which='minor', direction='in', length=4)
 
     if title is None and leg is not None:
-        ax.set_title('IOP '+str(iop)+' | Leg '+str(leg), fontdict=font)
+        ax.set_title('IOP '+str(iop)+' | '+str(start)+' - '+str(end)+' (Leg '+str(leg)+')', fontdict=font)
     elif title is None and leg is None:
         ax.set_title('IOP '+str(iop)+' | '+str(start)+' - '+str(end), fontdict=font)
     elif title is not None:
