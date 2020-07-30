@@ -199,10 +199,10 @@ def plot_sd(
     else:
         sd = read_sd(filename)
 
-    if start is None:
-        start = int(sd.time[0])
-    if end is None:
-        end = int(sd.time[-1])
+    # if start is None:
+    #     start = int(sd.time[0])
+    # if end is None:
+    #     end = int(sd.time[-1])
 
     fig = parse_fig(fig,6,6)
     ax = parse_ax(ax)
@@ -216,6 +216,7 @@ def plot_sd(
     # end_time = 183702
 
     sd_CDP, sd_2DS, sd_2DP, bins_CDP, bins_2DS, bins_2DP = sd_corr(sd, start, end, 0)
+    print (start)
 
     bins = np.append(bins_CDP[1], bins_2DS[1])
     bins = np.append(bins, bins_2DP[1])
@@ -393,8 +394,8 @@ def plot_sd_hov(
         # else:
         #     y2 = ka.fields[second_var][p_start:p_end]
         
-        y2 = nev_corr(ka, iop)[0][p_start:p_end]
-        y3 = nev_corr(ka, iop)[1][p_start:p_end]
+        y2 = nev_corr(ka, iop, var='lwc')[p_start:p_end]
+        y3 = nev_corr(ka, iop, var='twc')[p_start:p_end]
 
         ax2.plot(d, y2, ls='-', c='k', linewidth=0.6, label='Liquid', **kwargs)
         ax2.plot(d, y3, ls='-', c='b', linewidth=0.6, label='Total', **kwargs)

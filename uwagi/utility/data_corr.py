@@ -56,7 +56,7 @@ def sd_corr(
         
         sd.dist_CDP[ind,:][sd.dist_CDP[ind,:] == 0.] = np.nan
         sd.dist_2DS[ind,:][sd.dist_2DS[ind,:] == 0.] = np.nan
-        sd.dist_2DP[ind,:][sd.dist_2DP[ind,1:] == 0.] = np.nan
+        sd.dist_2DP[ind,1:][sd.dist_2DP[ind,1:] == 0.] = np.nan
 
         sd_CDP = np.nanmean(sd.dist_CDP[ind,:], axis=0).data
         sd_2DS = np.nanmean(sd.dist_2DS[ind,:], axis=0).data
@@ -94,11 +94,9 @@ def sd_corr(
 
 
 def nev_corr(
-    # nev,
-    # t
-    # ):
     ka,
-    iop
+    iop,
+    var = None
     ):
 
     t = np.array(ka.fields['HHMMSS']).astype(int)
@@ -141,7 +139,7 @@ def nev_corr(
 
     if iop is 5:
         
-# LEG 1
+        # LEG 1
         ind0 = np.where(np.logical_and(t >= 154002, t < 154830))
         nev[ind0] = nev[ind0] - 0.0132
         ind1 = np.where(np.logical_and(t >= 154830, t < 155125))
@@ -187,15 +185,44 @@ def nev_corr(
         ind14 = np.where(np.logical_and(t >= 181300, t <= 182151))
         nev[ind14] = nev[ind14] - 0.008
 
+    if iop is 6:
+        
+        # LEG 1
+        ind0 = np.where(np.logical_and(t >= 224429, t < 224930))
+        nev[ind0] = nev[ind0] - 0.0137
+        ind1 = np.where(np.logical_and(t >= 224930, t <= 230505))
+        nev[ind1] = nev[ind1] - 0.0163
+
+        # LEG 6
+        ind6 = np.where(np.logical_and(t >= 2228, t <= 3908))
+        nev[ind6] = nev[ind6] + 0.0113
+
+        # LEG 9
+        ind13 = np.where(np.logical_and(t >= 12020, t < 13601))
+        nev[ind13] = nev[ind13] - 0.0127
+
+        # LEG 10
+        ind14 = np.where(np.logical_and(t >= 13830, t <= 15200))
+        nev[ind14] = nev[ind14] - 0.0108
+
+
 
     tot_ind = np.where(nev_tot_ > nev)
     nev[tot_ind] = nev[tot_ind] - (nev_tot_[tot_ind]-nev[tot_ind])*0.05
 
     nev_tot_[nev_tot_ < nev] = nev[nev_tot_ < nev]
 
+    nev_ice = nev_tot_ - nev
 
-    return nev, nev_tot_
-
+    if var is 'lwc':
+        print ('Liquid')
+        return nev
+    elif var is 'twc':
+        print ('Total')
+        return nev_tot_
+    elif var is 'iwc':
+        print ('IT\'S ICE!')
+        return nev_ice
 
 
 

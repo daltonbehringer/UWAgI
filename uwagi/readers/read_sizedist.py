@@ -95,6 +95,7 @@ class _reader(object):
             raise ValueError('!!!Both 2DS channels missing!!!')
 
         self.dist_2DS = (self.dist_2DS_H + self.dist_2DS_V) / channels
+        self.conc_2DS = (self.conc_2DS_H + self.conc_2DS_V) / channels
 
         self.fields["bin_min_2DS"] = self.bin_min_2DS
         self.fields["bin_max_2DS"] = self.bin_max_2DS
@@ -103,6 +104,7 @@ class _reader(object):
         self.fields["size_dist_2DS_H"] = self.dist_2DS_H
         self.fields["size_dist_2DS_V"] = self.dist_2DS_V
         self.fields["size_dist_2DS"] = self.dist_2DS
+        self.fields["conc_2DS"] = self.conc_2DS
 
         # 2DP
         self.fields["bin_min_2DP"] = self.bin_min_2DP
