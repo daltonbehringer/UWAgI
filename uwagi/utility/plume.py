@@ -74,11 +74,10 @@ def get_out_plume(
     # else:
     #     ka = read_ka(filename)
 
-    t = np.array(ka.fields['HHMMSS']).astype(int)
-
     p_start = np.where(np.array(ka.fields['HHMMSS']) == str(start))[0][0]
     p_end = np.where(np.array(ka.fields['HHMMSS']) == str(end))[0][0]
 
+    t = np.array(ka.fields['HHMMSS']).astype(int)[p_start:p_end]
     '''
     IOP 5
     '''
