@@ -78,6 +78,7 @@ def get_out_plume(
     p_end = np.where(np.array(ka.fields['HHMMSS']) == str(end))[0][0]
 
     t = np.array(ka.fields['HHMMSS']).astype(int)[p_start:p_end]
+    print (t)
     '''
     IOP 5
     '''
@@ -90,6 +91,7 @@ def get_out_plume(
 
         if leg is 4:
             end_plume_ind = np.where(t == 165053)[0][0]
+            print (end_plume_ind)
             end_plume_d = dist(lats, lons)[end_plume_ind]
             d_ = d - end_plume_d
             out_plume = np.where(np.logical_and(d_ > 0, d_ <= dist_out))
