@@ -59,7 +59,7 @@ def get_out_plume(
 
     ):
 
-    # start, end = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
+    start, end = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
 
     # filename = get_times(iop)+'.c1.nc'
 
