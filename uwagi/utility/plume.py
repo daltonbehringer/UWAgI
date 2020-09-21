@@ -52,24 +52,24 @@ def get_plume(
 
 
 def get_out_plume(
-    indir,
+    ka,
     iop,
     leg,
     dist_out
 
     ):
 
-    start, end = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
+    # start, end = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
 
-    filename = get_times(iop)+'.c1.nc'
+    # filename = get_times(iop)+'.c1.nc'
 
-    if indir is not None:
-        if indir[-1] is '/':
-            ka = read_ka(indir+filename_ka)
-        else:
-            ka = read_ka(indir+'/'+filename_ka)
-    else:
-        ka = read_ka(filename_ka)
+    # if indir is not None:
+    #     if indir[-1] is '/':
+    #         ka = read_ka(indir+filename_ka)
+    #     else:
+    #         ka = read_ka(indir+'/'+filename_ka)
+    # else:
+    #     ka = read_ka(filename)
 
     t = np.array(ka.fields['HHMMSS']).astype(int)
 
