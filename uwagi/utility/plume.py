@@ -4,7 +4,7 @@ def get_plume(
     ka,
     iop,
     leg
-    
+
     ):
 
     t = np.array(ka.fields['HHMMSS']).astype(int)
@@ -48,6 +48,85 @@ def get_plume(
         else:
             print ('**NO SEEDING PLUME**')
 
-
     return p_ind
+
+
+def get_out_plume(
+    indir,
+    iop,
+    leg,
+    dist_out
+
+    ):
+
+    start, end = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
+
+    filename = get_times(iop)+'.c1.nc'
+
+    if indir is not None:
+        if indir[-1] is '/':
+            ka = read_ka(indir+filename_ka)
+        else:
+            ka = read_ka(indir+'/'+filename_ka)
+    else:
+        ka = read_ka(filename_ka)
+
+    t = np.array(ka.fields['HHMMSS']).astype(int)
+
+    p_start = np.where(np.array(ka.fields['HHMMSS']) == str(start))[0][0]
+    p_end = np.where(np.array(ka.fields['HHMMSS']) == str(end))[0][0]
+
+    '''
+    IOP 5
+    '''
+
+    if iop is 5:
+
+        lats = ka.fields['lat']
+        lons = ka.fields['lon']
+        d = dist(lats, lons)[p_start:p_end]
+
+        if leg is 4:
+            end_plume_ind = np.where(t == 165053)
+            end_plume_d = dist(lats, lons)[end_plume_ind]
+            d_ = d - end_plume_d
+            out_plume = np.where(np.logical_and(d_ > 0, d <= dist_out))
+
+        if leg is 5:
+            end_plume_ind = np.where(t == 165803)
+            end_plume_d = dist(lats, lons)[end_plume_ind]
+            d_ = d - end_plume_d
+            out_plume = np.where(np.logical_and(d_ > 0, d <= dist_out))
+
+        if leg is 6:
+            end_plume_ind = np.where(t == 171728)
+            end_plume_d = dist(lats, lons)[end_plume_ind]
+            d_ = d - end_plume_d
+            out_plume = np.where(np.logical_and(d_ > 0, d <= dist_out))
+        
+        if leg is 7:
+            end_plume_ind = np.where(t == 173015)
+            end_plume_d = dist(lats, lons)[end_plume_ind]
+            d_ = d - end_plume_d
+            out_plume = np.where(np.logical_and(d_ > 0, d <= dist_out))
+        
+        if leg is 8:
+            end_plume_ind = np.where(t == 174050)
+            end_plume_d = dist(lats, lons)[end_plume_ind]
+            d_ = d - end_plume_d
+            out_plume = np.where(np.logical_and(d_ > 0, d <= dist_out))
+
+        if leg is 9:
+            end_plume_ind = np.where(t == 180029)
+            end_plume_d = dist(lats, lons)[end_plume_ind]
+            d_ = d - end_plume_d
+            out_plume = np.where(np.logical_and(d_ > 0, d <= dist_out))
+
+        if leg is 10:
+            end_plume_ind = np.where(t == 180438)
+            end_plume_d = dist(lats, lons)[end_plume_ind]
+            d_ = d - end_plume_d
+            out_plume = np.where(np.logical_and(d_ > 0, d <= dist_out))
+
+    return out_plume
 
