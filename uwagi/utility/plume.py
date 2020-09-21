@@ -90,46 +90,46 @@ def get_out_plume(
         d = dist(lats, lons)[p_start:p_end]
 
         if leg is 4:
-            end_plume_ind = np.where(t == 165053)
+            end_plume_ind = np.where(t == 165053)[0][0]
             end_plume_d = dist(lats, lons)[end_plume_ind]
             d_ = d - end_plume_d
-            out_plume = np.where(np.logical_and(d_ > 0, d <= dist_out))
+            out_plume = np.where(np.logical_and(d_ > 0, d_ <= dist_out))
 
         if leg is 5:
-            end_plume_ind = np.where(t == 165803)
+            end_plume_ind = np.where(t == 165803)[0][0]
             end_plume_d = dist(lats, lons)[end_plume_ind]
             d_ = d - end_plume_d
-            out_plume = np.where(np.logical_and(d_ > 0, d <= dist_out))
+            out_plume = np.where(np.logical_and(d_ > 0, d_ <= dist_out))
 
         if leg is 6:
-            end_plume_ind = np.where(t == 171728)
+            end_plume_ind = np.where(t == 171728)[0][0]
             end_plume_d = dist(lats, lons)[end_plume_ind]
             d_ = d - end_plume_d
-            out_plume = np.where(np.logical_and(d_ > 0, d <= dist_out))
+            out_plume = np.where(np.logical_and(d_ > 0, d_ <= dist_out))
         
         if leg is 7:
-            end_plume_ind = np.where(t == 173015)
+            end_plume_ind = np.where(t == 173015)[0][0]
             end_plume_d = dist(lats, lons)[end_plume_ind]
             d_ = d - end_plume_d
-            out_plume = np.where(np.logical_and(d_ > 0, d <= dist_out))
+            out_plume = np.where(np.logical_and(d_ > 0, d_ <= dist_out))
         
         if leg is 8:
-            end_plume_ind = np.where(t == 174050)
+            end_plume_ind = np.where(t == 174050)[0][0]
             end_plume_d = dist(lats, lons)[end_plume_ind]
             d_ = d - end_plume_d
-            out_plume = np.where(np.logical_and(d_ > 0, d <= dist_out))
+            out_plume = np.where(np.logical_and(d_ > 0, d_ <= dist_out))
 
         if leg is 9:
-            end_plume_ind = np.where(t == 180029)
+            end_plume_ind = np.where(t == 180029)[0][0]
             end_plume_d = dist(lats, lons)[end_plume_ind]
             d_ = d - end_plume_d
-            out_plume = np.where(np.logical_and(d_ > 0, d <= dist_out))
+            out_plume = np.where(np.logical_and(d_ > 0, d_ <= dist_out))
 
         if leg is 10:
-            end_plume_ind = np.where(t == 180438)
+            end_plume_ind = np.where(t == 180438)[0][0]
             end_plume_d = dist(lats, lons)[end_plume_ind]
             d_ = d - end_plume_d
-            out_plume = np.where(np.logical_and(d_ > 0, d <= dist_out))
+            out_plume = np.where(np.logical_and(d_ > 0, d_ <= dist_out))
 
     return out_plume
 
