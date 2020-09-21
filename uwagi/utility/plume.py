@@ -1,4 +1,5 @@
 import numpy as np
+from ..utility.iop import get_times
 
 def get_plume(
     ka,
