@@ -13,6 +13,7 @@ from .utility.csv_out import ts_to_csv
 from .utility.iop import get_times
 from .utility.plume import get_plume
 from .utility.plume import get_out_plume
+from .utility.data_corr import nev_corr
 from .plot.plot import plot_sd
 from .plot.plot import plot_sd_hov
 from .plot.plot import plot_ts
