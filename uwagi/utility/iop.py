@@ -300,56 +300,56 @@ def get_times(
 	# 		end_time = 1:28:50
 
 
-	# elif iop is 8:
-	# 	date1 = '2017-01-22 '
-	# 	date2 = '2017-01-23 '
-	# 	file = '20170122'
-	# 	if leg is None and start is not None:
-	# 		if int(start[0:2]) > 20 and int(end[0:2]) > 20:
-	# 			start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
-	# 			end_time = date1 + end[0:2]+':'+end[2:4]+':'+end[4:6]
-	# 		elif int(start[0:2]) > 20 and int(end[0:2]) < 10:
-	# 			start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
-	# 			end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
-	# 		elif int(start[0:2]) <10 and int(end[0:2]) < 10:
-	# 			start_time = date2 + start[0:2]+':'+start[2:4]+':'+start[4:6]
-	# 			end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
-	# 	elif leg is 1:
-	# 		start_time = 21:11:00
-	# 		end_time = 21:23:05
-	# 	elif leg is 2:
-	# 		start_time = 21:25:45
-	# 		end_time = 21:41:00
-	# 	elif leg is 3:
-	# 		start_time = 21:43:35
-	# 		end_time = 21:50:45
-	# 	elif leg is 4:
-	# 		start_time = 21:53:20
-	# 		end_time = 22:05:35
-	# 	elif leg is 5:
-	# 		start_time = 22:07:55
-	# 		end_time = 22:18:10
-	# 	elif leg is 6:
-	# 		start_time = 22:20:45
-	# 		end_time = 22:38:20
-	# 	elif leg is 7:
-	# 		start_time = 22:40:30
-	# 		end_time = 22:52:20
-	# 	elif leg is 8:
-	# 		start_time = 22:54:45
-	# 		end_time = 23:12:38
-	# 	elif leg is 9:
-	# 		start_time = 23:15:30
-	# 		end_time = 23:26:30
-	# 	elif leg is 10:
-	# 		start_time = 23:29:05
-	# 		end_time = 23:46:15
-	# 	elif leg is 11:
-	# 		start_time = 23:49:30
-	# 		end_time = 00:30
-	# 	elif leg is 12:
-	# 		start_time = 03:00
-	# 		end_time = 20:20
+	elif iop is 8:
+		date1 = '2017-01-22 '
+		date2 = '2017-01-23 '
+		file = '20170122'
+		if leg is None and start is not None:
+			if int(start[0:2]) > 20 and int(end[0:2]) > 20:
+				start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date1 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+			elif int(start[0:2]) > 20 and int(end[0:2]) < 10:
+				start_time = date1 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+			elif int(start[0:2]) <10 and int(end[0:2]) < 10:
+				start_time = date2 + start[0:2]+':'+start[2:4]+':'+start[4:6]
+				end_time = date2 + end[0:2]+':'+end[2:4]+':'+end[4:6]
+		elif leg is 1:
+			start_time = '211100'
+			end_time = '212305'
+		elif leg is 2:
+			start_time = '212545'
+			end_time = '214100'
+		elif leg is 3:
+			start_time = '214335'
+			end_time = '215045'
+		elif leg is 4:
+			start_time = '215320'
+			end_time = '220535'
+		elif leg is 5:
+			start_time = '220755'
+			end_time = '221810'
+		elif leg is 6:
+			start_time = '222045'
+			end_time = '223820'
+		elif leg is 7:
+			start_time = '224030'
+			end_time = '225220'
+		elif leg is 8:
+			start_time = '225445'
+			end_time = '231238'
+		elif leg is 9:
+			start_time = '231530'
+			end_time = '232630'
+		elif leg is 10:
+			start_time = '232905'
+			end_time = '234615'
+		elif leg is 11:
+			start_time = '234930'
+			end_time = '000030'
+		elif leg is 12:
+			start_time = '000300'
+			end_time = '002020'
 
 	# elif iop is 9:
 	# 	date = '2017-01-31 '
