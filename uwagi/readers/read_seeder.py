@@ -26,6 +26,8 @@ class _reader(object):
         data = pd.read_csv(filename)
         
         self.time = pd.Series([val.time() for val in pd.to_datetime(data.Time)])
+        self.time = self.Time.str.replace(':', '').astype(int)
+
         self.date = pd.to_datetime(data.Date)
         self.lat = data.Latitude
         self.lon = data.Longitude
@@ -36,7 +38,7 @@ class _reader(object):
         self._prep_data()
 
     def _prep_data(self):
-        
+    
         self.fields = {}
 
         self.fields["time"] = var_to_dict(
