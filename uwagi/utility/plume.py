@@ -146,5 +146,5 @@ def get_out_plume(
             d_ = d - end_plume_d
             out_plume = np.where(np.logical_and(d_ > 0, d_ <= dist_out))
 
-    return out_plume[0]
+    return out_plume[0]   
 
