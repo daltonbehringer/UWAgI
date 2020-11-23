@@ -292,7 +292,7 @@ def plot_sd_hov(
     
     if start is None and end is None and leg is not None:
         print('Gathering data from entire leg '+str(leg)+' period.')
-        start, end = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
+        start, end = int(get_times(iop, leg=leg)[0]), int(get_times(iop, leg=leg)[1])
     
     # if start is not None and end is not None and leg is None:
     #     start_time, end_time = get_times(iop, start=start, end=end)[0], get_times(iop, start=start, end=end)[1
@@ -311,10 +311,10 @@ def plot_sd_hov(
         sd = read_sd(filename)
         ka = read_ka(filename_ka)
 
-    if start is None:
-        start = int(sd.time[0])
-    if end is None:
-        end = int(sd.time[-1])
+    # if start is None:
+    #     start = int(sd.time[0])
+    # if end is None:
+    #     end = int(sd.time[-1])
 
     fig = parse_fig(fig,10,4)
     ax = parse_ax(ax)
@@ -401,7 +401,7 @@ def plot_sd_hov(
         ax2.plot(d, y3, ls='-', c='b', linewidth=0.6, label='Total', **kwargs)
         ax2.set_ylim(ymin=0)
         ax2.set_ylabel(get_label('water_content'), fontdict=font)
-        # ax2.legend(loc=2, fontsize=12)
+        ax2.legend(loc=2, fontsize=12)
         ax2.yaxis.set_minor_locator(ticker.MultipleLocator(0.025))
         ax2.tick_params(axis='y', which='major', direction='in', length=7, grid_linestyle='--', grid_alpha=0.5, labelsize=labelsize)
         ax2.tick_params(axis='y', which='minor', direction='in', length=4)

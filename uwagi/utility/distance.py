@@ -14,3 +14,14 @@ def dist(lats, lons):
 	d[ind] = d[ind] * -1
 
 	return d
+
+def ac_dist(seedlats, seedlons, kalats, kalons):
+
+	ref_dist = 111.321 * np.cos(np.radians(kalats))
+
+	x_dist = (seedlons - kalons) * ref_dist
+	y_dist = (seedlats - kalats) * 111.321
+
+	d = np.sqrt(x_dist**2 + y_dist**2)
+
+	return d

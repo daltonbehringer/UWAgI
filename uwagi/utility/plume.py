@@ -66,6 +66,46 @@ def get_plume(
         else:
             print ('**NO SEEDING PLUME**')
 
+    '''
+    IOP 8
+    '''
+
+    # if iop is 8:
+
+    #     if leg is 4:
+
+
+    #     elif leg is 5:
+    #         p_ind = np.where(np.logical_and(t >= 231318, t <= 221330))
+    #         p_ind = np.append(p_ind, np.where(np.logical_and(t >= 221159, t <= 221208)))
+
+    #     elif leg is 6:
+    #         p_ind = np.where(np.logical_and(t >= 222512, t <= 222535))
+
+    #     elif leg is 7:
+    #         p_ind = np.where(np.logical_and(t >= 224400, t <= 224410))
+
+    #     elif leg is 8:
+    #         p_ind = np.where(np.logical_and(t >= 230134, t <= 230144))
+    #         p_ind = np.append(p_ind, np.where(np.logical_and(t >= 230415, t <= 230417)))
+    #         p_ind = np.append(p_ind, np.where(np.logical_and(t >= 230618, t <= 230625)))
+        
+    #     elif leg is 9:
+    #         p_ind = np.where(np.logical_and(t >= 232005, t <= 232015))
+
+    #     elif leg is 10:
+    #         p_ind = np.where(np.logical_and(t >= 232936, t <= 232957))
+    #         p_ind = np.append(p_ind, np.where(np.logical_and(t >= 233427, t <= 233452)))
+
+    #     elif leg is 11:
+    
+        
+    #     elif leg is 12:
+
+
+    #     else:
+    #         print ('**NO SEEDING PLUME**')
+
     return p_ind
 
 
