@@ -3,7 +3,7 @@ Function to define start/end time to flight legs
 '''
 
 def get_times(
-	iop,
+	iop = None,
 	leg = None,
 	start = None,
 	end = None
