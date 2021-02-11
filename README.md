@@ -26,5 +26,8 @@ This package provides tools to read and plot data from the University of Wyoming
       - `dist` -> calculates and returns distance from the Packer John DOW
       - `ac_dist` -> calculates and returns distance between seeder AC and UWKA
    - `iop.py`
-      - `get_times` -> 
+      - `get_times` -> returns file names and IOP/leg dates and times for functions that plot or gather data based on IOP and leg number
+   - `plume.py`
+      - `get_plume` -> returns index of points within seeded plume
+      - `get_out_plume` -> returns index of points within user-defined distance downwind of downwind-most seeded plume
  
