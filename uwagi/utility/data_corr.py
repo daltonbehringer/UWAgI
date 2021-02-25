@@ -1,10 +1,7 @@
 '''Includes data corrections and for data from SNOWIE 2017'''
 
 import numpy as np
-
-'''
-Adjust size distribution to set new bins
-'''
+import pandas as pd
 
 def sd_corr(
     sd,
@@ -12,6 +9,13 @@ def sd_corr(
     end_time,
     t_flag
     ):
+
+'''
+Adjust size distribution to set new bins
+sd = sd object (output from read_sd)
+t_flag: 0 = time-averaged single size dist, 1 = time-series size dist
+'''
+
 
     # bins_2DP = np.arange(100,20300,200)
     # bins1 = np.arange(500,2100,200)
@@ -107,108 +111,48 @@ def nev_corr(
     nev_tot = nev_tot_ + 0.
 # plt.plot(nev,nev_i)
 
-    if iop is 4:
-
-# LEG 1
-        ind0 = np.where(np.logical_and(t >= 201540, t < 202845))
-        nev[ind0] = 0.
-        nev_tot[ind0] = 0.
+    def _get_sheet(iop):
+        if iop is 4:
+            link = 'https://docs.google.com/spreadsheets/d/1QFxzhyLfFp0qMalODrILlS-EtIll6B3yuBSFMKHx6XM/export?gid=0&format=csv'
+        if iop is 5:
+            link = 'https://docs.google.com/spreadsheets/d/1V2CnGCfI-kMe5_nVQzW5Oo2pP9j1NW1mRMft97OvwSo/export?gid=0&format=csv'
+        if iop is 6:
+            link = 'https://docs.google.com/spreadsheets/d/1jBMiAZXulBUw7-YR_RQ_b7NpcPJgRbNk7_W_HkMU0Ow/export?gid=0&format=csv'
         
-        ind1 = np.where(np.logical_and(t >= 202845, t <= 203118))
-        nev[ind1] = nev[ind1] - 0.02
-        nev_tot[ind1] = nev_tot[ind1] - 0.02
+        df = pd.read_csv(link)
 
-# LEG 2
-        ind0 = np.where(np.logical_and(t >= 203342, t <= 205020))
-        nev[ind0] = nev[ind0] - 0.0183
-        nev_tot[ind0] = nev_tot[ind0] - 0.0183
+        return df
 
-# LEG 4
-        ind0 = np.where(np.logical_and(t >= 210728, t < 211830))
-        nev[ind0] = nev[ind0] + 0.09
-        nev_tot[ind0] = nev_tot[ind0] + 0.09
+    df = _get_sheet(iop)
 
-        ind1 = np.where(np.logical_and(t >= 211830, t <= 212432))
-        nev[ind1] = nev[ind1] + 0.0094
-        nev_tot[ind1] = nev_tot[ind1] + 0.0094
+    num_corrections = int((len(df.columns) - 2) / 3)
 
-# LEG 5
-        ind0 = np.where(np.logical_and(t >= 212710, t <= 213817))
-        nev[ind0] = nev[ind0] - 0.0132
-        nev_tot[ind0] = nev_tot[ind0] - 0.0132
+    for i in range(len(df.leg)):
+        for j in range(num_corrections):
+            s = 'start_time' + str(j+1)
+            e = 'end_time' + str(j+1)
+            c = 'correction' + str(j+1)
+            
+            if df.var_flag[i] == 'lwc':
+                ind_liq = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
+            
+                if df[c][i] is 0.:
+                    nev[ind_liq] = 0.
+                else:
+                    nev[ind_liq] = nev[ind_liq] + df[c][i]
 
-    if iop is 5:
-        
-        # LEG 1
-        ind0 = np.where(np.logical_and(t >= 154002, t < 154830))
-        nev[ind0] = nev[ind0] - 0.0132
-        ind1 = np.where(np.logical_and(t >= 154830, t < 155125))
-        nev[ind1] = nev[ind1] - 0.0092
-        ind2 = np.where(np.logical_and(t >= 155125, t <= 155917))
-        nev[ind2] = nev[ind2] - 0.0132
-
-        # LEG 2
-        ind3 = np.where(np.logical_and(t >= 160213, t < 161100))
-        nev[ind3] = nev[ind3] - 0.016
-
-        # LEG 4
-        ind4 = np.where(np.logical_and(t >= 164550, t < 164830))
-        nev[ind4] = nev[ind4] + 0.0106
-        ind5 = np.where(np.logical_and(t >= 164830, t <= 165337))
-        nev[ind5] = nev[ind5] + 0.0047
-
-        # LEG 6
-        ind6 = np.where(np.logical_and(t >= 171013, t <= 172303))
-        nev[ind6] = nev[ind6] + 0.0133
-
-        # LEG 7
-        ind7 = np.where(np.logical_and(t >= 173300, t <= 173444))
-        nev[ind7] = nev[ind7] + 0.056
-
-        # LEG 8
-        ind8 = np.where(np.logical_and(t >= 173758, t < 174000))
-        nev[ind8] = nev[ind8] + 0.12
-        ind9 = np.where(np.logical_and(t >= 174000, t < 174130))
-        nev[ind9] = nev[ind9] + 0.14
-        ind10 = np.where(np.logical_and(t >= 174130, t < 174200))
-        nev[ind10] = nev[ind10] + 0.15
-        ind11 = np.where(np.logical_and(t >= 174200, t < 174417))
-        nev[ind11] = nev[ind11] + 0.18
-        ind12 = np.where(np.logical_and(t >= 174417, t <= 174935))
-        nev[ind12] = nev[ind12] + 0.08
-
-        # LEG 9
-        ind13 = np.where(np.logical_and(t >= 175157, t < 175348))
-        nev[ind13] = nev[ind13] + 0.06
-
-        # LEG 10
-        ind14 = np.where(np.logical_and(t >= 181300, t <= 182151))
-        nev[ind14] = nev[ind14] - 0.008
-
-    if iop is 6:
-        
-        # LEG 1
-        ind0 = np.where(np.logical_and(t >= 224429, t < 224930))
-        nev[ind0] = nev[ind0] - 0.0137
-        ind1 = np.where(np.logical_and(t >= 224930, t <= 230505))
-        nev[ind1] = nev[ind1] - 0.0163
-
-        # LEG 6
-        ind6 = np.where(np.logical_and(t >= 2228, t <= 3908))
-        nev[ind6] = nev[ind6] + 0.0113
-
-        # LEG 9
-        ind13 = np.where(np.logical_and(t >= 12020, t < 13601))
-        nev[ind13] = nev[ind13] - 0.0127
-
-        # LEG 10
-        ind14 = np.where(np.logical_and(t >= 13830, t <= 15200))
-        nev[ind14] = nev[ind14] - 0.0108
+            if df.var_flag[i] == 'twc':
+                ind_tot = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
+                
+                if df[c][i] is 0.:
+                    nev_tot[ind_tot] = 0.
+                else:
+                    nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
 
 
-
-    tot_ind = np.where(nev_tot_ > nev)
-    nev[tot_ind] = nev[tot_ind] - (nev_tot_[tot_ind]-nev[tot_ind])*0.05
+### NEED FIX TOT_GT FUNC TO TAKE CARE OF DISCREPANCIES BEFORE CORR LOOP
+    tot_gt = np.where(nev_tot_ > nev)
+    nev[tot_gt] = nev[tot_gt] - (nev_tot_[tot_gt]-nev[tot_gt])*0.05
 
     nev_tot_[nev_tot_ < nev] = nev[nev_tot_ < nev]
 
@@ -223,14 +167,5 @@ def nev_corr(
     elif var is 'iwc':
         print ('IT\'S ICE!')
         return nev_ice
-
-
-
-
-
-
-
-
-
 
 
