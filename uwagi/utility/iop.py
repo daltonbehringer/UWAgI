@@ -1,5 +1,8 @@
 '''
-Function to define start/end time to flight legs
+Function to define start/end time to flight legs and get proper file date/time
+
+Returns: -file name if leg and start are 'None'
+		 -[[start_time][end_time][file]] if leg or start/end included
 '''
 
 def get_times(
