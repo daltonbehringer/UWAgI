@@ -119,7 +119,7 @@ def get_plume(
     if iop is 8:
 
         if leg is 4:
-            #NO PLUMES IDENTIFIED
+            print ('NO PLUMES IDENTIFIED')
 
         elif leg is 5:
             if plume is 'A':
@@ -168,10 +168,10 @@ def get_plume(
                 p_ind = np.append(p_ind, np.where(np.logical_and(t >= 233427, t <= 233452)))
 
         elif leg is 11:
-            #NO PLUMES IDENTIFIED
+            print ('NO PLUMES IDENTIFIED')
         
         elif leg is 12:
-            #NO PLUMES IDENTIFIED
+            print ('NO PLUMES IDENTIFIED')
 
         else:
             print ('**NO SEEDING PLUME**')
