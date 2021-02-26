@@ -10,11 +10,11 @@ def sd_corr(
     t_flag
     ):
 
-'''
-Adjust size distribution to set new bins
-sd = sd object (output from read_sd)
-t_flag: 0 = time-averaged single size dist, 1 = time-series size dist
-'''
+    '''
+    Adjust size distribution to set new bins
+    sd = sd object (output from read_sd)
+    t_flag: 0 = time-averaged single size dist, 1 = time-series size dist
+    '''
 
 
     # bins_2DP = np.arange(100,20300,200)
@@ -109,7 +109,6 @@ def nev_corr(
     nev_tot_ = ka.fields['nev_twc']
     nev = nev_ + 0.
     nev_tot = nev_tot_ + 0.
-# plt.plot(nev,nev_i)
 
     def _get_sheet(iop):
         if iop is 4:
