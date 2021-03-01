@@ -135,7 +135,6 @@ def nev_corr(
             if df.var_flag[i] == 'lwc':
                 if np.isnan(df[s][i]):
                     continue
-
                 ind_liq = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
             
                 if df[c][i] is 0.:
@@ -144,6 +143,8 @@ def nev_corr(
                     nev[ind_liq] = nev[ind_liq] + df[c][i]
 
             if df.var_flag[i] == 'twc':
+                if np.isnan(df[s][i]):
+                    continue
                 ind_tot = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
                 
                 if df[c][i] is 0.:
