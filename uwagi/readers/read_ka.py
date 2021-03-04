@@ -14,6 +14,31 @@ Object containing King Air Data
 '''
 
 def read_ka(filename):
+    # indir = None,
+    # iop = None,
+    # file = None
+    # ):
+    
+    # if file is not None and iop is None:
+    #     if indir is not None:
+    #         if indir[-1] is '/':
+    #             filename = indir+file
+    #         else:
+    #             filename = indir+'/'+file
+    #     else:
+    #         filename = file
+    # elif file is None and iop is not None:   
+    #     name = get_times(iop)+'.c1.nc'
+
+    #     if indir is not None:
+    #         if indir[-1] is '/':
+    #             filename = indir+name
+    #         else:
+    #             filename = indir+'/'+name
+    #     else:
+    #         filename = name
+    # else:
+    #     raise ValueError('PLEASE ENTER IOP OR FILE ')
 
     ka = _reader(filename)
     return ka
