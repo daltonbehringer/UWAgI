@@ -141,9 +141,9 @@ def nev_corr(
                     continue
                 ind_liq = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
             
-                if df[c][i] is 0.:
+                if df[c][i] == 0:
                     print ('ZERO')
-                    nev[ind_liq] = 0.
+                    nev[ind_liq] = 0
                 else:
                     nev[ind_liq] = nev[ind_liq] + df[c][i]
 
@@ -152,8 +152,8 @@ def nev_corr(
                     continue
                 ind_tot = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
                 
-                if df[c][i] is 0.:
-                    nev_tot[ind_tot] = 0.
+                if df[c][i] == 0:
+                    nev_tot[ind_tot] = 0
                 else:
                     nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
 
