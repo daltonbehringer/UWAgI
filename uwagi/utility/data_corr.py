@@ -100,7 +100,8 @@ def sd_corr(
 def nev_corr(
     ka,
     iop,
-    var = None
+    var = None,
+    file = None
     ):
 
     t = np.array(ka.fields['HHMMSS']).astype(int)
@@ -122,7 +123,10 @@ def nev_corr(
 
         return df
 
-    df = _get_sheet(iop)
+    if file is not None:
+        df = pd.read_csv(file) 
+    else:  
+        df = _get_sheet(iop)
 
     num_corrections = int((len(df.columns) - 2) / 3)
 
@@ -138,6 +142,7 @@ def nev_corr(
                 ind_liq = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
             
                 if df[c][i] is 0.:
+                    print ('ZERO')
                     nev[ind_liq] = 0.
                 else:
                     nev[ind_liq] = nev[ind_liq] + df[c][i]
