@@ -128,7 +128,7 @@ def nev_corr(
     else:  
         df = _get_sheet(iop)
 
-    df_ = df[df.var_flag == var]
+    df_ = df[df.var_flag == var].reset_index()
 
     num_corrections = int((len(df_.columns) - 2) / 3)
 
