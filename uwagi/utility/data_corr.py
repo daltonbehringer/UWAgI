@@ -142,7 +142,6 @@ def nev_corr(
                 ind_liq = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
             
                 if df[c][i] == 0:
-                    print ('ZERO')
                     nev[ind_liq] = 0
                 else:
                     nev[ind_liq] = nev[ind_liq] + df[c][i]
@@ -158,20 +157,19 @@ def nev_corr(
                     nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
 
 
-### NEED FIX TOT_GT FUNC TO TAKE CARE OF DISCREPANCIES BEFORE CORR LOOP
-    tot_gt = np.where(nev_tot_ > nev)
-    nev[tot_gt] = nev[tot_gt] - (nev_tot_[tot_gt]-nev[tot_gt])*0.05
+    tot_gt = np.where(nev_tot > nev)
+    nev[tot_gt] = nev[tot_gt] - (nev_tot[tot_gt]-nev[tot_gt])*0.05
 
-    nev_tot_[nev_tot_ < nev] = nev[nev_tot_ < nev]
+    nev_tot[nev_tot < nev] = nev[nev_tot < nev]
 
-    nev_ice = nev_tot_ - nev
+    nev_ice = nev_tot - nev
 
     if var is 'lwc':
         print ('Liquid')
         return nev
     elif var is 'twc':
         print ('Total')
-        return nev_tot_
+        return nev_tot
     elif var is 'iwc':
         print ('IT\'S ICE!')
         return nev_ice
