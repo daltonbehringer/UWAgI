@@ -128,9 +128,11 @@ def nev_corr(
     else:  
         df = _get_sheet(iop)
 
-    num_corrections = int((len(df.columns) - 2) / 3)
+    df_ = df[df.var_flag == var]
 
-    for i in range(len(df.leg)):
+    num_corrections = int((len(df_.columns) - 2) / 3)
+
+    for i in range(len(df_.leg)):
         for j in range(num_corrections):
             s = 'start_time' + str(j+1)
             e = 'end_time' + str(j+1)
