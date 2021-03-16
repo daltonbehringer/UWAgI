@@ -128,7 +128,7 @@ def nev_corr(
     else:  
         df = _get_sheet(iop)
 
-    df_ = df[df.var_flag == var].reset_index()
+    df_ = df[df.var_flag == var].reset_index(drop=True)
 
     num_corrections = int((len(df_.columns) - 2) / 3)
 
@@ -138,25 +138,25 @@ def nev_corr(
             e = 'end_time' + str(j+1)
             c = 'correction' + str(j+1)
             
-            if df.var_flag[i] == 'lwc':
-                if np.isnan(df[s][i]):
+            if df_.var_flag[i] == 'lwc':
+                if np.isnan(df_[s][i]):
                     continue
-                ind_liq = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
+                ind_liq = np.where(np.logical_and(t >= int(df_[s][i]), t <= int(df_[e][i])))
             
-                if df[c][i] == 0:
+                if df_[c][i] == 0:
                     nev[ind_liq] = 0
                 else:
-                    nev[ind_liq] = nev[ind_liq] + df[c][i]
+                    nev[ind_liq] = nev[ind_liq] + df_[c][i]
 
-            if df.var_flag[i] == 'twc':
-                if np.isnan(df[s][i]):
+            if df_.var_flag[i] == 'twc':
+                if np.isnan(df_[s][i]):
                     continue
-                ind_tot = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
+                ind_tot = np.where(np.logical_and(t >= int(df_[s][i]), t <= int(df_[e][i])))
                 
-                if df[c][i] == 0:
+                if df_[c][i] == 0:
                     nev_tot[ind_tot] = 0
                 else:
-                    nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
+                    nev_tot[ind_tot] = nev_tot[ind_tot] + df_[c][i]
 
 
     tot_gt = np.where(nev_tot > nev)
