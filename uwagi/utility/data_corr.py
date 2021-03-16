@@ -165,10 +165,9 @@ def nev_corr(
                 nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
 
 
-    tot_gt = np.where(nev_tot > nev)
-    nev[tot_gt] = nev[tot_gt] - (nev_tot[tot_gt]-nev[tot_gt])*0.05
-
     if testing_flag == 0:
+        tot_gt = np.where(nev_tot > nev)
+        nev[tot_gt] = nev[tot_gt] - (nev_tot[tot_gt]-nev[tot_gt])*0.05
         nev_tot[nev_tot < nev] = nev[nev_tot < nev]
     elif testing_flag == 1:
         print ('TEST MODE')
