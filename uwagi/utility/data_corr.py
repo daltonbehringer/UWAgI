@@ -156,6 +156,7 @@ def nev_corr(
                 ind_tot = np.where(np.logical_and(t >= int(df_[s][i]), t <= int(df_[e][i])))
                 
                 if df_[c][i] == 0:
+                    print ('Zero')
                     nev_tot[ind_tot] = 0
                 else:
                     nev_tot[ind_tot] = nev_tot[ind_tot] + df_[c][i]
