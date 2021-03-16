@@ -101,7 +101,8 @@ def nev_corr(
     ka,
     iop,
     var = None,
-    file = None
+    file = None,
+    testing_flag = 0
     ):
 
     t = np.array(ka.fields['HHMMSS']).astype(int)
@@ -167,7 +168,10 @@ def nev_corr(
     tot_gt = np.where(nev_tot > nev)
     nev[tot_gt] = nev[tot_gt] - (nev_tot[tot_gt]-nev[tot_gt])*0.05
 
-    # nev_tot[nev_tot < nev] = nev[nev_tot < nev]
+    if testing_flag == 0:
+        nev_tot[nev_tot < nev] = nev[nev_tot < nev]
+    elif testing_flag == 1:
+        print ('TEST MODE')
 
     nev_ice = nev_tot - nev
 
