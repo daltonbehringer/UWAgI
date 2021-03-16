@@ -131,8 +131,8 @@ def nev_corr(
 
     num_corrections = int((len(df.columns) - 2) / 3)
 
-    liq = np.where(df.var_flag == 'lwc')[0]
-    tot = np.where(df.var_flag == 'twc')[0]
+    liq = np.where(df.var_flag == 'liquid')[0]
+    tot = np.where(df.var_flag == 'total')[0]
 
     for i in liq:
         for j in range(num_corrections):
