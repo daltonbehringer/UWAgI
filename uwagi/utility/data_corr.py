@@ -197,8 +197,8 @@ def nev_corr(
     #             print(df[c][i])
 
 
-    # tot_gt = np.where(nev_tot > nev)
-    # nev[tot_gt] = nev[tot_gt] - (nev_tot[tot_gt]-nev[tot_gt])*0.05
+    tot_gt = np.where(nev_tot > nev)
+    nev[tot_gt] = nev[tot_gt] - (nev_tot[tot_gt]-nev[tot_gt])*0.05
 
     # nev_tot[nev_tot < nev] = nev[nev_tot < nev]
 
