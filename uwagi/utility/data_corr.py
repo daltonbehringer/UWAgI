@@ -151,7 +151,6 @@ def nev_corr(
 
             elif df.var_flag[i] == 'twc':
                 print ('Total')
-                print (i)
                 if np.isnan(df[s][i]):
                     continue
                 ind_tot = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
@@ -160,6 +159,7 @@ def nev_corr(
                     nev_tot[ind_tot] = 0
                 else:
                     nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
+                print(df[c][i])
 
 
     tot_gt = np.where(nev_tot > nev)
