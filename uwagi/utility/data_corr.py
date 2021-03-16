@@ -149,14 +149,13 @@ def nev_corr(
                 else:
                     nev[ind_liq] = nev[ind_liq] + df[c][i]
 
-            if df.var_flag[i] == 'twc':
+            elif df.var_flag[i] == 'twc':
                 print ('Total')
                 if np.isnan(df[s][i]):
                     continue
                 ind_tot = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
                 
                 if df[c][i] == 0:
-                    print ('Zero')
                     nev_tot[ind_tot] = 0
                 else:
                     nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
