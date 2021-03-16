@@ -139,7 +139,7 @@ def nev_corr(
             c = 'correction' + str(j+1)
             
             if df.var_flag[i] == 'lwc':
-                print ('Liquid')
+                # print ('Liquid')
                 if np.isnan(df[s][i]):
                     continue
                 ind_liq = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
@@ -150,7 +150,7 @@ def nev_corr(
                     nev[ind_liq] = nev[ind_liq] + df[c][i]
 
             elif df.var_flag[i] == 'twc':
-                print ('Total')
+                # print ('Total')
                 if np.isnan(df[s][i]):
                     continue
                 ind_tot = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
