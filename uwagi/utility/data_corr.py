@@ -166,7 +166,7 @@ def nev_corr(
 
 
     if testing_flag == 0:
-        tot_gt = np.where(nev_tot > nev)
+        tot_gt = np.where(np.logical_and(nev_tot > nev, nev != 0))
         nev[tot_gt] = nev[tot_gt] - (nev_tot[tot_gt]-nev[tot_gt])*0.05
         nev_tot[nev_tot < nev] = nev[nev_tot < nev]
     elif testing_flag == 1:
