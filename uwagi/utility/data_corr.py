@@ -102,7 +102,7 @@ def nev_corr(
     iop,
     var = None,
     file = None,
-    testing_flag = 0
+    test_flag = 0
     ):
 
     t = np.array(ka.fields['HHMMSS']).astype(int)
@@ -142,7 +142,11 @@ def nev_corr(
                
             if np.isnan(df[s][i]):
                 continue
-            ind_liq = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
+
+            if df[s][i] > df[e][i]:
+                ind_liq = np.where(np.logical_and(t <= int(df[s][i]), t >= int(df[e][i])))
+            else:
+                ind_liq = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
 
             if df[c][i] == 0:
                 nev[ind_liq] = 0
@@ -157,7 +161,11 @@ def nev_corr(
 
             if np.isnan(df[s][i]):
                 continue
-            ind_tot = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
+
+            if df[s][i] > df[e][i]:
+                ind_tot = np.where(np.logical_and(t <= int(df[s][i]), t >= int(df[e][i])))
+            else:
+                ind_tot = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
             
             if df[c][i] == 0:
                 nev_tot[ind_tot] = 0
@@ -165,11 +173,11 @@ def nev_corr(
                 nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
 
 
-    if testing_flag == 0:
+    if test_flag == 0:
         tot_gt = np.where(np.logical_and(nev_tot > nev, nev != 0))
         nev[tot_gt] = nev[tot_gt] - (nev_tot[tot_gt]-nev[tot_gt])*0.05
         nev_tot[nev_tot < nev] = nev[nev_tot < nev]
-    elif testing_flag == 1:
+    elif test_flag == 1:
         print ('TEST MODE')
 
     nev_ice = nev_tot - nev
