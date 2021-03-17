@@ -113,12 +113,22 @@ def nev_corr(
     nev_tot = nev_tot_ + 0.
 
     def _get_sheet(iop):
+        if iop is 1:
+            link = 'https://docs.google.com/spreadsheets/d/1c_OBUn973tWVQvMJB9QwACl9A3c3PvIfND45h2-FOGI/export?gid=0&format=csv'
+        if iop is 2:
+            link = ''
+        if iop is 3:
+            link = ''
         if iop is 4:
             link = 'https://docs.google.com/spreadsheets/d/1QFxzhyLfFp0qMalODrILlS-EtIll6B3yuBSFMKHx6XM/export?gid=0&format=csv'
         if iop is 5:
             link = 'https://docs.google.com/spreadsheets/d/1V2CnGCfI-kMe5_nVQzW5Oo2pP9j1NW1mRMft97OvwSo/export?gid=0&format=csv'
         if iop is 6:
             link = 'https://docs.google.com/spreadsheets/d/1jBMiAZXulBUw7-YR_RQ_b7NpcPJgRbNk7_W_HkMU0Ow/export?gid=0&format=csv'
+        if iop is 7:
+            link = ''
+        if iop is 8:
+            link = ''
         
         df = pd.read_csv(link)
 
