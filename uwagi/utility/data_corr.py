@@ -144,7 +144,8 @@ def nev_corr(
                 continue
 
             if df[s][i] > df[e][i]:
-                ind_liq = np.where(np.logical_and(t <= int(df[s][i]), t >= int(df[e][i])))
+                ind_liq = np.append(np.where(np.logical_and(t >= int(df[s][i]), t > 0)), 
+                    np.where(np.logical_and(t >= 0, t <= int(df[e][i]))))
             else:
                 ind_liq = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
 
@@ -163,7 +164,8 @@ def nev_corr(
                 continue
 
             if df[s][i] > df[e][i]:
-                ind_tot = np.where(np.logical_and(t <= int(df[s][i]), t >= int(df[e][i])))
+                ind_tot = np.append(np.where(np.logical_and(t >= int(df[s][i]), t > 0)), 
+                    np.where(np.logical_and(t >= 0, t <= int(df[e][i]))))
             else:
                 ind_tot = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
             
