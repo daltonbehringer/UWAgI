@@ -128,7 +128,7 @@ def nev_corr(
         if iop is 7:
             link = ''
         if iop is 8:
-            link = ''
+            link = 'https://docs.google.com/spreadsheets/d/1hJkTQCO8T-gNalwH5T3n8mVBWADTijreLlbuT-99YaQ/export?gid=0&format=csv'
         
         df = pd.read_csv(link)
 
