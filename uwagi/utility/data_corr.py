@@ -118,7 +118,7 @@ def nev_corr(
         if iop is 2:
             link = 'https://docs.google.com/spreadsheets/d/1MN2lnpb6IQ_DOrM3SHnZYavGq2GsRnDx6kRQGzAcvbk/export?gid=0&format=csv'
         if iop is 3:
-            link = ''
+            link = 'https://docs.google.com/spreadsheets/d/1A1MQj0DHq7jFHjwt6JmjF_4padPwvFJMJ81ZBNs3ERM/export?gid=0&format=csv'
         if iop is 4:
             link = 'https://docs.google.com/spreadsheets/d/1QFxzhyLfFp0qMalODrILlS-EtIll6B3yuBSFMKHx6XM/export?gid=0&format=csv'
         if iop is 5:
@@ -126,7 +126,7 @@ def nev_corr(
         if iop is 6:
             link = 'https://docs.google.com/spreadsheets/d/1jBMiAZXulBUw7-YR_RQ_b7NpcPJgRbNk7_W_HkMU0Ow/export?gid=0&format=csv'
         if iop is 7:
-            link = ''
+            link = 'https://docs.google.com/spreadsheets/d/143vrgE9bgYGNeK7MTVYYT2anG-cmPJ9i004I7ZVu3Lk/export?gid=0&format=csv'
         if iop is 8:
             link = 'https://docs.google.com/spreadsheets/d/1hJkTQCO8T-gNalwH5T3n8mVBWADTijreLlbuT-99YaQ/export?gid=0&format=csv'
         
