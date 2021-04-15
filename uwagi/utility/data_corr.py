@@ -161,6 +161,8 @@ def nev_corr(
 
             if df[c][i] == 0:
                 nev[ind_liq] = 0
+            elif df[c][i] == -9999:
+                nev[ind_liq] = -9999
             else:
                 nev[ind_liq] = nev[ind_liq] + df[c][i]
 
@@ -181,6 +183,8 @@ def nev_corr(
             
             if df[c][i] == 0:
                 nev_tot[ind_tot] = 0
+            elif df[c][i] == -9999:
+                nev[ind_tot] = -9999
             else:
                 nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
 
