@@ -129,6 +129,10 @@ def nev_corr(
             link = 'https://docs.google.com/spreadsheets/d/143vrgE9bgYGNeK7MTVYYT2anG-cmPJ9i004I7ZVu3Lk/export?gid=0&format=csv'
         if iop is 8:
             link = 'https://docs.google.com/spreadsheets/d/1hJkTQCO8T-gNalwH5T3n8mVBWADTijreLlbuT-99YaQ/export?gid=0&format=csv'
+        if iop is 9:
+            link = 'https://docs.google.com/spreadsheets/d/1zsLgYIEb0ZY0p2t1S262K-Joi8BWENbR5uOLfgfTn-A/export?gid=0&format=csv'
+        if iop is 10:
+            link = 'https://docs.google.com/spreadsheets/d/19Ah6nAxPK0TYdaKjp_N_jvSmHEVGDpuSJtiOVCjB3og/export?gid=0&format=csv'
         
         df = pd.read_csv(link)
 
@@ -184,7 +188,7 @@ def nev_corr(
             if df[c][i] == 0:
                 nev_tot[ind_tot] = 0
             elif df[c][i] == -9999:
-                nev[ind_tot] = -9999
+                nev_tot[ind_tot] = -9999
             else:
                 nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
 
