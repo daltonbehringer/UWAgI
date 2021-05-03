@@ -197,10 +197,11 @@ def nev_corr(
             # elif df[c][i] == -9999:
             #     nev[ind_liq] = -9999
             # else:
-
-            nev[ind_liq] = nev[ind_liq] + df[c][i]
             if df[c][i] == -9999:
                 nev_liq_flag[ind_liq] = 2
+            else:
+                nev[ind_liq] = nev[ind_liq] + df[c][i]
+            
 
     for i in tot:
         for j in range(num_corrections):
@@ -222,11 +223,10 @@ def nev_corr(
             # elif df[c][i] == -9999:
             #     nev_tot[ind_tot] = -9999
             # else:
-            
-            nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
             if df[c][i] == -9999:
                 nev_tot_flag[ind_tot] = 2
-
+            else:
+                nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
 
     if test_flag == 0:
         tot_gt = np.where(np.logical_and(nev_tot > nev, nev != 0))
