@@ -102,7 +102,8 @@ def nev_corr(
     iop,
     var = None,
     file = None,
-    test_flag = 0
+    test_flag = 0,
+    qc_flag = 0
     ):
 
     t = np.array(ka.fields['HHMMSS']).astype(int)
@@ -152,6 +153,30 @@ def nev_corr(
     liq = np.where(df.var_flag == 'liquid')[0]
     tot = np.where(df.var_flag == 'total')[0]
 
+    if qc_flag == 1:
+        nev_liq_flag = np.zeros_like(nev)
+        nev_tot_flag = np.zeros_like(nev_tot)
+        nev_ice_flag = np.zeros_like(nev_tot)
+
+        leg_times = np.array([])
+
+        for i in range(1,20):
+            try:
+                start, end = uwagi.get_times(iop, leg=i)[0], uwagi.get_times(iop, leg=i)[1]
+
+                p_start = np.where(np.array(ka.fields['HHMMSS']) == start)[0][0]
+                p_end = np.where(np.array(ka.fields['HHMMSS']) == end)[0][0]
+                time = ka.fields['HHMMSS'][p_start:p_end]
+
+                leg_times = np.append(leg_times, np.array(time).astype(int))
+            except:
+                break
+
+        leg_ind = np.in1d(t, leg_times).nonzero()[0]
+        nev_liq_flag[leg_ind] = 1
+        nev_tot_flag[leg_ind] = 1
+        nev_ice_flag[leg_ind] = 1
+
     for i in liq:
         for j in range(num_corrections):
             s = 'start_time' + str(j+1)
@@ -167,12 +192,15 @@ def nev_corr(
             else:
                 ind_liq = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
 
-            if df[c][i] == 0:
-                nev[ind_liq] = 0
-            elif df[c][i] == -9999:
-                nev[ind_liq] = -9999
-            else:
-                nev[ind_liq] = nev[ind_liq] + df[c][i]
+            # if df[c][i] == 0:
+            #     nev[ind_liq] = 0
+            # elif df[c][i] == -9999:
+            #     nev[ind_liq] = -9999
+            # else:
+
+            nev[ind_liq] = nev[ind_liq] + df[c][i]
+            if df[c][i] == -9999:
+                nev_liq_flag[ind_liq] = 2
 
     for i in tot:
         for j in range(num_corrections):
@@ -189,12 +217,15 @@ def nev_corr(
             else:
                 ind_tot = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
             
-            if df[c][i] == 0:
-                nev_tot[ind_tot] = 0
-            elif df[c][i] == -9999:
-                nev_tot[ind_tot] = -9999
-            else:
-                nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
+            # if df[c][i] == 0:
+            #     nev_tot[ind_tot] = 0
+            # elif df[c][i] == -9999:
+            #     nev_tot[ind_tot] = -9999
+            # else:
+            
+            nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
+            if df[c][i] == -9999:
+                nev_tot_flag[ind_tot] = 2
 
 
     if test_flag == 0:
@@ -206,14 +237,22 @@ def nev_corr(
 
     nev_ice = nev_tot - nev
 
+    nev_ice_flag[np.logical_or(nev_liq_flag == 2, nev_tot_flag == 2)] = 2
+
     if var is 'lwc':
-        # print ('Liquid')
-        return nev
+        if qc_flag == 1:
+            return nev, nev_liq_flag
+        else:
+            return nev
     elif var is 'twc':
-        # print ('Total')
-        return nev_tot
+        if qc_flag == 1:
+            return nev_tot, nev_tot_flag
+        else:
+            return nev_tot
     elif var is 'iwc':
-        # print ('IT\'S ICE!')
-        return nev_ice
+        if qc_flag == 1:
+            return nev_ice, nev_ice_flag
+        else:
+            return nev_ice
 
 
