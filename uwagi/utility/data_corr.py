@@ -2,6 +2,8 @@
 
 import numpy as np
 import pandas as pd
+import sys
+import uwagi
 
 def sd_corr(
     sd,
@@ -154,9 +156,10 @@ def nev_corr(
     tot = np.where(df.var_flag == 'total')[0]
 
     if qc_flag == 1:
-        nev_liq_flag = np.zeros_like(nev)
-        nev_tot_flag = np.zeros_like(nev_tot)
-        nev_ice_flag = np.zeros_like(nev_tot)
+        print("ADDING QC FLAG OUTPUT AS SECOND ARRAY")
+        nev_liq_flag = np.zeros_like(nev).astype(int)
+        nev_tot_flag = np.zeros_like(nev_tot).astype(int)
+        nev_ice_flag = np.zeros_like(nev_tot).astype(int)
 
         leg_times = np.array([])
 
@@ -166,16 +169,20 @@ def nev_corr(
 
                 p_start = np.where(np.array(ka.fields['HHMMSS']) == start)[0][0]
                 p_end = np.where(np.array(ka.fields['HHMMSS']) == end)[0][0]
-                time = ka.fields['HHMMSS'][p_start:p_end]
+                time = np.array(ka.fields['HHMMSS'][p_start:p_end]).astype(int)
 
-                leg_times = np.append(leg_times, np.array(time).astype(int))
+                leg_times = np.append(leg_times, time)
             except:
+                print("Processed " + str(i) + ' legs for ' + var)
                 break
 
         leg_ind = np.in1d(t, leg_times).nonzero()[0]
         nev_liq_flag[leg_ind] = 1
         nev_tot_flag[leg_ind] = 1
         nev_ice_flag[leg_ind] = 1
+    
+    else:
+        pass
 
     for i in liq:
         for j in range(num_corrections):
@@ -192,11 +199,6 @@ def nev_corr(
             else:
                 ind_liq = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
 
-            # if df[c][i] == 0:
-            #     nev[ind_liq] = 0
-            # elif df[c][i] == -9999:
-            #     nev[ind_liq] = -9999
-            # else:
             if df[c][i] == -9999:
                 nev_liq_flag[ind_liq] = 2
             else:
@@ -218,11 +220,6 @@ def nev_corr(
             else:
                 ind_tot = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
             
-            # if df[c][i] == 0:
-            #     nev_tot[ind_tot] = 0
-            # elif df[c][i] == -9999:
-            #     nev_tot[ind_tot] = -9999
-            # else:
             if df[c][i] == -9999:
                 nev_tot_flag[ind_tot] = 2
             else:
