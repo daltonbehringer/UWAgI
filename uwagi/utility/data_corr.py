@@ -2,7 +2,7 @@
 
 import numpy as np
 import pandas as pd
-import sys
+# import sys
 import uwagi
 
 def sd_corr(
@@ -108,6 +108,28 @@ def nev_corr(
     qc_flag = 0
     ):
 
+    '''
+    Reads Nevzorov corrections from a table and outputs adjusted data.
+
+    var:
+        ice water = 'iwc'
+        liquid water = 'lwc'
+        total water = 'twc'
+
+    file:
+        if None, function will read Google sheet from _get_sheet()
+        else, function will read user-supplied CSV
+
+    test_flag:
+        if 0, ice contamination is subtracted from lwc, twc is not allowed to be greater than lwc
+        if 1, raw data from liquid and total
+
+    qc_flag:
+        if 0, function returns corrected Nevzorov data only
+        if 1, function returns corrected Nevzorov data as 1st dimension and quality flag as 2nd dimension
+        quality flags: 0=raw, 1=good, 2=bad (data labeled as 'bad' will be flagged as such but retained)
+    '''
+
     t = np.array(ka.fields['HHMMSS']).astype(int)
 
     nev_ = ka.fields['nev_lwc']
@@ -140,6 +162,14 @@ def nev_corr(
             link = 'https://docs.google.com/spreadsheets/d/1ym4VsjBhK9FmJ-Y6LoBNI4xj3ksOgWTE2VNvvyLn9l0/export?gid=0&format=csv'    
         if iop is 12:
             link = 'https://docs.google.com/spreadsheets/d/1HlWb4bUmejq4zO35M3pqbJIrvB8qYtv-YoN8kIagJdE/export?gid=0&format=csv'
+        if iop is 13:
+            link = 'https://docs.google.com/spreadsheets/d/1URz_ER6sLkZyGqgBzsWe0NA63siey0lup51416vntdo/export?gid=0&format=csv'
+        if iop is 14:
+            link = 'https://docs.google.com/spreadsheets/d/12U-Uwts6XkP-ZI9VPA3g9YL_IatNKVdxy9rTWR0q6bY/export?gid=0&format=csv'
+        if iop is 15:
+            link = 'https://docs.google.com/spreadsheets/d/1hPT0f3lUH6VCFOJmaQK1AZbhEUaeecAy_EhYX8b8MAs/export?gid=0&format=csv'
+        if iop is 16:
+            link = 'https://docs.google.com/spreadsheets/d/1Pwzk8kT33ZToDL-Ev4cGrxF2nSP_ppdj9pdeqoTtIG8/export?gid=0&format=csv'
 
         df = pd.read_csv(link)
 
@@ -173,7 +203,7 @@ def nev_corr(
 
                 leg_times = np.append(leg_times, time)
             except:
-                print("Processed " + str(i) + ' legs for ' + var)
+                print("Processed " + str(i-1) + ' legs for ' + var)
                 break
 
         leg_ind = np.in1d(t, leg_times).nonzero()[0]
@@ -199,11 +229,12 @@ def nev_corr(
             else:
                 ind_liq = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
 
-            if df[c][i] == -9999:
+            if df[c][i] == -9999 and qc_flag == 1:
                 nev_liq_flag[ind_liq] = 2
+            elif df[c][i] == -9999 and qc_flag == 0:
+                nev[ind_liq] = -9999
             else:
-                nev[ind_liq] = nev[ind_liq] + df[c][i]
-            
+                nev[ind_liq] = nev[ind_liq] + df[c][i]            
 
     for i in tot:
         for j in range(num_corrections):
@@ -220,8 +251,10 @@ def nev_corr(
             else:
                 ind_tot = np.where(np.logical_and(t >= int(df[s][i]), t <= int(df[e][i])))
             
-            if df[c][i] == -9999:
+            if df[c][i] == -9999 and qc_flag == 1:
                 nev_tot_flag[ind_tot] = 2
+            elif df[c][i] == -9999 and qc_flag == 0:
+                nev_tot[ind_tot] = -9999
             else:
                 nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
 
@@ -234,7 +267,10 @@ def nev_corr(
 
     nev_ice = nev_tot - nev
 
-    nev_ice_flag[np.logical_or(nev_liq_flag == 2, nev_tot_flag == 2)] = 2
+    if qc_flag == 1:
+        nev_ice_flag[np.logical_or(nev_liq_flag == 2, nev_tot_flag == 2)] = 2
+    else:
+        pass
 
     if var is 'lwc':
         if qc_flag == 1:
