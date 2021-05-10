@@ -14,6 +14,8 @@ def get_times(
 	
 	if iop is None:
 		raise ValueError('Function requires IOP argument.')
+	if iop is 18:
+		raise ValueError('NO RESEARCH FLIGHT FOR IOP18')
 	
 	elif iop is 1:
 		date = '2017-01-08 '
