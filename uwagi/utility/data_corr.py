@@ -170,6 +170,22 @@ def nev_corr(
             link = 'https://docs.google.com/spreadsheets/d/1hPT0f3lUH6VCFOJmaQK1AZbhEUaeecAy_EhYX8b8MAs/export?gid=0&format=csv'
         if iop is 16:
             link = 'https://docs.google.com/spreadsheets/d/1Pwzk8kT33ZToDL-Ev4cGrxF2nSP_ppdj9pdeqoTtIG8/export?gid=0&format=csv'
+        if iop is 17:
+            link = 'https://docs.google.com/spreadsheets/d/1Xw_m-zufcrc2iFGh4WeVPAqvyH8n0w1QDaxpiOY5Ro0/export?gid=0&format=csv'
+        if iop is 18:
+            raise ValueError('NO RESEARCH FLIGHT FOR IOP18.')
+        if iop is 19:
+            link = 'https://docs.google.com/spreadsheets/d/13d28e22k8AqPIuoSpHheXl9J59I7qDmVFBFLrpuBMZg/export?gid=0&format=csv'
+        if iop is 20:
+            link = 'https://docs.google.com/spreadsheets/d/1Bojh1c4GX4T56r0GfvFZi3GjoEFQ35x2uC0awpexAI0/export?gid=0&format=csv'
+        if iop is 21:
+            link = 'https://docs.google.com/spreadsheets/d/1sosGH4buoWgme6Az-pPI9y__tiz41EGq3UxH2NgmaMg/export?gid=0&format=csv'
+        if iop is 22:
+            link = 'https://docs.google.com/spreadsheets/d/1IAFSjDjmoQt6RFa5jfyBBpMGaIoN00-dxzNGaSDZ1bY/export?gid=0&format=csv'
+        if iop is 23:
+            link = 'https://docs.google.com/spreadsheets/d/1aMpPHUTdk8NafWYV4RuyL__5C-zyMDmrEVE0v2V1hyc/export?gid=0&format=csv'
+        if iop is 24:
+            link = 'https://docs.google.com/spreadsheets/d/169qvLp8zQAY3B5lskxMDUW6FPsEw-RlDAFKllRH1pZU/export?gid=0&format=csv'
 
         df = pd.read_csv(link)
 
@@ -259,7 +275,7 @@ def nev_corr(
                 nev_tot[ind_tot] = nev_tot[ind_tot] + df[c][i]
 
     if test_flag == 0:
-        tot_gt = np.where(np.logical_and(nev_tot > nev, nev != 0))
+        tot_gt = np.where(np.logical_and(nev_tot > nev, nev > 0))
         nev[tot_gt] = nev[tot_gt] - (nev_tot[tot_gt]-nev[tot_gt])*0.05
         nev_tot[nev_tot < nev] = nev[nev_tot < nev]
     elif test_flag == 1:
