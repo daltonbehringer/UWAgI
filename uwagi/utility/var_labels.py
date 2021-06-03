@@ -26,8 +26,6 @@ def get_label(var):
 		label = r'Nevzorov IWC, $g\/m^{-3}$'
 	if var is 'cdp_lwc':
 		label = r'CDP LWC, $g\/m^{-3}$'
-	# if var is 'cdp_conc':
-	# 	label = 'CDP Total Concentraion, $cm^{-3}$'
 	if var is 'cdp_conc':
 		label = r'CDP Total Concentraion, $cm^{-3}$'
 	if var is 'lwc_pvm':

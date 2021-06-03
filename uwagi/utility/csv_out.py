@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 
 from ..utility.data_corr import sd_corr
+from ..utility.data_corr import nev_corr
 from ..utility.iop import get_times
 from ..readers.read_ka import read_ka
 from ..readers.read_sizedist import read_sd
@@ -103,7 +104,7 @@ def sd_time_csv(
     
     if start is None and end is None and leg is not None:
         print('Gathering data from entire leg '+str(leg)+' period.')
-        start, end = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
+        start, end = int(get_times(iop, leg=leg)[0]), int(get_times(iop, leg=leg)[1])
     
     # if start is not None and end is not None and leg is None:
     #     start_time, end_time = get_times(iop, start=start, end=end)[0], get_times(iop, start=start, end=end)[1
@@ -123,14 +124,14 @@ def sd_time_csv(
         ka = read_ka(filename_ka)
 
     if start is None:
-        start = int(sd.time[0])
+        start = sd.time[0]
     if end is None:
-        end = int(sd.time[-1])
+        end = sd.time[-1]
 
     p_start = np.where(sd.time == start)[0][0]
     p_end = np.where(sd.time == end)[0][0]
 
-    t = sd.time[p_start:p_end].astype(int)
+    t = sd.time[p_start:p_end]
 
     sd_CDP = np.zeros((27,len(t)))
     sd_2DS = np.zeros((30,len(t)))
@@ -202,7 +203,7 @@ def ts_to_csv(
     
     if start is None and end is None and leg is not None:
         print('Gathering data from entire leg '+str(leg)+' period.')
-        start, end = get_times(iop, leg=leg)[0], get_times(iop, leg=leg)[1]
+        start, end = int(get_times(iop, leg=leg)[0]), int(get_times(iop, leg=leg)[1])
     
     filename = get_times(iop)+'.c1.nc'
 
@@ -238,8 +239,9 @@ def ts_to_csv(
     df['Dewpoint (C)'] = ka.fields['dewpoint'][p_start:p_end]
     df['CDP LWC (g/m^3)'] = ka.fields['cdp_lwc'][p_start:p_end]
     df['CDP Total Concentration (#/cm^3)'] = ka.fields['cdp_conc'][p_start:p_end]
-    df['Nevzerov LWC (g/m^3)'] = ka.fields['nev_lwc'][p_start:p_end]
-    df['Nevzerov TWC (g/m^3)'] = ka.fields['nev_twc'][p_start:p_end]
+    df['Nevzerov LWC (g/m^3)'] = nev_corr(ka, iop, var='lwc')[p_start:p_end]
+    df['Nevzerov TWC (g/m^3)'] = nev_corr(ka, iop, var='twc')[p_start:p_end]
+    df['Nevzerov IWC (g/m^3)'] = nev_corr(ka, iop, var='iwc')[p_start:p_end]
 
     if outdir is None:
         filename = 'timeseries_IOP'+str(iop)+'_'+str(start)+'_'+str(end)+'.csv'

@@ -43,7 +43,6 @@ class _reader(object):
         self.lwc100 = nc.variables['lwc100'][:]
         self.nevlwc = nc.variables['nevlwc'][:]
         self.nevtwc = nc.variables['nevtwc'][:]
-        # self.neviwc = self.nevtwc[:] - self.nevlwc[:]
         self.cdplwc = nc.variables['cdplwc_NRB'][:]
         self.cdpconc = nc.variables['cdpconc_NRB'][:]
         self.pvmlwc = nc.variables['pvmlwc'][:]
