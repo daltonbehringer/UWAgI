@@ -1,8 +1,6 @@
 # UWAgI
 ### This package provides tools to read and plot data from the University of Wyoming King Air and cloud seeding aircraft as well as track the advection of Silver Iodide from the seeding aircraft.
 
-(Usage examples to be added)
-
 ##### 1. Plotting Functions ([`uwagi.plot`](https://github.com/daltonbehringer/UWAgI/tree/master/uwagi/plot))
    - [`plot.py`](https://github.com/daltonbehringer/UWAgI/blob/master/uwagi/plot/plot.py)
       - `plot_ts` -> plots time series of given var (refer to `utility/var_labels.py` for list of vars)
