@@ -32,4 +32,4 @@
       - `get_out_plume` -> returns index of points within user-defined distance downwind of downwind-most seeded plume
  
  ##### 4. QC Scripts ([`uwagi.qc_scripts`](https://github.com/daltonbehringer/UWAgI/tree/master/uwagi/qc_scripts))
-   - Scripts used to aid in the quality control of data from the Nevzorov probe for liquid, total, and ice water content. These will allow the user to look closely at the data to make neccessary manual corrections to the Nevzorov data. Existing corrections that have been applied already can be found via the links in [`uwagi.data_corr.nev_corr()`].
+   - Scripts used to aid in the quality control of data from the Nevzorov probe for liquid, total, and ice water content. These will allow the user to look closely at the data to make neccessary manual corrections to the Nevzorov data. Existing corrections that have been applied already can be found via the links in `uwagi.data_corr.nev_corr()`.
