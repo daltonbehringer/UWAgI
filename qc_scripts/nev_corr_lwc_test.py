@@ -16,7 +16,7 @@ font = {'family': 'sans serif',
         }
 labelsize = 12
 
-iop  = 8
+iop  = 24
 leg  = 13
 test = 1
 
@@ -25,7 +25,7 @@ outdir = '/Users/jbehrin1/Desktop/snowie_data/'
 filename = uwagi.get_times(iop) + '.c1.nc'
 ka = uwagi.read_ka(indir + filename)
 
-# start, end = '230828', '231238'
+# start, end = '162630', '164800'
 start, end = uwagi.get_times(iop, leg=leg)[0], uwagi.get_times(iop, leg=leg)[1]
 
 p_start = np.where(np.array(ka.fields['HHMMSS']) == start)[0][0]
@@ -51,6 +51,8 @@ print('DIFF: ' + str(mean_diff))
 
 nev_new = data_corr.nev_corr(ka, iop, var='lwc', test_flag=test)[p_start:p_end]
 
+nev_new[nev_new == -9999] = np.nan
+
 fig = plt.figure(figsize=(10,4))
 ax1 = plt.gca()
 
@@ -64,7 +66,7 @@ ax1.plot(time, cdp, 'k:', linewidth = .75, label = 'CDP')
 ax1.plot(time, nev_new, 'r-', linewidth = 1, label = 'Corr. Nevzorov')
 
 ax1.set_xlim([time[0], time[-1]])
-ax1.set_ylim([np.nanmin(nev)-0.05, np.nanmax(nev_new)+0.05])
+ax1.set_ylim([np.nanmin(nev)-0.05, np.nanmax(cdp)+0.05])
 
 ax1.legend()
 ax1.set_title('Liquid Water Content Correction' + '\n'
