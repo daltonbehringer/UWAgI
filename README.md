@@ -33,7 +33,7 @@
       - `ac_dist` -> calculates and returns distance between seeder AC and UWKA
    - [`iop.py`](https://github.com/daltonbehringer/UWAgI/blob/master/uwagi/utility/iop.py)
       - `get_times` -> returns file names and IOP/leg dates and times for functions that plot or gather data based on IOP and leg number
-   - [`plume.py`](https://github.com/daltonbehringer/UWAgI/blob/master/uwagi/utility/plume.py)
+   - [`plume.py`](https://github.com/daltonbehringer/UWAgI/blob/master/uwagi/utility/plume.py) (Currently only available for IOPs 5 and 8 as of 06/04/21)
       - `get_plume` -> returns index of points within seeded plume
       - `get_out_plume` -> returns index of points within user-defined distance downwind of downwind-most seeded plume
  
