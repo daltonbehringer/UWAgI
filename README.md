@@ -1,11 +1,11 @@
 # UWAgI
-### This package provides tools to read and plot data from the University of Wyoming King Air and cloud seeding aircraft as well as track the advection of Silver Iodide from the seeding aircraft.
+### This package provides tools to read, QC, and plot data from the University of Wyoming King Air and cloud seeding aircraft.
 
 ##### 1. Plotting Functions ([`uwagi.plot`](https://github.com/daltonbehringer/UWAgI/tree/master/uwagi/plot))
    - [`plot.py`](https://github.com/daltonbehringer/UWAgI/blob/master/uwagi/plot/plot.py)
       - `plot_ts` -> plots time series of given var (refer to `utility/var_labels.py` for list of vars)
-      - `plot_sd` -> plots QCed size distribution
-      - `plot_sd_hov` -> plots QCed size dist over time or space
+      - `plot_sd` -> plots QC'ed size distribution
+      - `plot_sd_hov` -> plots QC'ed size dist over time or space
    
 ##### 2. Data Ingest ([`uwagi.readers`](https://github.com/daltonbehringer/UWAgI/tree/master/uwagi/readers))
    - [`read_ka.py`](https://github.com/daltonbehringer/UWAgI/blob/master/uwagi/readers/read_ka.py) -> reads NetCDF files from the UWKA
@@ -31,3 +31,5 @@
       - `get_plume` -> returns index of points within seeded plume
       - `get_out_plume` -> returns index of points within user-defined distance downwind of downwind-most seeded plume
  
+ ##### 4. QC Scripts ([`uwagi.qc_scripts`](https://github.com/daltonbehringer/UWAgI/tree/master/uwagi/qc_scripts))
+   - Scripts used to aid in the quality control of data from the Nevzorov probe for liquid, total, and ice water content. These will allow the user to look closely at the data to make neccessary manual corrections to the Nevzorov data. Existing corrections that have been applied already can be found via the links in `uwagi.data_corr.nev_corr()`.
