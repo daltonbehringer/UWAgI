@@ -4,8 +4,8 @@
 ##### 1. Plotting Functions ([`uwagi.plot`](https://github.com/daltonbehringer/UWAgI/tree/master/uwagi/plot))
    - [`plot.py`](https://github.com/daltonbehringer/UWAgI/blob/master/uwagi/plot/plot.py)
       - `plot_ts` -> plots time series of given var (refer to `utility/var_labels.py` for list of vars)
-      - `plot_sd` -> plots QCed size distribution
-      - `plot_sd_hov` -> plots QCed size dist over time or space
+      - `plot_sd` -> plots QC'ed size distribution
+      - `plot_sd_hov` -> plots QC'ed size dist over time or space
    
 ##### 2. Data Ingest ([`uwagi.readers`](https://github.com/daltonbehringer/UWAgI/tree/master/uwagi/readers))
    - [`read_ka.py`](https://github.com/daltonbehringer/UWAgI/blob/master/uwagi/readers/read_ka.py) -> reads NetCDF files from the UWKA
