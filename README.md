@@ -1,11 +1,11 @@
 # UWAgI
 ### This package provides tools to read, QC, and plot data from the University of Wyoming King Air and cloud seeding aircraft.
 
-###### - Data Access
-   - ([UW King Air 1-second aircraft data](http://flights.uwyo.edu/projects/snowie17/order_1hz.shtml))
-   - ([UW King Air Size Spectra data](https://doi.org/10.5065/D6GT5KXK))
-   - ([UW King Air Manually Corrected Nevzorov data](https://doi.org/10.26023/2QRK-XSBA-RS0P))
-   - ([SNOWIE '17 dataset master list](https://data.eol.ucar.edu/master_lists/generated/snowie/))
+##### - Data Access
+   - [UW King Air 1-second aircraft data](http://flights.uwyo.edu/projects/snowie17/order_1hz.shtml)
+   - [UW King Air Size Spectra data](https://doi.org/10.5065/D6GT5KXK)
+   - [UW King Air Manually Corrected Nevzorov data](https://doi.org/10.26023/2QRK-XSBA-RS0P)
+   - [SNOWIE '17 dataset master list](https://data.eol.ucar.edu/master_lists/generated/snowie/)
 
 ##### 1. Plotting Functions ([`uwagi.plot`](https://github.com/daltonbehringer/UWAgI/tree/master/uwagi/plot))
    - [`plot.py`](https://github.com/daltonbehringer/UWAgI/blob/master/uwagi/plot/plot.py)
